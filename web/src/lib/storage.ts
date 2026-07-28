@@ -39,6 +39,7 @@ function reviveAppData(raw: string): AppData {
     therapistNotes: parsed.therapistNotes ?? [],
     insights: parsed.insights ?? [],
     feedback: parsed.feedback ?? [],
+    checklists: parsed.checklists ?? [],
   });
 }
 
