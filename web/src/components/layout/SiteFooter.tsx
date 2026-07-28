@@ -41,6 +41,12 @@ export function SiteFooter() {
           <Link href="/settings" className="underline hover:text-text">
             Your data
           </Link>
+          <Link href="/privacy" className="underline hover:text-text">
+            Privacy
+          </Link>
+          <Link href="/terms" className="underline hover:text-text">
+            Terms
+          </Link>
         </nav>
         <p className="text-xs text-text-subtle">
           Everything you record stays on this device unless you choose to export it.
