@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { PagePlaceholder } from "@/components/content/PagePlaceholder";
 import { ButtonLink } from "@/components/ui/Button";
+import { ActivityList } from "./ActivityList";
 
 export const metadata: Metadata = {
   title: "Activity",
@@ -17,17 +17,7 @@ export default function ActivityIndexPage() {
         description="Every card you have drawn, with what you predicted and what actually happened."
         action={<ButtonLink href="/activity/new">Start a card</ButtonLink>}
       />
-
-      <PagePlaceholder
-        summary="The activity history list is not wired up yet. The route, the data model and the storage layer are in place — this page just needs building."
-        planned={[
-          "A list of every card drawn, newest first",
-          "Status at a glance: in progress, completed, or opted out",
-          "Prediction against actual outcome, side by side",
-          "Filters by category and by whether the feared outcome occurred",
-          "A link into the reflection for anything still unfinished",
-        ]}
-      />
+      <ActivityList />
     </>
   );
 }

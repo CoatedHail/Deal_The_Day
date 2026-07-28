@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { PagePlaceholder } from "@/components/content/PagePlaceholder";
+import { PRE_ACTIVITY_COPY } from "@/content/activity-flow";
+import { NewActivityForm } from "./NewActivityForm";
 
 export const metadata: Metadata = {
   title: "Start a card",
@@ -13,21 +14,9 @@ export default function NewActivityPage() {
       <PageHeader
         eyebrow="Before you go"
         title="Start a card"
-        description="A few questions before you set off. The point is to get your prediction on record while you still believe it."
+        description={PRE_ACTIVITY_COPY.intro}
       />
-
-      <PagePlaceholder
-        summary="The pre-activity flow is not built yet. Its questions are already defined in the data model."
-        planned={[
-          "The number printed on the card, and its category",
-          "Anxiety right now, 0 to 10",
-          "Confidence you can handle it, 0 to 10",
-          "What you predict will happen",
-          "The specific thing you are most worried about",
-          "Which compulsions you expect to be pulled toward",
-          "An ERP reminder before you set off",
-        ]}
-      />
+      <NewActivityForm />
     </>
   );
 }
