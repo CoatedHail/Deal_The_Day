@@ -62,7 +62,21 @@ interface (`web/src/lib/storage.ts`). The interface is async so that an
 API-backed implementation can be swapped in later without touching any
 component.
 
-Nothing is uploaded anywhere and there is no account system.
+Nothing is uploaded anywhere and there is no account system. This has two
+consequences worth knowing before planning features:
+
+- Data is per-device and per-browser. There is no sync between a parent's phone
+  and their laptop.
+- A clinician cannot log in to view entries. Sharing works by the family
+  exporting their record and handing it over (`/therapist`).
+
+### Cards
+
+Cards in the physical deck are numbered, and the number is the identifier the
+app stores (`cardNumber` on `PreActivityCheck`). The printed wording is optional
+context. Helpers for parsing and displaying card references live in
+`web/src/lib/cards.ts`. No upper bound is enforced on the number, because the
+final deck size is not settled.
 
 ### Content
 

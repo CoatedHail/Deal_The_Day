@@ -38,6 +38,7 @@ function reviveAppData(raw: string): AppData {
     sessions: parsed.sessions ?? [],
     therapistNotes: parsed.therapistNotes ?? [],
     insights: parsed.insights ?? [],
+    feedback: parsed.feedback ?? [],
   });
 }
 

@@ -25,7 +25,9 @@ export type IconName =
   | "plus"
   | "sparkle"
   | "download"
-  | "printer";
+  | "printer"
+  | "journal"
+  | "message";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   home: <path d="M3 10.5 12 3l9 7.5M5.5 9.5V20h13V9.5" />,
@@ -91,6 +93,17 @@ const PATHS: Record<IconName, React.ReactNode> = {
       <path d="M7 9V3h10v6" />
       <rect x="3" y="9" width="18" height="8" rx="2" />
       <path d="M7 14h10v7H7z" />
+    </>
+  ),
+  journal: (
+    <>
+      <path d="M6 3h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+      <path d="M4 17h15M9 7h6M9 11h6" />
+    </>
+  ),
+  message: (
+    <>
+      <path d="M20 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z" />
     </>
   ),
 };

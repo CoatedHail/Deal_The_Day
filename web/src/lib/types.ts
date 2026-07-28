@@ -23,7 +23,16 @@ export const RATING_MAX = 10;
 export type FearedOutcome = "did-not-happen" | "partly-happened" | "happened";
 
 export interface PreActivityCheck {
-  /** The card drawn from the physical deck. */
+  /**
+   * The number printed on the card drawn from the physical deck.
+   *
+   * The number is the identifier, not the title: it is faster to enter, it does
+   * not depend on copying wording accurately, and it lets a family reference the
+   * same card consistently across entries. The title stays optional so an entry
+   * still reads sensibly on its own.
+   */
+  cardNumber?: number;
+  /** The wording on the card, if the family wants it recorded. */
   cardTitle: string;
   cardCategory?: ActivityCategory;
   anxiety: Rating;
@@ -212,6 +221,37 @@ export interface TherapistNote {
   linkedActivityId?: string;
 }
 
+/**
+ * A review of a card in the physical deck.
+ *
+ * Separate from the therapeutic record on purpose. This is feedback about the
+ * game as a product — whether a card landed, whether it was pitched right — and
+ * it should never be mixed into progress tracking, where it would read as a
+ * judgement of how the family did.
+ */
+export interface GameFeedback {
+  id: string;
+  submittedAt: string;
+  /** Which card is being reviewed. Optional — some feedback is about the deck. */
+  cardNumber?: number;
+  /** Overall rating of the card or deck, 0–10. */
+  rating: Rating;
+  /** How the difficulty felt for this family, in their judgement. */
+  difficulty: "too-easy" | "about-right" | "too-hard";
+  whatWorked: string;
+  whatDidNot: string;
+  /** Free suggestion for the people making the deck. */
+  suggestion?: string;
+  /** Set once the user has copied or emailed it onward. */
+  sent: boolean;
+}
+
+export const FEEDBACK_DIFFICULTY_LABELS: Record<GameFeedback["difficulty"], string> = {
+  "too-easy": "Too easy for us",
+  "about-right": "About right",
+  "too-hard": "Too big a step",
+};
+
 /** An insight the user chose to keep from a reflection. */
 export interface SavedInsight {
   id: string;
@@ -227,6 +267,7 @@ export interface AppData {
   sessions: ScheduledSession[];
   therapistNotes: TherapistNote[];
   insights: SavedInsight[];
+  feedback: GameFeedback[];
   /** Schema version, so future migrations have something to branch on. */
   version: number;
 }
@@ -239,6 +280,7 @@ export const EMPTY_APP_DATA: AppData = {
   sessions: [],
   therapistNotes: [],
   insights: [],
+  feedback: [],
   version: CURRENT_DATA_VERSION,
 };
 
