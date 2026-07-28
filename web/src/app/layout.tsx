@@ -5,6 +5,7 @@ import { SETTINGS_BOOTSTRAP_SCRIPT } from "@/lib/settings";
 import { SettingsProvider } from "@/components/providers/SettingsProvider";
 import { DataProvider } from "@/components/providers/DataProvider";
 import { AppShell } from "@/components/layout/AppShell";
+import { AccountPanel } from "@/components/auth/AccountPanel";
 
 /**
  * Atkinson Hyperlegible was designed by the Braille Institute specifically to
@@ -49,7 +50,7 @@ export default function RootLayout({
       <body className={atkinson.variable}>
         <SettingsProvider>
           <DataProvider>
-            <AppShell>{children}</AppShell>
+            <AppShell account={<AccountPanel />}>{children}</AppShell>
           </DataProvider>
         </SettingsProvider>
       </body>

@@ -9,7 +9,18 @@ import { Wordmark } from "@/components/layout/Wordmark";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { cn } from "@/lib/cn";
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({
+  children,
+  account,
+}: {
+  children: React.ReactNode;
+  /**
+   * Slot for the account panel. Passed in from the server layout rather than
+   * imported here, because this component is a client component and the panel
+   * needs to read the session on the server.
+   */
+  account?: React.ReactNode;
+}) {
   const pathname = usePathname();
   const [moreOpen, setMoreOpen] = useState(false);
 
@@ -53,6 +64,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </li>
           ))}
         </ul>
+        {account}
       </nav>
 
       <div className="flex min-w-0 flex-1 flex-col">
@@ -133,6 +145,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </li>
               ))}
             </ul>
+            {account}
           </div>
         </>
       ) : null}
