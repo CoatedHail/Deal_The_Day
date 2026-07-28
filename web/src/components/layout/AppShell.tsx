@@ -64,16 +64,22 @@ export function AppShell({
             </li>
           ))}
         </ul>
-        {account}
       </nav>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        {/* Mobile header */}
+        {/* Top bar. Present on every page and at every width: the wordmark
+            shows only on mobile, where there is no sidebar carrying it, while
+            the account control sits on the right throughout. */}
         <header
           data-app-nav
-          className="sticky top-0 z-30 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur lg:hidden"
+          className="sticky top-0 z-30 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur sm:px-6 lg:px-10"
         >
-          <Wordmark />
+          <div className="mx-auto flex w-full max-w-4xl items-center gap-4">
+            <div className="lg:hidden">
+              <Wordmark />
+            </div>
+            <div className="ml-auto">{account}</div>
+          </div>
         </header>
 
         <main id="main" className="flex-1 px-4 py-6 pb-28 sm:px-6 lg:px-10 lg:py-10 lg:pb-10">
@@ -145,7 +151,6 @@ export function AppShell({
                 </li>
               ))}
             </ul>
-            {account}
           </div>
         </>
       ) : null}
