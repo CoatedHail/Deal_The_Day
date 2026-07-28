@@ -26,7 +26,7 @@ export default async function SignInPage({
     <div className="mx-auto max-w-lg">
       <PageHeader
         title="Sign in"
-        description="So your record is still here tomorrow, and on your other devices."
+        description="So your record is still here tomorrow, and on your other devices. If you have not been here before, this creates your account — there is no separate sign-up."
       />
 
       <Card className="space-y-6">
