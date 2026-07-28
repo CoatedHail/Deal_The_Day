@@ -1,0 +1,400 @@
+@import "tailwindcss";
+
+/* Theme is driven by a data attribute on <html> so the user can override the
+   system preference, not just follow it. See lib/settings.ts. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------------
+   Colour tokens
+
+   The palette is deliberately warm and low-contrast-anxiety: sand and clay
+   rather than clinical white and blue. Sage green carries primary actions
+   because it reads as calm and growth-oriented rather than alarming.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --bg: #faf6f1;
+  --bg-subtle: #f3ece4;
+  --surface: #ffffff;
+  --surface-sunken: #f7f1ea;
+  --border: #e7ddd2;
+  --border-strong: #d3c4b5;
+
+  --text: #2e2926;
+  --text-muted: #6b615a;
+  --text-subtle: #8c8078;
+
+  --primary: #3f7a6b;
+  --primary-hover: #356155;
+  --primary-soft: #e2efeb;
+  --primary-border: #b9d8cf;
+  --on-primary: #ffffff;
+
+  --accent: #b9663a;
+  --accent-soft: #fbebe0;
+  --accent-border: #edcbb2;
+
+  --info: #4c6f92;
+  --info-soft: #e7eef6;
+  --info-border: #c3d5e7;
+
+  --success: #4a7a4a;
+  --success-soft: #e7f0e7;
+  --success-border: #c1d8c1;
+
+  --caution: #96682a;
+  --caution-soft: #f9efdd;
+  --caution-border: #e8d2a9;
+
+  --focus: #1f6f8b;
+
+  /* Chart tokens.
+
+     Every chart in the app is either single-series or ordinal, so no
+     categorical palette is needed. The ordinal ramp encodes "how much of the
+     feared outcome actually happened" — deliberately one calm hue rather than
+     a green-to-red scale, because colouring a realised fear as an alarm would
+     contradict the point: the outcome happening is information, not failure.
+
+     Ramp steps validated for monotone lightness, adjacent ΔL and light-end
+     contrast against this mode's surface. */
+  --chart-mark: #3f7a6b;
+  --chart-grid: #ece3d9;
+  --chart-axis: #b6a99c;
+  --chart-ord-1: #86bdac;
+  --chart-ord-2: #4c8d7c;
+  --chart-ord-3: #2a5449;
+  --chart-before: #4c8d7c;
+  --chart-after: #2a5449;
+
+  --shadow-sm: 0 1px 2px rgb(46 41 38 / 0.06);
+  --shadow-md: 0 2px 8px rgb(46 41 38 / 0.07), 0 1px 2px rgb(46 41 38 / 0.04);
+  --shadow-lg: 0 8px 28px rgb(46 41 38 / 0.1), 0 2px 6px rgb(46 41 38 / 0.05);
+}
+
+[data-theme="dark"] {
+  --bg: #1a1714;
+  --bg-subtle: #211d19;
+  --surface: #24201c;
+  --surface-sunken: #1e1a17;
+  --border: #38312b;
+  --border-strong: #4d443c;
+
+  --text: #f1eae2;
+  --text-muted: #b5a99e;
+  --text-subtle: #93867b;
+
+  --primary: #74b5a2;
+  --primary-hover: #8cc7b5;
+  --primary-soft: #1e352f;
+  --primary-border: #2f5449;
+  --on-primary: #12241f;
+
+  --accent: #dd9060;
+  --accent-soft: #33241a;
+  --accent-border: #563926;
+
+  --info: #85aacd;
+  --info-soft: #1b2731;
+  --info-border: #2e4356;
+
+  --success: #82b382;
+  --success-soft: #1c2a1c;
+  --success-border: #2f472f;
+
+  --caution: #d0a463;
+  --caution-soft: #2c2317;
+  --caution-border: #4a3c25;
+
+  --focus: #7cc3dd;
+
+  /* Dark-mode steps are chosen against the dark surface, not flipped from the
+     light ramp. */
+  --chart-mark: #74b5a2;
+  --chart-grid: #332c26;
+  --chart-axis: #6d6157;
+  --chart-ord-1: #3d7568;
+  --chart-ord-2: #5f9d8c;
+  --chart-ord-3: #93c9ba;
+  --chart-before: #5f9d8c;
+  --chart-after: #93c9ba;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 2px 8px rgb(0 0 0 / 0.35), 0 1px 2px rgb(0 0 0 / 0.2);
+  --shadow-lg: 0 8px 28px rgb(0 0 0 / 0.45), 0 2px 6px rgb(0 0 0 / 0.25);
+}
+
+/* Raises text and border contrast for users who need it. Kept as a separate
+   axis from dark mode so the two can be combined. */
+[data-contrast="high"] {
+  --text: #000000;
+  --text-muted: #2e2926;
+  --text-subtle: #403934;
+  --border: #6b615a;
+  --border-strong: #2e2926;
+  --primary: #22564a;
+  --accent: #8c4519;
+  --info: #2d4f6d;
+  --success: #2c5a2c;
+  --caution: #6b4a17;
+}
+
+[data-theme="dark"][data-contrast="high"] {
+  --text: #ffffff;
+  --text-muted: #e0d8d0;
+  --text-subtle: #cabfb5;
+  --border: #9b8f84;
+  --border-strong: #cabfb5;
+  --primary: #9ad6c4;
+  --accent: #f0ac82;
+  --info: #a8c8e6;
+  --success: #a2d3a2;
+  --caution: #e4c087;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-surface: var(--surface);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-subtle: var(--text-subtle);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-border: var(--primary-border);
+  --color-on-primary: var(--on-primary);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-border: var(--accent-border);
+
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-info-border: var(--info-border);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-border: var(--success-border);
+
+  --color-caution: var(--caution);
+  --color-caution-soft: var(--caution-soft);
+  --color-caution-border: var(--caution-border);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+
+  --radius-card: 1rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Typography and reading accessibility
+
+   --font-scale lets users enlarge everything without breaking layout, because
+   all sizing downstream is in rem.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --font-body: var(--font-atkinson), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-heading: var(--font-atkinson), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-scale: 1;
+  --reading-measure: 68ch;
+}
+
+/* Dyslexia-friendly mode. The generous letter, word and line spacing is the
+   part with the strongest evidence behind it; the font swap is offered because
+   many readers prefer it, and falls back through fonts that may be installed
+   locally before landing on the default stack. */
+[data-font="dyslexic"] {
+  --font-body: "OpenDyslexic", "Open Dyslexic", "Lexie Readable", "Comic Sans MS",
+    var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-body);
+  --reading-measure: 60ch;
+}
+
+[data-font="dyslexic"] body {
+  letter-spacing: 0.035em;
+  word-spacing: 0.12em;
+  line-height: 1.85;
+}
+
+[data-text-size="sm"] {
+  --font-scale: 0.9375;
+}
+[data-text-size="md"] {
+  --font-scale: 1;
+}
+[data-text-size="lg"] {
+  --font-scale: 1.125;
+}
+[data-text-size="xl"] {
+  --font-scale: 1.25;
+}
+
+html {
+  font-size: calc(100% * var(--font-scale));
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------------------------
+   Focus, motion, and other global affordances
+   --------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Users can force this on regardless of the OS setting. */
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+::selection {
+  background-color: var(--primary-soft);
+  color: var(--text);
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* The range input is the backbone of every rating scale in the app, so it is
+   styled once here rather than per-component. */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1.75rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 0.625rem;
+  border-radius: 999px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 0.625rem;
+  border-radius: 999px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-top: -0.625rem;
+  border-radius: 999px;
+  background: var(--primary);
+  border: 3px solid var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  background: var(--primary);
+  border: 3px solid var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------------------------------------------------------------------------
+   Print — used by the therapist report and the printable family guides.
+   --------------------------------------------------------------------------- */
+
+@media print {
+  :root {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --text: #000000;
+    --text-muted: #333333;
+    --border: #cccccc;
+  }
+
+  .print-hidden,
+  nav[data-app-nav],
+  footer[data-app-footer] {
+    display: none !important;
+  }
+
+  .print-block {
+    break-inside: avoid;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555555;
+  }
+}
