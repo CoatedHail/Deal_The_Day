@@ -19,7 +19,7 @@ export default function NewActivityPage() {
       <PagePlaceholder
         summary="The pre-activity flow is not built yet. Its questions are already defined in the data model."
         planned={[
-          "Which card was drawn, and its category",
+          "The number printed on the card, and its category",
           "Anxiety right now, 0 to 10",
           "Confidence you can handle it, 0 to 10",
           "What you predict will happen",

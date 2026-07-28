@@ -20,6 +20,7 @@ import {
   CheckIn,
   CheckInRatings,
   EMPTY_APP_DATA,
+  GameFeedback,
   OptOutRecord,
   PostActivityCheck,
   PreActivityCheck,
@@ -51,6 +52,10 @@ interface DataContextValue {
 
   saveInsight: (text: string, sourceActivityId?: string) => void;
   deleteInsight: (id: string) => void;
+
+  addFeedback: (feedback: Omit<GameFeedback, "id" | "submittedAt" | "sent">) => string;
+  markFeedbackSent: (id: string) => void;
+  deleteFeedback: (id: string) => void;
 
   /** Serialises everything for download. Used by the therapist export. */
   exportJson: () => string;
@@ -246,6 +251,37 @@ export function DataProvider({
     }));
   }, []);
 
+  const addFeedback = useCallback(
+    (feedback: Omit<GameFeedback, "id" | "submittedAt" | "sent">) => {
+      const id = createId();
+      const entry: GameFeedback = {
+        ...feedback,
+        id,
+        submittedAt: now(),
+        sent: false,
+      };
+      setData((current) => ({ ...current, feedback: [entry, ...current.feedback] }));
+      return id;
+    },
+    [],
+  );
+
+  const markFeedbackSent = useCallback((id: string) => {
+    setData((current) => ({
+      ...current,
+      feedback: current.feedback.map((entry) =>
+        entry.id === id ? { ...entry, sent: true } : entry,
+      ),
+    }));
+  }, []);
+
+  const deleteFeedback = useCallback((id: string) => {
+    setData((current) => ({
+      ...current,
+      feedback: current.feedback.filter((entry) => entry.id !== id),
+    }));
+  }, []);
+
   const exportJson = useCallback(() => JSON.stringify(data, null, 2), [data]);
 
   const importJson = useCallback(
@@ -263,6 +299,7 @@ export function DataProvider({
           sessions: parsed.sessions ?? [],
           therapistNotes: parsed.therapistNotes ?? [],
           insights: parsed.insights ?? [],
+          feedback: parsed.feedback ?? [],
         });
         return { ok: true };
       } catch {
@@ -295,6 +332,9 @@ export function DataProvider({
       deleteTherapistNote,
       saveInsight,
       deleteInsight,
+      addFeedback,
+      markFeedbackSent,
+      deleteFeedback,
       exportJson,
       importJson,
       clearAllData,
@@ -316,6 +356,9 @@ export function DataProvider({
       deleteTherapistNote,
       saveInsight,
       deleteInsight,
+      addFeedback,
+      markFeedbackSent,
+      deleteFeedback,
       exportJson,
       importJson,
       clearAllData,

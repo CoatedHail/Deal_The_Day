@@ -39,6 +39,12 @@ export const NAV_ITEMS: NavItem[] = [
     primary: true,
   },
   {
+    href: "/journal",
+    label: "Journal",
+    icon: "journal",
+    description: "Everything you have recorded, in order",
+  },
+  {
     href: "/learn",
     label: "Learn",
     icon: "book",
@@ -61,6 +67,12 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Resources",
     icon: "lifebuoy",
     description: "FAQ, reading, worksheets and support",
+  },
+  {
+    href: "/feedback",
+    label: "Review a card",
+    icon: "message",
+    description: "Tell us how a card landed",
   },
   {
     href: "/therapist",
