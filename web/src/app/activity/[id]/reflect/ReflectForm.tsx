@@ -14,13 +14,19 @@ import {
   POST_ACTIVITY_COPY as COPY,
 } from "@/content/activity-flow";
 import { formatCardReference } from "@/lib/cards";
-import { FearedOutcome } from "@/lib/types";
+import { ChecklistAuthor } from "@/components/checklists/ChecklistAuthor";
+import { ChecklistItem, FearedOutcome } from "@/lib/types";
 
 export function ReflectForm({ activityId }: { activityId: string }) {
   const router = useRouter();
-  const { data, ready, completeActivity } = useData();
+  const { data, ready, completeActivity, saveChecklist } = useData();
 
   const activity = data.activities.find((entry) => entry.id === activityId);
+  const category = activity?.pre.cardCategory;
+  const existingChecklist = category
+    ? data.checklists.find((entry) => entry.category === category)
+    : undefined;
+  const [checklistItems, setChecklistItems] = useState<ChecklistItem[] | null>(null);
 
   const [whatHappened, setWhatHappened] = useState("");
   const [anxietyAfter, setAnxietyAfter] = useState(5);
@@ -72,6 +78,12 @@ export function ReflectForm({ activityId }: { activityId: string }) {
       compulsionsResisted: resisted,
       compulsionsPerformed: tempted.filter((item) => !resisted.includes(item)),
     });
+
+    // Saved only on submit, so abandoning the reflection does not quietly
+    // rewrite the category's checklist.
+    if (category && checklistItems !== null) {
+      saveChecklist(category, checklistItems);
+    }
 
     router.push(`/activity/${activityId}`);
   }
@@ -184,6 +196,14 @@ export function ReflectForm({ activityId }: { activityId: string }) {
             rows={5}
           />
         </Card>
+
+        {category ? (
+          <ChecklistAuthor
+            category={category}
+            existing={existingChecklist?.items}
+            onChange={setChecklistItems}
+          />
+        ) : null}
 
         <div className="flex flex-wrap items-center gap-3">
           <Button type="submit" size="lg" disabled={!canSubmit}>

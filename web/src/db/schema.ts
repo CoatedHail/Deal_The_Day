@@ -30,11 +30,14 @@ import {
   smallint,
   text,
   timestamp,
+  unique,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccountType } from "next-auth/adapters";
 import type {
+  ActivityCategory,
   ActivityStatus,
   CheckInRatings,
+  ChecklistItem,
   GameFeedback,
   OptOutRecord,
   PostActivityCheck,
@@ -108,7 +111,34 @@ export const activities = pgTable("activities", {
   pre: jsonb("pre").$type<PreActivityCheck>().notNull(),
   post: jsonb("post").$type<PostActivityCheck>(),
   optOut: jsonb("opt_out").$type<OptOutRecord>(),
+  // Copied from the category checklist at draw time rather than referenced, so
+  // later edits to that checklist cannot rewrite what this entry says happened.
+  checklistSnapshot: jsonb("checklist_snapshot").$type<ChecklistItem[]>(),
+  checklistCompleted: jsonb("checklist_completed").$type<string[]>(),
+  executedBy: text("executed_by"),
 });
+
+/**
+ * One checklist per category, per user.
+ *
+ * `revisions` is recorded for a clinician export and is never surfaced to the
+ * parent — a visible count of your own edits becomes a number to drive to zero.
+ */
+export const categoryChecklists = pgTable(
+  "category_checklists",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    category: text("category").$type<ActivityCategory>().notNull(),
+    items: jsonb("items").$type<ChecklistItem[]>().notNull(),
+    revisions: integer("revisions").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
+  },
+  (table) => [unique().on(table.userId, table.category)],
+);
 
 export const checkIns = pgTable("check_ins", {
   id: text("id").primaryKey(),

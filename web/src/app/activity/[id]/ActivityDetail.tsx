@@ -48,6 +48,7 @@ export function ActivityDetail({ activityId }: { activityId: string }) {
 
   const { pre, post, optOut } = activity;
   const awaiting = activity.status === "awaiting-reflection";
+  const checklist = activity.checklistSnapshot ?? [];
 
   function handleDelete() {
     deleteActivity(activityId);
@@ -85,6 +86,58 @@ export function ActivityDetail({ activityId }: { activityId: string }) {
             </ButtonLink>
           </div>
         </Callout>
+      ) : null}
+
+      {awaiting && checklist.length > 0 ? (
+        <Card>
+          <CardHeader
+            title="There is a checklist for this category"
+            description={`${checklist.length} ${checklist.length === 1 ? "item" : "items"}, written in advance. Hand the phone over rather than reading it out.`}
+            level={3}
+          />
+          <ButtonLink href={`/activity/${activityId}/checklist`} variant="secondary">
+            <Icon name="check" size={18} />
+            Open the checklist
+          </ButtonLink>
+        </Card>
+      ) : null}
+
+      {/* Completion is shown only once the activity is over. A live view of
+          items being ticked off would be the checking compulsion with a
+          progress bar. */}
+      {!awaiting && checklist.length > 0 ? (
+        <Card>
+          <CardHeader
+            title="The checklist"
+            description={
+              activity.executedBy
+                ? `Followed by ${activity.executedBy}.`
+                : "As it stood when the card was drawn."
+            }
+            level={3}
+          />
+          <ul className="space-y-2">
+            {checklist.map((item) => {
+              const done = activity.checklistCompleted?.includes(item.id);
+              return (
+                <li key={item.id} className="flex items-start gap-3 text-sm">
+                  {done ? (
+                    <Icon name="check" size={16} className="mt-0.5 text-success" />
+                  ) : (
+                    // An empty marker rather than a cross: an unticked item is
+                    // simply unrecorded, not a failure, and should not be
+                    // coloured like one.
+                    <span
+                      aria-hidden="true"
+                      className="mt-1 h-3.5 w-3.5 shrink-0 rounded-full border border-border-strong"
+                    />
+                  )}
+                  <span className={done ? "text-text" : "text-text-muted"}>{item.text}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </Card>
       ) : null}
 
       <div className="grid gap-5 lg:grid-cols-2">

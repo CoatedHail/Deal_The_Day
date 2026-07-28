@@ -97,6 +97,24 @@ export interface ActivityEntry {
   pre: PreActivityCheck;
   post?: PostActivityCheck;
   optOut?: OptOutRecord;
+  /**
+   * The category checklist exactly as it stood when this card was drawn.
+   *
+   * Copied rather than referenced on purpose. If the activity only pointed at
+   * the checklist, editing that list next month would silently rewrite what
+   * this entry says happened today — and the record has to stay true to the
+   * day it describes.
+   */
+  checklistSnapshot?: ChecklistItem[];
+  /** Ids from the snapshot that were ticked off during the activity. */
+  checklistCompleted?: string[];
+  /**
+   * Who carried it out, as a free-text name.
+   *
+   * A name rather than a linked account: children do not have logins here, and
+   * rotating who does it matters more than identifying them precisely.
+   */
+  executedBy?: string;
 }
 
 /**
@@ -222,6 +240,47 @@ export interface TherapistNote {
 }
 
 /**
+ * A single line on a category checklist.
+ *
+ * Deliberately just an id and a short string. Anything richer — notes,
+ * sub-items, priorities — would let the checklist grow into the kind of
+ * exhaustive planning project the game exists to loosen.
+ */
+export interface ChecklistItem {
+  id: string;
+  text: string;
+}
+
+/**
+ * What the parent decided, in advance, needs to be true before an activity of
+ * this kind happens.
+ *
+ * The therapeutic point is the timing, not the content. Deciding ahead and then
+ * letting the list carry it out — rather than supervising in the moment — is
+ * the exposure. So these are authored after an activity, while reflecting on
+ * what actually mattered, and are read-only by the time the next card is drawn.
+ */
+export interface CategoryChecklist {
+  id: string;
+  category: ActivityCategory;
+  items: ChecklistItem[];
+  createdAt: string;
+  updatedAt: string;
+  /**
+   * How many times the list has been revised. Recorded for a clinician export,
+   * and deliberately never shown to the parent: a visible count of your own
+   * revisions becomes a number to drive to zero, which would discourage the
+   * honest editing that means someone is actually learning.
+   */
+  revisions: number;
+}
+
+/** Hard cap, not a suggestion. A nudge does not restrain the pattern this
+ *  feature is trying to avoid feeding. */
+export const CHECKLIST_MAX_ITEMS = 7;
+export const CHECKLIST_ITEM_MAX_LENGTH = 60;
+
+/**
  * A review of a card in the physical deck.
  *
  * Separate from the therapeutic record on purpose. This is feedback about the
@@ -268,6 +327,8 @@ export interface AppData {
   therapistNotes: TherapistNote[];
   insights: SavedInsight[];
   feedback: GameFeedback[];
+  /** At most one per category, and a category may have none. */
+  checklists: CategoryChecklist[];
   /** Schema version, so future migrations have something to branch on. */
   version: number;
 }
@@ -281,6 +342,7 @@ export const EMPTY_APP_DATA: AppData = {
   therapistNotes: [],
   insights: [],
   feedback: [],
+  checklists: [],
   version: CURRENT_DATA_VERSION,
 };
 

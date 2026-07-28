@@ -15,9 +15,12 @@ import {
   createId,
 } from "@/lib/storage";
 import {
+  ActivityCategory,
   ActivityEntry,
   AppData,
+  CategoryChecklist,
   CheckIn,
+  ChecklistItem,
   CheckInRatings,
   EMPTY_APP_DATA,
   GameFeedback,
@@ -52,6 +55,15 @@ interface DataContextValue {
 
   saveInsight: (text: string, sourceActivityId?: string) => void;
   deleteInsight: (id: string) => void;
+
+  /** Creates or replaces the checklist for a category. Empty items clears it. */
+  saveChecklist: (category: ActivityCategory, items: ChecklistItem[]) => void;
+  /** Records what was ticked off, after the fact. Never live. */
+  recordChecklistProgress: (
+    activityId: string,
+    completedIds: string[],
+    executedBy?: string,
+  ) => void;
 
   addFeedback: (feedback: Omit<GameFeedback, "id" | "submittedAt" | "sent">) => string;
   markFeedbackSent: (id: string) => void;
@@ -101,14 +113,22 @@ export function DataProvider({
   const startActivity = useCallback((pre: PreActivityCheck) => {
     const id = createId();
     const timestamp = now();
-    const entry: ActivityEntry = {
-      id,
-      status: "awaiting-reflection",
-      createdAt: timestamp,
-      updatedAt: timestamp,
-      pre,
-    };
-    setData((current) => ({ ...current, activities: [entry, ...current.activities] }));
+    setData((current) => {
+      // Snapshot the category's checklist as it stands right now. Referencing
+      // it instead would let a later edit rewrite this entry's history.
+      const checklist = pre.cardCategory
+        ? current.checklists.find((entry) => entry.category === pre.cardCategory)
+        : undefined;
+      const entry: ActivityEntry = {
+        id,
+        status: "awaiting-reflection",
+        createdAt: timestamp,
+        updatedAt: timestamp,
+        pre,
+        checklistSnapshot: checklist?.items.length ? checklist.items : undefined,
+      };
+      return { ...current, activities: [entry, ...current.activities] };
+    });
     return id;
   }, []);
 
@@ -251,6 +271,70 @@ export function DataProvider({
     }));
   }, []);
 
+  const saveChecklist = useCallback(
+    (category: ActivityCategory, items: ChecklistItem[]) => {
+      const timestamp = now();
+      setData((current) => {
+        const existing = current.checklists.find((entry) => entry.category === category);
+
+        // An empty list is a legitimate answer — a category the family has got
+        // comfortable with should be allowed to drop to nothing.
+        if (items.length === 0) {
+          return {
+            ...current,
+            checklists: current.checklists.filter((entry) => entry.category !== category),
+          };
+        }
+
+        if (!existing) {
+          const entry: CategoryChecklist = {
+            id: createId(),
+            category,
+            items,
+            createdAt: timestamp,
+            updatedAt: timestamp,
+            revisions: 0,
+          };
+          return { ...current, checklists: [...current.checklists, entry] };
+        }
+
+        return {
+          ...current,
+          checklists: current.checklists.map((entry) =>
+            entry.category === category
+              ? {
+                  ...entry,
+                  items,
+                  updatedAt: timestamp,
+                  revisions: entry.revisions + 1,
+                }
+              : entry,
+          ),
+        };
+      });
+    },
+    [],
+  );
+
+  const recordChecklistProgress = useCallback(
+    (activityId: string, completedIds: string[], executedBy?: string) => {
+      setData((current) => ({
+        ...current,
+        activities: current.activities.map((activity) =>
+          activity.id === activityId
+            ? {
+                ...activity,
+                checklistCompleted: completedIds,
+                executedBy: executedBy?.trim() || activity.executedBy,
+                updatedAt: now(),
+              }
+            : activity,
+        ),
+      }));
+    },
+    [],
+  );
+
   const addFeedback = useCallback(
     (feedback: Omit<GameFeedback, "id" | "submittedAt" | "sent">) => {
       const id = createId();
@@ -300,6 +384,7 @@ export function DataProvider({
           therapistNotes: parsed.therapistNotes ?? [],
           insights: parsed.insights ?? [],
           feedback: parsed.feedback ?? [],
+          checklists: parsed.checklists ?? [],
         });
         return { ok: true };
       } catch {
@@ -332,6 +417,8 @@ export function DataProvider({
       deleteTherapistNote,
       saveInsight,
       deleteInsight,
+      saveChecklist,
+      recordChecklistProgress,
       addFeedback,
       markFeedbackSent,
       deleteFeedback,
@@ -356,6 +443,8 @@ export function DataProvider({
       deleteTherapistNote,
       saveInsight,
       deleteInsight,
+      saveChecklist,
+      recordChecklistProgress,
       addFeedback,
       markFeedbackSent,
       deleteFeedback,
