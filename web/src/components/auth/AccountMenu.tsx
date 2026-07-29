@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { SignOutButton } from "@/components/auth/AuthButtons";
 import { ButtonLink } from "@/components/ui/Button";
+import { isReviewer } from "@/lib/reviewers";
 
 /**
  * Account control for the top bar.
@@ -32,6 +33,13 @@ export async function AccountMenu() {
 
   return (
     <div className="flex items-center gap-2">
+      {/* The reviews screen is only linked for the people who can open it. The
+          link is a convenience, not the gate — the page checks for itself. */}
+      {isReviewer(user.email) ? (
+        <ButtonLink href="/reviews" size="sm" variant="quiet">
+          Reviews
+        </ButtonLink>
+      ) : null}
       <span
         aria-hidden="true"
         className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary"
