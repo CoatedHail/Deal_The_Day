@@ -301,7 +301,10 @@ export interface GameFeedback {
   whatDidNot: string;
   /** Free suggestion for the people making the deck. */
   suggestion?: string;
-  /** Set once the user has copied or emailed it onward. */
+  /**
+   * Whether this reached the project team. The local copy is kept either way,
+   * so a failed send never loses what the family wrote and can be retried.
+   */
   sent: boolean;
 }
 

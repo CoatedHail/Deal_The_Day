@@ -10,7 +10,6 @@ import { Icon } from "@/components/ui/Icon";
 import { Pill } from "@/components/ui/Pill";
 import { RatingScale } from "@/components/ui/RatingScale";
 import { formatCardNumber, parseCardNumber } from "@/lib/cards";
-import { FEEDBACK_EMAIL } from "@/lib/contact";
 import { formatDate } from "@/lib/date";
 import { FEEDBACK_DIFFICULTY_LABELS, GameFeedback } from "@/lib/types";
 
@@ -34,37 +33,7 @@ const DIFFICULTY_OPTIONS: { value: Difficulty; label: string; description: strin
   },
 ];
 
-/** Renders one saved review as plain text, for copying or emailing onward. */
-function toPlainText(entry: GameFeedback): string {
-  const lines = [
-    `Deal the Day — card feedback`,
-    `Submitted: ${formatDate(entry.submittedAt, "long")}`,
-    entry.cardNumber ? `Card: ${entry.cardNumber}` : `Card: not specified`,
-    `Rating: ${entry.rating}/10`,
-    `Difficulty: ${FEEDBACK_DIFFICULTY_LABELS[entry.difficulty]}`,
-    ``,
-    `What worked:`,
-    entry.whatWorked || "—",
-    ``,
-    `What did not:`,
-    entry.whatDidNot || "—",
-  ];
-
-  if (entry.suggestion?.trim()) {
-    lines.push("", "Suggestion:", entry.suggestion.trim());
-  }
-
-  return lines.join("\n");
-}
-
-function mailtoHref(entry: GameFeedback): string {
-  const subject = entry.cardNumber
-    ? `Deal the Day feedback — card ${entry.cardNumber}`
-    : "Deal the Day feedback";
-  return `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
-    toPlainText(entry),
-  )}`;
-}
+type SendState = "idle" | "sending" | "sent" | "failed";
 
 export function FeedbackForm() {
   const { data, ready, addFeedback, markFeedbackSent, deleteFeedback } = useData();
@@ -75,86 +44,90 @@ export function FeedbackForm() {
   const [whatWorked, setWhatWorked] = useState("");
   const [whatDidNot, setWhatDidNot] = useState("");
   const [suggestion, setSuggestion] = useState("");
-  const [justSavedId, setJustSavedId] = useState<string | null>(null);
-  const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [state, setState] = useState<SendState>("idle");
+  const [lastSavedId, setLastSavedId] = useState<string | null>(null);
 
   const cardNumber = parseCardNumber(cardNumberInput);
   const cardNumberInvalid = cardNumberInput.trim().length > 0 && cardNumber === null;
-  const canSubmit = difficulty !== null && !cardNumberInvalid;
+  const canSubmit = difficulty !== null && !cardNumberInvalid && state !== "sending";
 
-  function handleSubmit(event: React.FormEvent) {
+  async function send(payload: Omit<GameFeedback, "id" | "submittedAt" | "sent">) {
+    const response = await fetch("/api/feedback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) throw new Error("send failed");
+  }
+
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     if (!canSubmit || difficulty === null) return;
 
-    const id = addFeedback({
+    const payload = {
       cardNumber: cardNumber ?? undefined,
       rating,
       difficulty,
       whatWorked: whatWorked.trim(),
       whatDidNot: whatDidNot.trim(),
       suggestion: suggestion.trim() || undefined,
-    });
+    };
 
-    setJustSavedId(id);
-    setCardNumberInput("");
-    setRating(5);
-    setDifficulty(null);
-    setWhatWorked("");
-    setWhatDidNot("");
-    setSuggestion("");
+    setState("sending");
+
+    // Kept on this device as well as sent, so the family can see what they said
+    // and so a failed send never loses what they wrote.
+    const id = addFeedback(payload);
+    setLastSavedId(id);
+
+    try {
+      await send(payload);
+      markFeedbackSent(id);
+      setState("sent");
+      setCardNumberInput("");
+      setRating(5);
+      setDifficulty(null);
+      setWhatWorked("");
+      setWhatDidNot("");
+      setSuggestion("");
+    } catch {
+      setState("failed");
+    }
   }
 
-  async function handleCopy(entry: GameFeedback) {
+  async function retry(entry: GameFeedback) {
+    setState("sending");
     try {
-      await navigator.clipboard.writeText(toPlainText(entry));
-      setCopiedId(entry.id);
+      await send(entry);
       markFeedbackSent(entry.id);
-      window.setTimeout(() => setCopiedId(null), 2500);
+      setState("sent");
     } catch {
-      // Clipboard access can be refused. The text is on screen either way, so
-      // there is nothing useful to recover here beyond not crashing.
+      setState("failed");
     }
   }
 
   const saved = ready ? data.feedback : [];
-  const justSaved = saved.find((entry) => entry.id === justSavedId) ?? null;
+  const lastSaved = saved.find((entry) => entry.id === lastSavedId) ?? null;
 
   return (
     <div className="space-y-6">
-      {justSaved ? (
-        <Card>
-          <CardHeader
-            title="Saved on this device"
-            description="Nothing has been sent anywhere. Send it on when you are ready."
-          />
-          <Callout tone="info" title="How to send it">
-            We do not run a server, so this review stays on your device until you pass
-            it on. Copy it into an email, a message, or hand it over on paper —
-            whichever suits.
-          </Callout>
-          <pre className="mt-4 max-h-64 overflow-auto whitespace-pre-wrap rounded-xl border border-border bg-surface-sunken p-4 text-sm leading-relaxed text-text">
-            {toPlainText(justSaved)}
-          </pre>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Button onClick={() => void handleCopy(justSaved)}>
-              <Icon name={copiedId === justSaved.id ? "check" : "clipboard"} size={18} />
-              {copiedId === justSaved.id ? "Copied" : "Copy to clipboard"}
-            </Button>
-            <a
-              href={mailtoHref(justSaved)}
-              onClick={() => markFeedbackSent(justSaved.id)}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-border-strong bg-surface px-4 py-2.5 font-medium text-text transition-colors hover:bg-bg-subtle"
-            >
-              Open in your email app
-            </a>
-            <Button variant="quiet" onClick={() => setJustSavedId(null)}>
-              Done
+      {state === "sent" ? (
+        <Callout tone="success" title="Sent — thank you">
+          That has gone to the people making the deck. It was sent without anything
+          identifying you or your family attached.
+        </Callout>
+      ) : null}
+
+      {state === "failed" && lastSaved ? (
+        <Callout tone="caution" title="That did not send">
+          Your review is saved on this device, so nothing is lost. It may just be the
+          connection.
+          <div className="mt-3">
+            <Button size="sm" onClick={() => void retry(lastSaved)}>
+              Try again
             </Button>
           </div>
-          <p className="mt-3 text-sm text-text-subtle">
-            The email address is a placeholder until the project publishes a real one.
-          </p>
-        </Card>
+        </Callout>
       ) : null}
 
       <Card>
@@ -212,9 +185,15 @@ export function FeedbackForm() {
             rows={3}
           />
 
+          <Callout tone="info">
+            These reviews are read by the project team, so please leave out names and
+            anything you would not want us to see. Nothing identifying you is sent
+            with them.
+          </Callout>
+
           <div className="flex items-center gap-3">
             <Button type="submit" disabled={!canSubmit}>
-              Save this review
+              {state === "sending" ? "Sending…" : "Send this review"}
             </Button>
             {difficulty === null ? (
               <p className="text-sm text-text-subtle">
@@ -228,8 +207,8 @@ export function FeedbackForm() {
       {saved.length > 0 ? (
         <Card>
           <CardHeader
-            title="Reviews saved on this device"
-            description={`${saved.length} saved. These are not part of your progress record.`}
+            title="Reviews you have sent"
+            description={`${saved.length} kept on this device. These are not part of your progress record.`}
             level={2}
           />
           <ul className="space-y-3">
@@ -246,7 +225,14 @@ export function FeedbackForm() {
                   )}
                   <Pill>{entry.rating}/10</Pill>
                   <Pill>{FEEDBACK_DIFFICULTY_LABELS[entry.difficulty]}</Pill>
-                  {entry.sent ? <Pill tone="success">Shared</Pill> : null}
+                  {entry.sent ? (
+                    <Pill tone="success">
+                      <Icon name="check" size={12} />
+                      Sent
+                    </Pill>
+                  ) : (
+                    <Pill tone="caution">Not sent</Pill>
+                  )}
                   <span className="ml-auto text-sm text-text-subtle">
                     {formatDate(entry.submittedAt)}
                   </span>
@@ -264,20 +250,27 @@ export function FeedbackForm() {
                 ) : null}
 
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <Button size="sm" variant="secondary" onClick={() => void handleCopy(entry)}>
-                    {copiedId === entry.id ? "Copied" : "Copy"}
-                  </Button>
+                  {!entry.sent ? (
+                    <Button size="sm" variant="secondary" onClick={() => void retry(entry)}>
+                      Send it
+                    </Button>
+                  ) : null}
                   <Button
                     size="sm"
                     variant="quiet"
                     onClick={() => deleteFeedback(entry.id)}
                   >
-                    Delete
+                    Remove from this device
                   </Button>
                 </div>
               </li>
             ))}
           </ul>
+          <p className="mt-4 text-sm text-text-subtle">
+            Removing a review here clears your own copy. It does not withdraw one
+            already sent, because sent reviews carry nothing that links them back to
+            you.
+          </p>
         </Card>
       ) : null}
     </div>

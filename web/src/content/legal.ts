@@ -70,6 +70,13 @@ export const PRIVACY_POLICY: LegalDocument = {
       text: "You may end up writing about your children — what they said, how they reacted. We do not ask for their names and they do not have accounts. Anything about them exists only because you typed it, inside your own record, and you can delete it at any time.",
     },
 
+    {
+      type: "callout",
+      tone: "info",
+      title: "Card reviews are the exception",
+      text: "If you review a card, that review is sent to the project team so the deck can be improved. It is stored with nothing attached that identifies you — no name, no email, no account link — and it is kept apart from your own record. Because a sent review carries nothing linking it back to you, it cannot be withdrawn afterwards.",
+    },
+
     { type: "heading", text: "What we do not do" },
     {
       type: "list",

@@ -188,11 +188,20 @@ export const insights = pgTable("insights", {
   sourceActivityId: text("source_activity_id"),
 });
 
+/**
+ * Reviews of cards in the physical deck.
+ *
+ * Deliberately not linked to a user. Improving a deck needs "card 14 averages
+ * 4/10 and three families found it too big a step" — it never needs to know
+ * which family said so. Storing these unlinked means the project team can read
+ * them freely without that being a privacy question at all, and it is one less
+ * pile of identifiable data to look after.
+ *
+ * Because there is no owner, there is nothing here to cascade on account
+ * deletion, and nothing to delete on request — which is the point.
+ */
 export const feedback = pgTable("feedback", {
   id: text("id").primaryKey(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
   submittedAt: timestamp("submitted_at", { withTimezone: true }).notNull(),
   cardNumber: integer("card_number"),
   rating: smallint("rating").notNull(),
@@ -200,5 +209,4 @@ export const feedback = pgTable("feedback", {
   whatWorked: text("what_worked").notNull().default(""),
   whatDidNot: text("what_did_not").notNull().default(""),
   suggestion: text("suggestion"),
-  sent: boolean("sent").notNull().default(false),
 });
