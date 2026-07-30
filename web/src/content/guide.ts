@@ -173,10 +173,14 @@ export const GUIDE_ARTICLES: Article[] = [
       },
       {
         type: "paragraph",
+        text: "This shows accountability without making the child responsible for comforting the parent.",
+      },
+      {
+        type: "paragraph",
         text: "Children also benefit from hearing that adults can struggle and still be loving, capable caregivers. Mental health challenges do not define a parent-child relationship.",
       },
 
-      { type: "heading", text: "4. Answering “will I get it too?”" },
+      { type: "heading", text: "4. Answering ‘will I get it too?’" },
       {
         type: "paragraph",
         text: "Many children worry about whether they will experience the same struggles as their parent. This question can come from curiosity, fear, or a desire to understand themselves. A simple answer:",

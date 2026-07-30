@@ -369,7 +369,7 @@ export const LEARN_ARTICLES: Article[] = [
       {
         type: "callout",
         tone: "erp",
-        text: "A useful reminder: “I am responsible for my actions — not for controlling every outcome.”",
+        text: "A useful reminder: “I am responsible for my actions—not for controlling every outcome.”",
       },
 
       { type: "heading", text: "The bigger picture" },
