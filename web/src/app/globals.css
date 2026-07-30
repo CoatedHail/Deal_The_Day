@@ -496,7 +496,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ---------------------------------------------------------------------------
-   Print — used by the therapist report and the printable family guides.
+   Print — used by the printable family guides and household records.
    --------------------------------------------------------------------------- */
 
 @media print {

@@ -168,16 +168,6 @@ export const scheduledSessions = pgTable("scheduled_sessions", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
 });
 
-export const therapistNotes = pgTable("therapist_notes", {
-  id: text("id").primaryKey(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
-  body: text("body").notNull(),
-  linkedActivityId: text("linked_activity_id"),
-});
-
 export const insights = pgTable("insights", {
   id: text("id").primaryKey(),
   userId: text("user_id")
