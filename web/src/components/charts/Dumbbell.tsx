@@ -16,7 +16,7 @@ export interface DumbbellRow {
  * The dumbbell is the right form for a paired change per item: it shows both
  * values and the size of the gap without needing two axes. Two shades of one
  * hue carry before/after, with a legend and direct value labels so the pairing
- * never depends on colour alone.
+ * never depends on color alone.
  */
 export function Dumbbell({
   rows,

@@ -1,7 +1,7 @@
 /**
  * Domain model for Deal the Day.
  *
- * Everything here is plain serialisable data with no framework dependencies, so
+ * Everything here is plain serializable data with no framework dependencies, so
  * that the same shapes can be reused by an API layer later without change.
  * Dates are ISO 8601 strings rather than Date objects for the same reason.
  */
@@ -56,7 +56,7 @@ export interface PostActivityCheck {
   reflection?: string;
   /** Which of the anticipated compulsions the user managed not to do. */
   compulsionsResisted: string[];
-  /** Which they did do. Recorded without judgement — data, not failure. */
+  /** Which they did do. Recorded without judgment — data, not failure. */
   compulsionsPerformed: string[];
 }
 
@@ -140,7 +140,7 @@ export interface CheckInMetricDefinition {
   lowLabel: string;
   highLabel: string;
   /**
-   * Which direction counts as progress. Used by charts to colour trends, and
+   * Which direction counts as progress. Used by charts to color trends, and
    * deliberately not used to congratulate or scold.
    */
   direction: "higher-is-better" | "lower-is-better";
@@ -286,7 +286,7 @@ export const CHECKLIST_ITEM_MAX_LENGTH = 60;
  * Separate from the therapeutic record on purpose. This is feedback about the
  * game as a product — whether a card landed, whether it was pitched right — and
  * it should never be mixed into progress tracking, where it would read as a
- * judgement of how the family did.
+ * judgment of how the family did.
  */
 export interface GameFeedback {
   id: string;
@@ -295,7 +295,7 @@ export interface GameFeedback {
   cardNumber?: number;
   /** Overall rating of the card or deck, 0–10. */
   rating: Rating;
-  /** How the difficulty felt for this family, in their judgement. */
+  /** How the difficulty felt for this family, in their judgment. */
   difficulty: "too-easy" | "about-right" | "too-hard";
   whatWorked: string;
   whatDidNot: string;

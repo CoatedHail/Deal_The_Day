@@ -8,7 +8,7 @@
  * as identifiers.
  *
  * `label`  the question itself, shown in bold
- * `help`   the smaller grey line under it. Optional — delete it if not needed.
+ * `help`   the smaller gray line under it. Optional — delete it if not needed.
  * `anchorLow` / `anchorHigh`  the two ends of a 0–10 slider
  * `placeholder`  ghost text inside an empty box. Optional.
  *

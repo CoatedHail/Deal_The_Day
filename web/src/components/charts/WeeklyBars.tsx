@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 /**
  * Weekly activity counts.
  *
- * Nominal bars all wear the same single-series colour — colouring them by value
+ * Nominal bars all wear the same single-series color — coloring them by value
  * would spend the identity channel re-encoding what bar height already shows.
  */
 export function WeeklyBars({

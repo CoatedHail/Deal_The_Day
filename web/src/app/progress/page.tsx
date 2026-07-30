@@ -17,7 +17,7 @@ export default function ProgressPage() {
       />
 
       <PagePlaceholder
-        summary="The progress dashboard is not built yet. Every statistic it needs is already computed in the stats module, and the four chart components are built and colour-validated."
+        summary="The progress dashboard is not built yet. Every statistic it needs is already computed in the stats module, and the four chart components are built and color-validated."
         planned={[
           "Activities completed, and how often the feared outcome did not arrive",
           "Anxiety before against after, per activity",

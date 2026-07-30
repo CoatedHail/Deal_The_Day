@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
  * Single-series line chart for one check-in metric over time.
  *
  * Single series by design: each metric gets its own panel rather than seven
- * lines sharing an axis. That keeps identity out of the colour channel
+ * lines sharing an axis. That keeps identity out of the color channel
  * entirely, so no categorical palette is involved and no legend is needed —
  * the panel title names the series.
  *

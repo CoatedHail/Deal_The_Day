@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s · Deal the Day",
   },
   description:
-    "The digital companion to the Deal the Day family card game — a gentle way to practise tolerating uncertainty together, built on ERP principles.",
+    "The digital companion to the Deal the Day family card game — a gentle way to practice tolerating uncertainty together, built on ERP principles.",
 };
 
 export const viewport: Viewport = {

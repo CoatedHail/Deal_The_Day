@@ -21,7 +21,7 @@ export default function DiscussionGuidesPage() {
         planned={[
           "A short guide for right after an activity",
           "Age-banded question sets: younger children, older children, teenagers",
-          "Questions for the parent to answer out loud, so the modelling goes both ways",
+          "Questions for the parent to answer out loud, so the modeling goes both ways",
           "A guide for when the activity did not go well",
           "A monthly 'how is this going for everyone' conversation",
           "Printable one-page versions",

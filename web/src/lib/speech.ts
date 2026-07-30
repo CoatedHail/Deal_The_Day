@@ -220,7 +220,7 @@ export function estimateSpeechMinutes(utterances: string[], rate: number): numbe
     (total, line) => total + line.split(/\s+/).filter(Boolean).length,
     0,
   );
-  // ~160 words per minute is a common conversational rate for synthesised
+  // ~160 words per minute is a common conversational rate for synthesized
   // speech at normal speed; the multiplier tracks the user's chosen rate.
   return Math.max(1, Math.round(words / (160 * rate)));
 }

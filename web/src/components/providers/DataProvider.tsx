@@ -79,7 +79,7 @@ interface DataContextValue {
   markFeedbackSent: (id: string) => void;
   deleteFeedback: (id: string) => void;
 
-  /** Serialises everything for download. Used by the therapist export. */
+  /** Serializes everything for download. Used by the therapist export. */
   exportJson: () => string;
   importJson: (json: string) => { ok: true } | { ok: false; error: string };
   clearAllData: () => void;
@@ -126,7 +126,7 @@ export function DataProvider({
   const loaded = useRef<AppData | null>(null);
 
   useEffect(() => {
-    let cancelled = false;
+    let canceled = false;
     setReady(false);
     setStorageError(null);
     const repo = repository ?? (signedIn ? new ApiRepository() : new LocalStorageRepository());
@@ -150,13 +150,13 @@ export function DataProvider({
 
     start()
       .then((result) => {
-        if (cancelled) return;
+        if (canceled) return;
         loaded.current = result;
         setData(result);
         setReady(true);
       })
       .catch(() => {
-        if (cancelled) return;
+        if (canceled) return;
         // Deliberately still ready, so the app is usable — but with saving
         // suspended, because writing an empty record back would destroy the
         // real one sitting on the server.
@@ -169,7 +169,7 @@ export function DataProvider({
       });
 
     return () => {
-      cancelled = true;
+      canceled = true;
     };
   }, [repository, signedIn]);
 
