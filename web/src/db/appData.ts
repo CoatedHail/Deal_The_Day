@@ -20,7 +20,6 @@ import {
   checkIns,
   insights,
   scheduledSessions,
-  therapistNotes,
   users,
 } from "@/db/schema";
 import {
@@ -31,7 +30,6 @@ import {
   CURRENT_DATA_VERSION,
   SavedInsight,
   ScheduledSession,
-  TherapistNote,
 } from "@/lib/types";
 
 /**
@@ -49,14 +47,12 @@ export async function loadAppData(userId: string): Promise<AppData> {
     activityRows,
     checkInRows,
     sessionRows,
-    noteRows,
     insightRows,
     checklistRows,
   ] = await Promise.all([
     db.select().from(activities).where(eq(activities.userId, userId)),
     db.select().from(checkIns).where(eq(checkIns.userId, userId)),
     db.select().from(scheduledSessions).where(eq(scheduledSessions.userId, userId)),
-    db.select().from(therapistNotes).where(eq(therapistNotes.userId, userId)),
     db.select().from(insights).where(eq(insights.userId, userId)),
     db.select().from(categoryChecklists).where(eq(categoryChecklists.userId, userId)),
   ]);
@@ -102,15 +98,6 @@ export async function loadAppData(userId: string): Promise<AppData> {
     // Ascending by date: the calendar reads forwards, unlike the histories.
     .sort((a, b) => a.date.localeCompare(b.date));
 
-  const noteEntries: TherapistNote[] = noteRows
-    .map((row) => ({
-      id: row.id,
-      createdAt: row.createdAt.toISOString(),
-      body: row.body,
-      linkedActivityId: optional(row.linkedActivityId),
-    }))
-    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-
   const insightEntries: SavedInsight[] = insightRows
     .map((row) => ({
       id: row.id,
@@ -133,7 +120,6 @@ export async function loadAppData(userId: string): Promise<AppData> {
     activities: activityEntries,
     checkIns: checkInEntries,
     sessions: sessionEntries,
-    therapistNotes: noteEntries,
     insights: insightEntries,
     // Card reviews are stored unlinked from any account, so a household's
     // record cannot contain them. The client keeps its own copy of what it
@@ -171,7 +157,6 @@ export async function replaceAppData(userId: string, data: AppData): Promise<voi
     db.delete(activities).where(eq(activities.userId, userId)),
     db.delete(checkIns).where(eq(checkIns.userId, userId)),
     db.delete(scheduledSessions).where(eq(scheduledSessions.userId, userId)),
-    db.delete(therapistNotes).where(eq(therapistNotes.userId, userId)),
     db.delete(insights).where(eq(insights.userId, userId)),
     db.delete(categoryChecklists).where(eq(categoryChecklists.userId, userId)),
   ];
@@ -225,20 +210,6 @@ export async function replaceAppData(userId: string, data: AppData): Promise<voi
           reminderEnabled: entry.reminderEnabled,
           fulfilledByActivityId: entry.fulfilledByActivityId ?? null,
           createdAt: toDate(entry.createdAt),
-        })),
-      ),
-    );
-  }
-
-  if (data.therapistNotes.length > 0) {
-    statements.push(
-      db.insert(therapistNotes).values(
-        data.therapistNotes.map((entry) => ({
-          id: entry.id,
-          userId,
-          createdAt: toDate(entry.createdAt),
-          body: safeText(entry.body),
-          linkedActivityId: entry.linkedActivityId ?? null,
         })),
       ),
     );

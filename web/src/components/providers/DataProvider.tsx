@@ -30,7 +30,6 @@ import {
   PreActivityCheck,
   SavedInsight,
   ScheduledSession,
-  TherapistNote,
 } from "@/lib/types";
 
 /** Where the record being edited actually lives. */
@@ -60,9 +59,6 @@ interface DataContextValue {
   updateSession: (id: string, patch: Partial<ScheduledSession>) => void;
   deleteSession: (id: string) => void;
 
-  addTherapistNote: (body: string, linkedActivityId?: string) => void;
-  deleteTherapistNote: (id: string) => void;
-
   saveInsight: (text: string, sourceActivityId?: string) => void;
   deleteInsight: (id: string) => void;
 
@@ -79,7 +75,7 @@ interface DataContextValue {
   markFeedbackSent: (id: string) => void;
   deleteFeedback: (id: string) => void;
 
-  /** Serializes everything for download. Used by the therapist export. */
+  /** Serializes the household record for a user-controlled backup. */
   exportJson: () => string;
   importJson: (json: string) => { ok: true } | { ok: false; error: string };
   clearAllData: () => void;
@@ -93,7 +89,6 @@ function isEmptyRecord(data: AppData): boolean {
     data.activities.length === 0 &&
     data.checkIns.length === 0 &&
     data.sessions.length === 0 &&
-    data.therapistNotes.length === 0 &&
     data.insights.length === 0 &&
     data.checklists.length === 0
   );
@@ -307,26 +302,6 @@ export function DataProvider({
     }));
   }, []);
 
-  const addTherapistNote = useCallback((body: string, linkedActivityId?: string) => {
-    const note: TherapistNote = {
-      id: createId(),
-      createdAt: now(),
-      body,
-      linkedActivityId,
-    };
-    setData((current) => ({
-      ...current,
-      therapistNotes: [note, ...current.therapistNotes],
-    }));
-  }, []);
-
-  const deleteTherapistNote = useCallback((id: string) => {
-    setData((current) => ({
-      ...current,
-      therapistNotes: current.therapistNotes.filter((note) => note.id !== id),
-    }));
-  }, []);
-
   const saveInsight = useCallback((text: string, sourceActivityId?: string) => {
     const insight: SavedInsight = {
       id: createId(),
@@ -454,7 +429,6 @@ export function DataProvider({
           activities: parsed.activities ?? [],
           checkIns: parsed.checkIns ?? [],
           sessions: parsed.sessions ?? [],
-          therapistNotes: parsed.therapistNotes ?? [],
           insights: parsed.insights ?? [],
           feedback: parsed.feedback ?? [],
           checklists: parsed.checklists ?? [],
@@ -488,8 +462,6 @@ export function DataProvider({
       addSession,
       updateSession,
       deleteSession,
-      addTherapistNote,
-      deleteTherapistNote,
       saveInsight,
       deleteInsight,
       saveChecklist,
@@ -516,8 +488,6 @@ export function DataProvider({
       addSession,
       updateSession,
       deleteSession,
-      addTherapistNote,
-      deleteTherapistNote,
       saveInsight,
       deleteInsight,
       saveChecklist,

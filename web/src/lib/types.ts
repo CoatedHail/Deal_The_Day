@@ -121,7 +121,7 @@ export interface ActivityEntry {
  * The seven dimensions tracked by an emotional check-in.
  *
  * Kept as a registry rather than hard-coded form fields so the check-in form,
- * the trend charts and the therapist export all stay in sync automatically.
+ * the check-in form and trend charts stay in sync automatically.
  */
 export type CheckInMetricKey =
   | "mood"
@@ -230,15 +230,6 @@ export interface ScheduledSession {
   createdAt: string;
 }
 
-export interface TherapistNote {
-  id: string;
-  createdAt: string;
-  /** Free text. Placeholder until real therapist accounts exist. */
-  body: string;
-  /** Optional link to the activity being discussed. */
-  linkedActivityId?: string;
-}
-
 /**
  * A single line on a category checklist.
  *
@@ -267,7 +258,7 @@ export interface CategoryChecklist {
   createdAt: string;
   updatedAt: string;
   /**
-   * How many times the list has been revised. Recorded for a clinician export,
+   * How many times the list has been revised. Recorded for internal history,
    * and deliberately never shown to the parent: a visible count of your own
    * revisions becomes a number to drive to zero, which would discourage the
    * honest editing that means someone is actually learning.
@@ -327,7 +318,6 @@ export interface AppData {
   activities: ActivityEntry[];
   checkIns: CheckIn[];
   sessions: ScheduledSession[];
-  therapistNotes: TherapistNote[];
   insights: SavedInsight[];
   feedback: GameFeedback[];
   /** At most one per category, and a category may have none. */
@@ -342,7 +332,6 @@ export const EMPTY_APP_DATA: AppData = {
   activities: [],
   checkIns: [],
   sessions: [],
-  therapistNotes: [],
   insights: [],
   feedback: [],
   checklists: [],

@@ -1,7 +1,32 @@
 import Link from "next/link";
 import { Pill } from "@/components/ui/Pill";
-import { Icon } from "@/components/ui/Icon";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import type { Article } from "@/content/types";
+
+const ARTICLE_ICONS: Record<string, Record<string, IconName>> = {
+  "/learn": {
+    "ocd-vs-ocpd": "balance",
+    "intolerance-of-uncertainty": "question",
+    "why-uncertainty-creates-anxiety": "pulse",
+    "compulsive-planning": "calendar",
+    "reassurance-seeking": "message",
+    overcontrol: "lock",
+    "family-accommodation": "family",
+    "what-is-erp": "target",
+    "how-erp-reduces-compulsions": "repeat",
+    "cognitive-distortions": "brain",
+    "modeling-flexibility": "shuffle",
+  },
+  "/guide": {
+    "talking-with-children": "message",
+    "explaining-anxiety": "pulse",
+    "discussing-uncertainty": "question",
+    "encouraging-brave-behavior": "shield",
+    "avoiding-reassurance-traps": "repeat",
+    "regulating-yourself": "pause",
+    "supporting-exposures": "people",
+  },
+};
 
 /** Card list used by both the psychoeducation library and the parent guide. */
 export function ArticleIndex({
@@ -19,8 +44,11 @@ export function ArticleIndex({
             href={`${basePath}/${article.slug}`}
             className="group flex h-full flex-col rounded-card border border-border bg-surface p-5 transition-colors hover:border-primary-border hover:bg-primary-soft"
           >
-            <div className="mb-2 flex items-start justify-between gap-3">
-              <h2 className="font-display text-lg font-semibold leading-snug text-text">
+            <div className="flex items-start gap-3">
+              <span className="rounded-xl bg-primary-soft p-2 text-primary" aria-hidden="true">
+                <Icon name={ARTICLE_ICONS[basePath]?.[article.slug] ?? "book"} size={20} />
+              </span>
+              <h2 className="min-w-0 flex-1 font-display text-lg font-semibold leading-snug text-text">
                 {article.title}
               </h2>
               <Icon
@@ -29,8 +57,7 @@ export function ArticleIndex({
                 className="mt-1 text-text-subtle transition-colors group-hover:text-primary"
               />
             </div>
-            <p className="flex-1 text-sm text-text-muted">{article.summary}</p>
-            <div className="mt-4 flex items-center gap-2">
+            <div className="mt-4 flex flex-1 items-end gap-2 pl-11">
               {article.minutes ? (
                 <span className="text-xs text-text-subtle">{article.minutes} min read</span>
               ) : null}
