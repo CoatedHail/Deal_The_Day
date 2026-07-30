@@ -36,7 +36,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <>
+    <div className="settings-palette">
       <PageHeader
         title="Settings"
         description="How the site looks and reads, and what happens to what you have written."
@@ -188,6 +188,6 @@ export default function SettingsPage() {
           ) : null}
         </Card>
       </div>
-    </>
+    </div>
   );
 }
