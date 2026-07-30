@@ -23,6 +23,7 @@
  * ────────────────────────────────────────────────────────────────────────────
  */
 
+import { CONTACT } from "@/content/contact";
 import type { Article } from "@/content/types";
 
 export interface LegalDocument extends Article {
@@ -142,10 +143,11 @@ export const PRIVACY_POLICY: LegalDocument = {
     },
 
     { type: "heading", text: "Who is responsible" },
-    // NEEDS-OWNER: name the legal entity and a monitored contact address.
+    // NEEDS-OWNER: the legal entity. The contact address is now real; the
+    // organization formally accountable for the data still is not named.
     {
       type: "paragraph",
-      text: "Deal the Day is made by the SNP-REACH project team. The specific organization formally responsible for this data, and a contact address for privacy questions, are being confirmed and will be published here before the site is opened to families.",
+      text: `Deal the Day is made by the SNP-REACH project team. Privacy questions can go to ${CONTACT.email}. The specific organization formally responsible for this data is being confirmed and will be named here before the site is opened to families.`,
     },
 
     { type: "heading", text: "Changes" },
@@ -233,7 +235,7 @@ export const TERMS_OF_SERVICE: LegalDocument = {
     { type: "heading", text: "Contact" },
     {
       type: "paragraph",
-      text: "Questions about these terms can go to the project team through the contact page.",
+      text: `Questions about these terms can go to ${CONTACT.email}, or to the project team through the contact page.`,
     },
   ],
 };

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { Callout } from "@/components/ui/Callout";
+import { CONTACT, CONTACT_EMAIL_HREF } from "@/content/contact";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -17,41 +19,67 @@ export default function ContactPage() {
       />
 
       <Card>
-        {/* Placeholder details — replace with the real contact information. */}
-        <dl className="space-y-4">
+        <dl className="space-y-5">
           <div>
-            <dt className="text-sm text-text-muted">General enquiries</dt>
-            <dd className="text-text">hello@example.com</dd>
+            <dt className="text-sm text-text-muted">Email</dt>
+            <dd className="text-lg">
+              <a
+                href={CONTACT_EMAIL_HREF}
+                className="font-medium text-primary underline"
+              >
+                {CONTACT.email}
+              </a>
+            </dd>
+            <dd className="mt-1 text-sm text-text-subtle">
+              One inbox for everything — questions from families, from clinicians, and
+              from anyone wanting to use the deck with a group.
+            </dd>
           </div>
+
           <div>
-            <dt className="text-sm text-text-muted">Clinicians and practices</dt>
-            <dd className="text-text">clinical@example.com</dd>
+            <dt className="text-sm text-text-muted">Instagram</dt>
+            <dd className="text-lg">
+              <a
+                href={CONTACT.instagramUrl}
+                rel="noreferrer"
+                className="font-medium text-primary underline"
+              >
+                @{CONTACT.instagramHandle}
+              </a>
+            </dd>
           </div>
+
           <div>
-            <dt className="text-sm text-text-muted">Press</dt>
-            <dd className="text-text">press@example.com</dd>
-          </div>
-          <div>
-            <dt className="text-sm text-text-muted">Post</dt>
-            <dd className="text-text">Address to be added</dd>
+            <dt className="text-sm text-text-muted">Phone</dt>
+            {/* Said plainly rather than left out, so nobody goes hunting for a
+                number that does not exist. */}
+            <dd className="text-text">
+              There is no phone line. Email is the way to reach us.
+            </dd>
           </div>
         </dl>
       </Card>
 
-      <Callout tone="caution" title="Placeholder details" className="mt-5">
-        These addresses are stand-ins. Replace them in{" "}
-        <code className="rounded bg-surface-sunken px-1.5 py-0.5 text-sm">
-          src/app/resources/contact/page.tsx
-        </code>{" "}
-        before this goes anywhere public.
+      <Callout tone="caution" title="Not monitored for urgent matters" className="mt-5">
+        This inbox is read when someone has time, not around the clock. If you need
+        support now, the{" "}
+        <Link href="/resources/crisis" className="font-medium text-primary underline">
+          crisis support page
+        </Link>{" "}
+        lists services that answer straight away.
       </Callout>
 
       <Callout tone="info" className="mt-4">
-        This inbox is not monitored for urgent matters. If you need support now, the{" "}
-        <a href="/resources/crisis" className="font-medium text-primary underline">
-          crisis support page
-        </a>{" "}
-        lists services that are.
+        Feedback about a particular card is more useful on the{" "}
+        <Link href="/feedback" className="font-medium text-primary underline">
+          review a card
+        </Link>{" "}
+        page — it reaches the people making the deck in a form they can act on. You can
+        also{" "}
+        <Link href="/team" className="font-medium text-primary underline">
+          meet the team
+        </Link>
+        .
       </Callout>
     </>
   );

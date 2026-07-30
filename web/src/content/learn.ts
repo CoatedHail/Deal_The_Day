@@ -15,6 +15,7 @@ import type { Article } from "@/content/types";
 export const LEARN_ARTICLES: Article[] = [
   {
     slug: "ocd-vs-ocpd",
+    authorId: "merisa",
     title: "OCD and OCPD are not the same thing",
     summary:
       "They share a name and almost nothing else. What separates them, and why the difference changes what helps.",
@@ -116,6 +117,7 @@ export const LEARN_ARTICLES: Article[] = [
   },
   {
     slug: "intolerance-of-uncertainty",
+    authorId: "merisa",
     title: "Intolerance of uncertainty",
     summary:
       "The engine underneath a lot of anxious behavior: not knowing feels unbearable, so you try to make it stop.",

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ContentBody } from "@/components/content/ContentBody";
+import { ArticleByline } from "@/components/content/ArticleByline";
 import { Icon } from "@/components/ui/Icon";
 import { LEARN_ARTICLES } from "@/content/learn";
 import { findArticle } from "@/content/types";
@@ -43,6 +44,7 @@ export default async function LearnArticlePage({ params }: Params) {
 
       <div className="max-w-[var(--reading-measure)]">
         <ContentBody article={article} />
+        <ArticleByline article={article} />
       </div>
 
       <nav

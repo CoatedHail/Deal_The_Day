@@ -6,11 +6,14 @@ interface CardProps {
   /** Removes the default padding for cards that manage their own layout. */
   bare?: boolean;
   as?: "div" | "section" | "article" | "li";
+  /** Anchor target, for cards a link can point at directly. */
+  id?: string;
 }
 
-export function Card({ children, className, bare, as: Tag = "div" }: CardProps) {
+export function Card({ children, className, bare, as: Tag = "div", id }: CardProps) {
   return (
     <Tag
+      id={id}
       className={cn(
         "rounded-card border border-border bg-surface",
         !bare && "p-5 sm:p-6",

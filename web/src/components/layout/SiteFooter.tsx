@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONTACT, CONTACT_EMAIL_HREF } from "@/content/contact";
 
 /**
  * Site footer.
@@ -28,9 +29,29 @@ export function SiteFooter() {
           </Link>
           .
         </p>
+        {/* The address itself, not just a link to a page that has it. Someone
+            looking for a way to reach a mental health project should not have
+            to navigate to find one. */}
+        <p>
+          Questions?{" "}
+          <a href={CONTACT_EMAIL_HREF} className="font-medium text-primary underline">
+            {CONTACT.email}
+          </a>{" "}
+          · Instagram{" "}
+          <a
+            href={CONTACT.instagramUrl}
+            rel="noreferrer"
+            className="font-medium text-primary underline"
+          >
+            @{CONTACT.instagramHandle}
+          </a>
+        </p>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
           <Link href="/resources/faq" className="underline hover:text-text">
             FAQ
+          </Link>
+          <Link href="/team" className="underline hover:text-text">
+            Meet the team
           </Link>
           <Link href="/resources/crisis" className="underline hover:text-text">
             Crisis support
@@ -49,7 +70,8 @@ export function SiteFooter() {
           </Link>
         </nav>
         <p className="text-xs text-text-subtle">
-          Everything you record stays on this device unless you choose to export it.
+          Signed out, everything you record stays in this browser. Signed in, it is
+          saved to your account and nobody else can read it.
         </p>
       </div>
     </footer>

@@ -33,6 +33,15 @@ export interface Article {
   /** The planned section headings. Shown for placeholders so the shape is clear. */
   outline?: string[];
   blocks?: ContentBlock[];
+  /**
+   * Who wrote it — the `id` of an entry in content/team.ts.
+   *
+   * Optional, and most articles have none: different people are writing
+   * different pieces, and no byline is better than a wrong one. Stored as an id
+   * rather than a name so the credit links to the team page and a person's
+   * details only have to be right in one place.
+   */
+  authorId?: string;
 }
 
 export function findArticle(articles: Article[], slug: string): Article | undefined {
