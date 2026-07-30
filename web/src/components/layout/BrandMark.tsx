@@ -15,12 +15,12 @@ export function BrandMark({
   return (
     <span
       className={cn(
-        "relative block shrink-0 overflow-hidden rounded-xl border border-border bg-white shadow-sm",
+        "relative block shrink-0 overflow-hidden",
         className,
       )}
     >
       <Image
-        src="/deal-the-day-mark.jpg"
+        src="/brand/deal-the-day-mark-original-transparent-v2.png"
         alt={alt}
         fill
         sizes={sizes}

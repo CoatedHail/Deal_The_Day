@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Private } from "@/components/a11y/Private";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ButtonLink } from "@/components/ui/Button";
@@ -28,6 +29,30 @@ export default function ActivityIndexPage() {
         description="Draw a card and work through it, then read back what your family recorded."
         action={<ButtonLink href="/activity/new">Start a card</ButtonLink>}
       />
+      <figure className="mb-6 overflow-hidden rounded-card border border-border bg-surface shadow-sm">
+        <div className="relative aspect-[16/9] bg-surface-sunken sm:aspect-[2/1]">
+          <Image
+            src="/activity-ideas/activities-hero.jpg"
+            alt="Parents playing outside with their young child in a grassy park"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 896px"
+            className="object-cover object-[center_58%]"
+          />
+        </div>
+        <figcaption className="px-4 py-2 text-xs text-text-subtle">
+          Photo by{" "}
+          <a
+            href="https://www.pexels.com/photo/parents-playing-with-their-child-in-a-park-20811236/"
+            target="_blank"
+            rel="noreferrer"
+            className="underline hover:text-text"
+          >
+            Alexander Mass on Pexels
+          </a>
+          .
+        </figcaption>
+      </figure>
 
       <Callout tone="erp" title="What to look for" className="mb-6">
         Read what you expected, then what happened. The gap between those two is the

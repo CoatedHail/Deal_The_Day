@@ -44,6 +44,14 @@ export const NAV_ITEMS: NavItem[] = [
     section: "practice",
   },
   {
+    href: "/activity-ideas",
+    label: "Activity Ideas",
+    icon: "sparkle",
+    description: "Browse ideas by activity type",
+    primary: true,
+    section: "practice",
+  },
+  {
     href: "/check-in",
     label: "Check in",
     icon: "pulse",
@@ -56,7 +64,6 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Progress",
     icon: "chart",
     description: "What has shifted over time",
-    primary: true,
     section: "practice",
   },
   {

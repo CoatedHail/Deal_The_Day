@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Callout } from "@/components/ui/Callout";
+import { Disclosure } from "@/components/ui/Disclosure";
 import { ChoiceGroup, Checkbox, TextField } from "@/components/ui/Field";
 import { Icon } from "@/components/ui/Icon";
 import { SpeechControls } from "@/components/a11y/SpeechControls";
@@ -63,7 +64,7 @@ export default function SettingsPage() {
 
       <div className="space-y-6">
         <Card as="section">
-          <CardHeader title="About you" />
+          <CardHeader title="About you" icon="family" />
           <TextField
             label="What should we call you?"
             help="Used only in greetings. It stays on this device."
@@ -76,6 +77,7 @@ export default function SettingsPage() {
         <Card as="section">
           <CardHeader
             title="Reading and display"
+            icon="settings"
             description="Change anything here at any time. Nothing is locked in."
           />
           <div className="space-y-6">
@@ -126,6 +128,7 @@ export default function SettingsPage() {
             <ChoiceGroup<FontChoice>
               legend="Typeface"
               help="The dyslexia-friendly option widens letter, word and line spacing, which is the part with the strongest evidence behind it. It also switches to a dyslexia-oriented font if one is installed on your device."
+              helpDisclosureLabel="Why this matters"
               options={[
                 {
                   value: "default",
@@ -157,6 +160,7 @@ export default function SettingsPage() {
             <ChoiceGroup<MotionPreference>
               legend="Motion"
               help="Your device setting is respected automatically. This forces it off regardless."
+              helpDisclosureLabel="More information"
               options={[
                 { value: "system", label: "Match my device" },
                 { value: "reduced", label: "Reduce motion" },
@@ -171,15 +175,25 @@ export default function SettingsPage() {
         <Card as="section">
           <CardHeader
             title="Reading aloud"
+            icon="speaker"
             description="A “Listen to this page” control on the explainers, the parent guide, the resources and the policies."
+            descriptionDisclosureLabel="More information"
           />
           <div className="space-y-6">
             <Checkbox
               label="Offer to read pages aloud"
-              description="For anyone who finds reading hard work rather than impossible — tiredness, dyslexia, a head too busy to hold a paragraph. If you use a screen reader, yours is better than this and you can turn this off."
               checked={settings.readAloud}
               onChange={(readAloud) => updateSettings({ readAloud })}
             />
+
+            <Disclosure summary="Who this can help" className="text-sm">
+              <p>
+                This can help anyone who finds reading hard work rather than
+                impossible — from tiredness, dyslexia, or a head too busy to hold a
+                paragraph. If you use a screen reader, yours is better than this and
+                you can leave this option off.
+              </p>
+            </Disclosure>
 
             {settings.readAloud ? <SpeechControls /> : null}
 
@@ -193,18 +207,25 @@ export default function SettingsPage() {
         </Card>
 
         <Card as="section">
-          <CardHeader title="How progress is shown" />
+          <CardHeader title="How progress is shown" icon="chart" />
           <Checkbox
             label="Gentle mode"
-            description="Hides streaks, counts and milestones. Worth turning on if tracking starts to feel like another rule you have to obey — that happens, and it is a good reason to switch it off, not a failure."
             checked={settings.gentleMode}
             onChange={(gentleMode) => updateSettings({ gentleMode })}
           />
+          <Disclosure summary="Why use gentle mode?" className="mt-4 text-sm">
+            <p>
+              Gentle mode hides streaks, counts, and milestones. It can help if
+              tracking starts to feel like another rule you have to obey. That is a
+              good reason to switch tracking off, not a failure.
+            </p>
+          </Disclosure>
         </Card>
 
         <Card as="section">
           <CardHeader
             title="Your data"
+            icon="download"
             description={`${entryCount} ${entryCount === 1 ? "entry" : "entries"} ${
               inAccount ? "saved to your account." : "stored on this device."
             }`}
@@ -271,6 +292,7 @@ export default function SettingsPage() {
           <Card as="section">
             <CardHeader
               title="Your account"
+              icon="family"
               description="Signed in with Google. Deleting the account is separate from clearing your entries above."
             />
 

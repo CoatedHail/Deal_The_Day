@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useData } from "@/components/providers/DataProvider";
 import { useSettings } from "@/components/providers/SettingsProvider";
 import { Private } from "@/components/a11y/Private";
-import { BrandMark } from "@/components/layout/BrandMark";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { ButtonLink } from "@/components/ui/Button";
 import { Callout } from "@/components/ui/Callout";
+import { Disclosure } from "@/components/ui/Disclosure";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { StatTile } from "@/components/ui/StatTile";
 import { Pill } from "@/components/ui/Pill";
@@ -40,34 +40,37 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="relative">
-        <PageHeader
-          className="sm:min-h-28 sm:pr-44"
-          title={settings.displayName ? `Hello, ${settings.displayName}` : "Welcome"}
-          description={
-            isNew
-              ? "This is the companion to your Deal the Day deck. Nothing here needs to be done perfectly, or in order."
-              : "Here is where things stand. Take what is useful and leave the rest."
-          }
-        />
-        <BrandMark
-          alt="Deal the Day family logo"
-          className="absolute right-0 top-0 hidden h-28 w-36 sm:block"
-          sizes="144px"
-          priority
-        />
-      </div>
+      <PageHeader
+        title={settings.displayName ? `Hello, ${settings.displayName}` : "Welcome"}
+        description={
+          isNew
+            ? "This is the companion to your Deal the Day deck. Nothing here needs to be done perfectly, or in order."
+            : "Here is where things stand. Take what is useful and leave the rest."
+        }
+      />
 
-      <Callout tone="info" title="Make the site comfortable for you" className="mb-6">
-        Change the font, text size, color scheme, contrast, motion and read-aloud
-        options at any time in{" "}
-        <Link href="/settings" className="font-semibold underline hover:text-info">
-          Settings
-        </Link>
-        .
-      </Callout>
+      <section className="mb-7 rounded-card border border-info-border bg-info-soft p-5 sm:p-7" aria-labelledby="settings-guidance">
+        <div className="flex items-start gap-4">
+          <span className="rounded-xl bg-surface p-2.5 text-info shadow-sm">
+            <Icon name="settings" size={24} />
+          </span>
+          <div className="min-w-0">
+            <h2 id="settings-guidance" className="text-xl font-semibold text-text sm:text-2xl">
+              Make the site comfortable for you
+            </h2>
+            <p className="mt-2 max-w-[var(--reading-measure)] text-base leading-relaxed text-text sm:text-lg">
+              In Settings, you can customize the font, text size, color scheme,
+              contrast, motion, and read-aloud preferences at any time.
+            </p>
+            <ButtonLink href="/settings" variant="secondary" size="lg" className="mt-4">
+              Open Settings
+              <Icon name="arrow-right" size={18} />
+            </ButtonLink>
+          </div>
+        </div>
+      </section>
 
-      {isNew ? <Introduction /> : null}
+      <Introduction defaultOpen={isNew} />
 
       {awaitingReflection ? (
         <Card className="mb-6 border-primary-border bg-primary-soft">
@@ -212,28 +215,27 @@ export default function DashboardPage() {
   );
 }
 
-function Introduction() {
+function Introduction({ defaultOpen }: { defaultOpen: boolean }) {
   return (
     <Card className="mb-6">
-      <CardHeader
-        title="What this is"
-        description="A short orientation — you only need to read it once."
-      />
-      <div className="max-w-[var(--reading-measure)] space-y-3 text-text">
-        <p>
-          Deal the Day is a game for families with parents who plan compulsively.
-          Someone draws a card with an activity, maybe a restaurant, an attraction, a
-          small trip, or even everyday errands. The goal is for a person without
-          OCD/OCPD-like symptoms to plan the activity and for the parent to manage
-          uncertainty.
-        </p>
-        <p>
-          This website works alongside the game by providing extra assistance,
-          including how to talk to kids about OCD/OCPD, an online log for each of the
-          cards with check-ins built in before the activity, check-ins after an
-          activity, a journal, a calendar, and other forms of support.
-        </p>
-      </div>
+      <CardHeader title="What Deal the Day is" icon="book" />
+      <Disclosure summary="Read the game and website introduction" defaultOpen={defaultOpen}>
+        <div className="max-w-[var(--reading-measure)] space-y-3 text-text">
+          <p>
+            Deal the Day is a game for families with parents who plan compulsively.
+            Someone draws a card with an activity, maybe a restaurant, an attraction, a
+            small trip, or even everyday errands. The goal is for a person without
+            OCD/OCPD-like symptoms to plan the activity and for the parent to manage
+            uncertainty.
+          </p>
+          <p>
+            This website works alongside the game by providing extra assistance,
+            including how to talk to kids about OCD/OCPD, an online log for each of the
+            cards with check-ins built in before the activity, check-ins after an
+            activity, a journal, a calendar, and other forms of support.
+          </p>
+        </div>
+      </Disclosure>
       <div className="mt-5 flex flex-wrap gap-3">
         <ButtonLink href="/learn" variant="secondary">
           Learn the ideas behind it

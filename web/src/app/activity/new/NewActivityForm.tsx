@@ -129,6 +129,7 @@ export function NewActivityForm() {
         <TextArea
           label={COPY.biggestFear.label}
           help={COPY.biggestFear.help}
+          helpDisclosureLabel="More information"
           placeholder={COPY.biggestFear.placeholder}
           value={biggestFear}
           onChange={setBiggestFear}
