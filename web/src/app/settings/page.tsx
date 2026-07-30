@@ -14,6 +14,7 @@ import type {
   ContrastPreference,
   FontChoice,
   MotionPreference,
+  PalettePreference,
   TextSize,
   ThemePreference,
 } from "@/lib/settings";
@@ -54,7 +55,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="settings-palette">
+    <>
       <PageHeader
         title="Settings"
         description="How the site looks and reads, and what happens to what you have written."
@@ -78,6 +79,25 @@ export default function SettingsPage() {
             description="Change anything here at any time. Nothing is locked in."
           />
           <div className="space-y-6">
+            <ChoiceGroup<PalettePreference>
+              legend="Color scheme"
+              options={[
+                {
+                  value: "calm",
+                  label: "Calm & earthy",
+                  description: "Warm sand, sage green and soft clay.",
+                },
+                {
+                  value: "blue-yellow",
+                  label: "Blue & yellow",
+                  description: "Soft sky blue with sunny yellow accents.",
+                },
+              ]}
+              value={settings.palette}
+              onChange={(palette) => updateSettings({ palette })}
+              columns={2}
+            />
+
             <ChoiceGroup<ThemePreference>
               legend="Theme"
               options={[
@@ -297,6 +317,6 @@ export default function SettingsPage() {
           </Card>
         ) : null}
       </div>
-    </div>
+    </>
   );
 }
