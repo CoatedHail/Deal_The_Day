@@ -177,13 +177,55 @@ export const LEARN_ARTICLES: Article[] = [
     title: "Why uncertainty creates anxiety",
     summary:
       "A plain explanation of what your brain is doing when it treats an unknown as a threat.",
-    status: "placeholder",
-    minutes: 5,
-    outline: [
-      "Threat detection is a guessing machine",
-      "Why the guess errs on the side of danger",
-      "The relief trap",
-      "Why reassurance wears off so fast",
+    status: "ready",
+    minutes: 3,
+    authorId: "merisa",
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Your brain is built to detect danger, and when something is unknown, it often treats that gap as a possible threat. Anxiety is what happens when the brain says, in effect, “I can’t be sure this is safe, so I should stay on alert.”",
+      },
+
+      { type: "heading", text: "1. Threat detection is a guessing machine" },
+      {
+        type: "paragraph",
+        text: "The brain does not wait for the perfect information before it reacts. It makes fast guesses based on patterns, memory, and body signals, then prepares you for action. That system is useful when there is a real threat, but it can also fire when the problem is simply that you do not know what will happen.",
+      },
+      {
+        type: "paragraph",
+        text: "Uncertainty gives the brain too little to work with, so it often fills in the blanks with worry. If the situation matters to you, the mind leans toward caution.",
+      },
+
+      { type: "heading", text: "2. Why the guess errs on the side of danger" },
+      {
+        type: "paragraph",
+        text: "From a survival point of view, false alarms are cheaper than missed threats. If your brain assumes “something might be wrong” and stays alert, that can feel uncomfortable, but it is safer than ignoring a real risk. The problem is that this ancient bias does not always match modern life, where many uncertainties are not dangerous at all.",
+      },
+      {
+        type: "paragraph",
+        text: "So the brain would rather create anxiety than miss a possible problem. It is not trying to make you miserable; it is trying to protect you using a very conservative rule.",
+      },
+
+      { type: "heading", text: "3. The relief trap" },
+      {
+        type: "paragraph",
+        text: "When uncertainty feels bad, people naturally try to reduce it. They check, research, ask for reassurance, rehearse outcomes, or avoid the situation entirely. That can bring short-term relief, but it also teaches the brain that uncertainty is something to escape.",
+      },
+      {
+        type: "paragraph",
+        text: "Over time, the relief becomes part of the cycle. The brain starts linking “unknown” with “must fix now,” so the anxiety returns faster the next time uncertainty shows up.",
+      },
+
+      { type: "heading", text: "4. Why reassurance wears off so fast" },
+      {
+        type: "paragraph",
+        text: "Reassurance can calm anxiety for a moment, but it rarely changes the brain’s deeper rule: “I need certainty to be safe.” Once the immediate reassurance fades, the original question comes back, often with a new one attached. That is why people can keep seeking reassurance and still feel stuck.",
+      },
+      {
+        type: "callout",
+        tone: "erp",
+        text: "The goal is not to eliminate uncertainty, which is impossible, but to change the brain’s response to it. When uncertainty stops being treated like an emergency, anxiety has less to grab onto.",
+      },
     ],
   },
   {
@@ -276,15 +318,79 @@ export const LEARN_ARTICLES: Article[] = [
     title: "Common thinking traps",
     summary:
       "The handful of patterns that show up again and again — named, so they are easier to spot in the moment.",
-    status: "placeholder",
-    minutes: 6,
-    outline: [
-      "Catastrophizing",
-      "All-or-nothing thinking",
-      "Overestimating responsibility",
-      "Emotional reasoning",
-      "Thought-action fusion",
-      "Noticing without arguing",
+    status: "ready",
+    minutes: 3,
+    authorId: "jackie",
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Our brains love taking shortcuts to help us decide things fast, but when anxiety, OCD, OCPD, or obsessive habits chip in, those shortcuts turn into predictable traps that can trick our minds.",
+      },
+      {
+        type: "paragraph",
+        text: "A thinking trap does not mean that you're irrational or doing anything wrong. It is just a pattern your mind has learned to use when it is trying to keep you or your family safe. The problem is that these patterns can make uncertainty feel more dangerous than it really is.",
+      },
+      {
+        type: "paragraph",
+        text: "Learning to recognize these habits is about noticing when your brain has slipped into a familiar pattern and choosing not to let it make every decision for you. Below are some of the habits people may exhibit.",
+      },
+
+      { type: "heading", text: "1. Catastrophizing" },
+      {
+        type: "paragraph",
+        text: "Catastrophizing is when your mind automatically jumps to the worst possible outcome. You might think: “If I don't check one more time, something terrible could happen.”",
+      },
+      {
+        type: "paragraph",
+        text: "Your brain treats unlikely possibilities as though they are imminent dangers; however, it is important to remember that uncertainty is always going to be part of life, and what we can do is not let our mind’s worst fears control us.",
+      },
+      {
+        type: "callout",
+        tone: "erp",
+        text: "Next time you start catastrophizing, you could ask yourself: “Is my brain trying to predict the future, or is it trying to protect me from uncertainty?”",
+      },
+
+      { type: "heading", text: "2. All-or-nothing thinking" },
+      { type: "paragraph", text: "This trap sees only extremes. Things are either:" },
+      {
+        type: "list",
+        items: ["perfect or ruined", "success or failure", "safe or dangerous"],
+      },
+      {
+        type: "paragraph",
+        text: "Real life almost never operates in black-and-white terms. We all learn through trial and error, and recovery is never a straight slope. Try to look for the shades of gray in life and accept messy progress.",
+      },
+
+      { type: "heading", text: "3. Overestimating responsibility" },
+      {
+        type: "paragraph",
+        text: "Many parents naturally feel responsible for their children, but anxiety can make you feel fully responsible for things that no one can actually control. You may start believing it's your job to prevent every mistake, every disappointment, and every possible future problem. Then, you may find yourself constantly monitoring, checking, and planning.",
+      },
+      {
+        type: "callout",
+        tone: "erp",
+        text: "A useful reminder: “I am responsible for my actions — not for controlling every outcome.”",
+      },
+
+      { type: "heading", text: "The bigger picture" },
+      {
+        type: "paragraph",
+        text: "These thinking traps all have something in common: they promise certainty.",
+      },
+      {
+        type: "list",
+        items: [
+          "“If I prepare enough…”",
+          "“If I control enough…”",
+          "“If I worry enough…”",
+        ],
+      },
+      { type: "paragraph", text: "…then maybe nothing bad will happen." },
+      {
+        type: "callout",
+        tone: "info",
+        text: "Certainty of the future is uncontrollable, but what we can learn is how to live well without knowing exactly what comes next.",
+      },
     ],
   },
   {

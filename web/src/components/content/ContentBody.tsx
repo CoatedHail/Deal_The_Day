@@ -54,6 +54,13 @@ function Block({ block }: { block: ContentBlock }) {
         </h2>
       );
 
+    case "subheading":
+      return (
+        <h3 className="pt-1 font-display text-lg font-semibold text-text">
+          {block.text}
+        </h3>
+      );
+
     case "paragraph":
       return <p className="text-text">{block.text}</p>;
 

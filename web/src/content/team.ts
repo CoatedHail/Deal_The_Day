@@ -28,10 +28,19 @@ export interface TeamMember {
 }
 
 export const TEAM: TeamMember[] = [
+  // NEEDS-OWNER for all three: a role, a short bio, and a photo. Names are as
+  // each person signed their drafts.
   {
     id: "merisa",
-    name: "Merisa",
-    // NEEDS-OWNER: role, a short bio, and a photo.
+    name: "Merisa S",
+  },
+  {
+    id: "jackie",
+    name: "Jackie",
+  },
+  {
+    id: "aashna",
+    name: "Aashna P",
   },
 ];
 
