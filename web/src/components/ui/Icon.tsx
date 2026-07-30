@@ -30,7 +30,8 @@ export type IconName =
   | "message"
   | "speaker"
   | "pause"
-  | "stop";
+  | "stop"
+  | "people";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   home: <path d="M3 10.5 12 3l9 7.5M5.5 9.5V20h13V9.5" />,
@@ -117,6 +118,15 @@ const PATHS: Record<IconName, React.ReactNode> = {
   ),
   pause: <path d="M9 5v14M15 5v14" />,
   stop: <rect x="6" y="6" width="12" height="12" rx="1.5" />,
+  // Three people, to read as a team rather than as the two-adult "family" glyph.
+  people: (
+    <>
+      <circle cx="12" cy="7.5" r="3" />
+      <circle cx="4.5" cy="10" r="2.2" />
+      <circle cx="19.5" cy="10" r="2.2" />
+      <path d="M6.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M2 19c0-2 1.1-3.6 2.9-3.6M22 19c0-2-1.1-3.6-2.9-3.6" />
+    </>
+  ),
 };
 
 export function Icon({

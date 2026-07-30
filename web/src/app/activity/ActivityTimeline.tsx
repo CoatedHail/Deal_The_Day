@@ -21,21 +21,47 @@ import {
 /**
  * One thing that happened, of whatever kind.
  *
- * Activities and check-ins are recorded separately but read as one story, so the
- * journal flattens them into a single time-ordered list rather than making
- * someone reconstruct the sequence across two pages.
+ * Activities and check-ins are recorded separately but read as one story, so
+ * this flattens them into a single time-ordered list rather than making someone
+ * reconstruct the sequence across two pages.
  */
 type JournalEntry =
   | { kind: "activity"; at: string; activity: ActivityEntry }
   | { kind: "check-in"; at: string; checkIn: CheckIn };
 
-type Filter = "all" | "activity" | "check-in";
+/**
+ * One flat set of filters covering both dimensions of the record.
+ *
+ * Cards and check-ins used to live on separate pages with separate filters —
+ * one by kind, one by how far through a card you were. Merged, a nested filter
+ * would be more faithful and much worse to use, so the two sets are flattened
+ * into a single row of pills.
+ */
+type Filter = "all" | "activity" | "open" | "completed" | "opted-out" | "check-in";
 
 const FILTERS: { value: Filter; label: string }[] = [
   { value: "all", label: "Everything" },
   { value: "activity", label: "Cards" },
+  { value: "open", label: "Still open" },
+  { value: "completed", label: "Completed" },
+  { value: "opted-out", label: "Stepped back" },
   { value: "check-in", label: "Check-ins" },
 ];
+
+function matches(entry: JournalEntry, filter: Filter): boolean {
+  switch (filter) {
+    case "all":
+      return true;
+    case "check-in":
+      return entry.kind === "check-in";
+    case "activity":
+      return entry.kind === "activity";
+    case "open":
+      return entry.kind === "activity" && entry.activity.status === "awaiting-reflection";
+    default:
+      return entry.kind === "activity" && entry.activity.status === filter;
+  }
+}
 
 function activityTimestamp(activity: ActivityEntry): string {
   return activity.completedAt ?? activity.optOut?.recordedAt ?? activity.createdAt;
@@ -166,7 +192,7 @@ function CheckInCard({ checkIn }: { checkIn: CheckIn }) {
   );
 }
 
-export function JournalTimeline() {
+export function ActivityTimeline() {
   const { data, ready } = useData();
   const [filter, setFilter] = useState<Filter>("all");
 
@@ -182,7 +208,7 @@ export function JournalTimeline() {
         at: checkIn.recordedAt,
         checkIn,
       })),
-    ].filter((entry) => filter === "all" || entry.kind === filter);
+    ].filter((entry) => matches(entry, filter));
 
     entries.sort((a, b) => b.at.localeCompare(a.at));
 
@@ -201,7 +227,7 @@ export function JournalTimeline() {
   if (!ready) {
     return (
       <p className="text-text-muted" role="status">
-        Loading your journal…
+        Loading your record…
       </p>
     );
   }
@@ -225,7 +251,7 @@ export function JournalTimeline() {
     <div className="space-y-6">
       <div
         role="group"
-        aria-label="Filter journal entries"
+        aria-label="Filter entries"
         className="flex flex-wrap gap-2"
       >
         {FILTERS.map((option) => {

@@ -5,7 +5,15 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ReadAloud } from "@/components/a11y/ReadAloud";
 import { Icon } from "@/components/ui/Icon";
-import { NAV_ITEMS, PRIMARY_NAV, SECONDARY_NAV, isActivePath } from "@/lib/nav";
+import {
+  NAV_ITEMS,
+  NAV_SECTIONS,
+  PRIMARY_NAV,
+  SECONDARY_NAV,
+  UNSECTIONED_NAV,
+  isActivePath,
+  navSection,
+} from "@/lib/nav";
 import { Wordmark } from "@/components/layout/Wordmark";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { cn } from "@/lib/cn";
@@ -58,13 +66,30 @@ export function AppShell({
         <div className="px-5 py-6">
           <Wordmark />
         </div>
-        <ul className="flex-1 space-y-0.5 overflow-y-auto px-3 pb-6">
-          {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <NavLink item={item} active={isActivePath(pathname, item.href)} />
-            </li>
+        <div className="flex-1 overflow-y-auto px-3 pb-6">
+          <ul className="space-y-0.5">
+            {UNSECTIONED_NAV.map((item) => (
+              <li key={item.href}>
+                <NavLink item={item} active={isActivePath(pathname, item.href)} />
+              </li>
+            ))}
+          </ul>
+
+          {NAV_SECTIONS.map((section) => (
+            <div key={section.id} className="mt-5">
+              <h2 className="mb-1 px-3 text-xs font-semibold uppercase tracking-wide text-text-subtle">
+                {section.label}
+              </h2>
+              <ul className="space-y-0.5">
+                {navSection(section.id).map((item) => (
+                  <li key={item.href}>
+                    <NavLink item={item} active={isActivePath(pathname, item.href)} />
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </nav>
 
       <div className="flex min-w-0 flex-1 flex-col">
