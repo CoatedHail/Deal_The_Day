@@ -70,6 +70,13 @@ export const PRIVACY_POLICY: LegalDocument = {
       text: "You may end up writing about your children — what they said, how they reacted. We do not ask for their names and they do not have accounts. Anything about them exists only because you typed it, inside your own record, and you can delete it at any time.",
     },
 
+    {
+      type: "callout",
+      tone: "info",
+      title: "Card reviews are the exception",
+      text: "If you review a card, that review is sent to the project team so the deck can be improved. It is stored with nothing attached that identifies you — no name, no email, no account link — and it is kept apart from your own record. Because a sent review carries nothing linking it back to you, it cannot be withdrawn afterwards.",
+    },
+
     { type: "heading", text: "What we do not do" },
     {
       type: "list",
@@ -85,7 +92,11 @@ export const PRIVACY_POLICY: LegalDocument = {
     { type: "heading", text: "Where it is stored" },
     {
       type: "paragraph",
-      text: "Your records are held in a PostgreSQL database operated by Neon, hosted on Amazon Web Services in Oregon, in the United States. The website itself is served by Vercel. Those two companies, and Google for sign-in, are the only third parties involved.",
+      text: "If you are signed in, your records are held in a PostgreSQL database operated by Neon, hosted on Amazon Web Services in Oregon, in the United States. The website itself is served by Vercel. Those two companies, and Google for sign-in, are the only third parties involved.",
+    },
+    {
+      type: "paragraph",
+      text: "If you are not signed in, everything you write stays in your own browser and is never sent to us at all. The trade-off is that clearing your browser data or switching device loses it. When you do sign in, anything already written in that browser is moved into your account and then removed from the browser, so there is only one copy.",
     },
     {
       type: "paragraph",
@@ -113,7 +124,7 @@ export const PRIVACY_POLICY: LegalDocument = {
         "You can read everything you have written, at any time, in the app.",
         "You can export the whole record as a file you keep.",
         "You can delete individual entries.",
-        "You can delete your account and everything in it. When you do, it is removed from the database rather than hidden.",
+        "You can delete your account and everything in it, from the settings page. When you do, your entries, your name and your email address are removed from the database rather than hidden, and it cannot be undone.",
       ],
     },
 

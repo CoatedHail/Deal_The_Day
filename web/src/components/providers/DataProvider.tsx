@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import {
+  ApiRepository,
   DataRepository,
   LocalStorageRepository,
   createId,
@@ -32,10 +33,19 @@ import {
   TherapistNote,
 } from "@/lib/types";
 
+/** Where the record being edited actually lives. */
+export type StorageLocation = "device" | "account";
+
 interface DataContextValue {
   data: AppData;
   /** False until the first load from storage completes. */
   ready: boolean;
+  storage: StorageLocation;
+  /**
+   * Set when the account's record could not be read. Saving is suspended while
+   * this is set, so a failed load can never be written back over a real record.
+   */
+  storageError: string | null;
 
   startActivity: (pre: PreActivityCheck) => string;
   updateActivityPre: (id: string, pre: PreActivityCheck) => void;
@@ -77,36 +87,99 @@ interface DataContextValue {
 
 const DataContext = createContext<DataContextValue | null>(null);
 
+/** True when nothing has been recorded. Card reviews are not part of this. */
+function isEmptyRecord(data: AppData): boolean {
+  return (
+    data.activities.length === 0 &&
+    data.checkIns.length === 0 &&
+    data.sessions.length === 0 &&
+    data.therapistNotes.length === 0 &&
+    data.insights.length === 0 &&
+    data.checklists.length === 0
+  );
+}
+
 export function DataProvider({
   children,
   repository,
+  signedIn = false,
 }: {
   children: React.ReactNode;
-  /** Injectable so tests and a future API-backed build can swap it out. */
+  /** Injectable so tests can swap the storage layer out. */
   repository?: DataRepository;
+  /**
+   * Whether there is a signed-in account to store the record against. Comes
+   * from the server session in the root layout, so the very first render
+   * already knows which side of the boundary it is on.
+   */
+  signedIn?: boolean;
 }) {
   const repoRef = useRef<DataRepository>(repository ?? new LocalStorageRepository());
   const [data, setData] = useState<AppData>(EMPTY_APP_DATA);
   const [ready, setReady] = useState(false);
+  const [storageError, setStorageError] = useState<string | null>(null);
+
+  /**
+   * The value that came out of storage. Compared by reference so the load does
+   * not immediately trigger a save of what was just read.
+   */
+  const loaded = useRef<AppData | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    repoRef.current.load().then((loaded) => {
-      if (cancelled) return;
-      setData(loaded);
-      setReady(true);
-    });
+    setReady(false);
+    setStorageError(null);
+    const repo = repository ?? (signedIn ? new ApiRepository() : new LocalStorageRepository());
+    repoRef.current = repo;
+
+    async function start(): Promise<AppData> {
+      if (repository || !signedIn) return repo.load();
+
+      // Signing in for the first time on a device that already has a history:
+      // the record is carried up to the account, then removed from the browser
+      // so there is only ever one copy and no chance of the two diverging.
+      const onDevice = new LocalStorageRepository();
+      const [remote, local] = await Promise.all([repo.load(), onDevice.load()]);
+      if (!isEmptyRecord(remote) || isEmptyRecord(local)) return remote;
+
+      await repo.save(local);
+      if (repo instanceof ApiRepository) await repo.flush();
+      await onDevice.clear();
+      return local;
+    }
+
+    start()
+      .then((result) => {
+        if (cancelled) return;
+        loaded.current = result;
+        setData(result);
+        setReady(true);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        // Deliberately still ready, so the app is usable — but with saving
+        // suspended, because writing an empty record back would destroy the
+        // real one sitting on the server.
+        loaded.current = EMPTY_APP_DATA;
+        setData(EMPTY_APP_DATA);
+        setStorageError(
+          "We could not reach your saved record just now. Nothing you write here will be kept until it reloads.",
+        );
+        setReady(true);
+      });
+
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [repository, signedIn]);
 
   // Persist on every change, but not before the initial load has landed —
   // otherwise the empty starting state would overwrite real stored data.
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || storageError) return;
+    if (data === loaded.current) return;
     void repoRef.current.save(data);
-  }, [data, ready]);
+  }, [data, ready, storageError]);
 
   const now = () => new Date().toISOString();
 
@@ -403,6 +476,8 @@ export function DataProvider({
     () => ({
       data,
       ready,
+      storage: signedIn ? ("account" as const) : ("device" as const),
+      storageError,
       startActivity,
       updateActivityPre,
       completeActivity,
@@ -429,6 +504,8 @@ export function DataProvider({
     [
       data,
       ready,
+      signedIn,
+      storageError,
       startActivity,
       updateActivityPre,
       completeActivity,

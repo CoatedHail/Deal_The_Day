@@ -6,6 +6,7 @@ import { SettingsProvider } from "@/components/providers/SettingsProvider";
 import { DataProvider } from "@/components/providers/DataProvider";
 import { AppShell } from "@/components/layout/AppShell";
 import { AccountMenu } from "@/components/auth/AccountMenu";
+import { auth } from "@/auth";
 
 /**
  * Atkinson Hyperlegible was designed by the Braille Institute specifically to
@@ -35,11 +36,16 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Read here rather than in the provider so the first render already knows
+  // whether the record belongs to an account or to this browser, and no page
+  // briefly shows the wrong one.
+  const session = await auth();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -49,7 +55,7 @@ export default function RootLayout({
       </head>
       <body className={atkinson.variable}>
         <SettingsProvider>
-          <DataProvider>
+          <DataProvider signedIn={Boolean(session?.user)}>
             <AppShell account={<AccountMenu />}>{children}</AppShell>
           </DataProvider>
         </SettingsProvider>

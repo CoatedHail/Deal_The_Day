@@ -20,6 +20,21 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Database
+
+Copy `.env.example` to `.env.local` and fill it in. The schema lives in
+`src/db/schema.ts`; after changing it, push the change to Neon. `drizzle-kit`
+does not read `.env.local` on its own, so load it first:
+
+```bash
+set -a && . ./.env.local && set +a && npm run db:push
+```
+
+`db:push` compares the schema against the live database and applies the
+difference. It will happily drop a column to make them match, so read what it
+says it is about to do before confirming. Once real families have records,
+switch to generated migrations (`npm run db:generate`) instead.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -72,6 +72,98 @@ export class LocalStorageRepository implements DataRepository {
 }
 
 /**
+ * Repository backed by the signed-in user's record on the server.
+ *
+ * Writes are coalesced. Every mutation in the provider replaces the whole
+ * record, and a burst of them — ticking four checklist items in a row — should
+ * cost one request, not four. The delay is short enough that a save always
+ * lands within a moment of the change that caused it.
+ */
+export class ApiRepository implements DataRepository {
+  private pending: AppData | null = null;
+  private timer: ReturnType<typeof setTimeout> | null = null;
+  private inFlight: Promise<void> = Promise.resolve();
+
+  constructor(private readonly delayMs: number = 400) {
+    if (typeof window !== "undefined") {
+      // A tab being hidden or closed is the one moment a queued write would be
+      // lost, so it is flushed immediately with `keepalive` — which lets the
+      // request outlive the page. Browsers cap a keepalive body at 64KB; a
+      // record that large would have to be closed within the debounce window to
+      // be affected, and the previous save is still on the server either way.
+      const flush = () => void this.flush(true);
+      window.addEventListener("pagehide", flush);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") flush();
+      });
+    }
+  }
+
+  async load(): Promise<AppData> {
+    const response = await fetch("/api/data", { cache: "no-store" });
+    if (!response.ok) {
+      // Throwing rather than returning empty: an empty record would look to the
+      // family like their history had been wiped, and would then be written
+      // back over the real one on the next change.
+      throw new Error(`Could not load your record (${response.status})`);
+    }
+    const parsed = (await response.json()) as Partial<AppData>;
+    return {
+      ...EMPTY_APP_DATA,
+      ...parsed,
+      activities: parsed.activities ?? [],
+      checkIns: parsed.checkIns ?? [],
+      sessions: parsed.sessions ?? [],
+      therapistNotes: parsed.therapistNotes ?? [],
+      insights: parsed.insights ?? [],
+      feedback: parsed.feedback ?? [],
+      checklists: parsed.checklists ?? [],
+    };
+  }
+
+  async save(data: AppData): Promise<void> {
+    this.pending = data;
+    if (this.timer) clearTimeout(this.timer);
+    this.timer = setTimeout(() => void this.flush(false), this.delayMs);
+  }
+
+  /** Sends whatever is queued. Safe to call when nothing is. */
+  async flush(keepalive = false): Promise<void> {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = null;
+    }
+    const data = this.pending;
+    if (!data) return;
+    this.pending = null;
+
+    // Chained so two flushes cannot race and land out of order, which would
+    // leave the server holding the older of the two. The stored link in the
+    // chain always resolves — a rejection kept there would silently skip every
+    // save that followed it.
+    const next = this.inFlight.catch(() => {}).then(async () => {
+      const response = await fetch("/api/data", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        keepalive,
+      });
+      if (!response.ok) throw new Error(`Save failed (${response.status})`);
+    });
+    this.inFlight = next.catch(() => {});
+    return next;
+  }
+
+  async clear(): Promise<void> {
+    this.pending = null;
+    if (this.timer) clearTimeout(this.timer);
+    this.timer = null;
+    await this.save(EMPTY_APP_DATA);
+    await this.flush();
+  }
+}
+
+/**
  * In-memory repository, used for server rendering and available for tests.
  */
 export class MemoryRepository implements DataRepository {
