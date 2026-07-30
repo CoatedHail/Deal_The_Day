@@ -1,3 +1,4 @@
+import { ReadAloud } from "@/components/a11y/ReadAloud";
 import { Callout } from "@/components/ui/Callout";
 import type { Article, ContentBlock } from "@/content/types";
 
@@ -37,10 +38,16 @@ export function ContentBody({ article }: { article: Article }) {
   }
 
   return (
-    <div className="space-y-5">
-      {article.blocks.map((block, index) => (
-        <Block key={index} block={block} />
-      ))}
+    <div>
+      {/* Placed above the prose rather than floating: someone who wants it
+          should meet it before they start reading, not after. */}
+      <ReadAloud article={article} />
+
+      <div className="space-y-5">
+        {article.blocks.map((block, index) => (
+          <Block key={index} block={block} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -11,6 +11,14 @@ export type TextSize = "sm" | "md" | "lg" | "xl";
 export type FontChoice = "default" | "dyslexic";
 export type MotionPreference = "system" | "reduced";
 export type ContrastPreference = "normal" | "high";
+export type SpeechRate = "slow" | "normal" | "fast";
+
+/** Multipliers passed to the speech synthesiser, where 1 is its own default. */
+export const SPEECH_RATES: Record<SpeechRate, number> = {
+  slow: 0.8,
+  normal: 1,
+  fast: 1.3,
+};
 
 export interface Settings {
   /** Display name used in greetings. Never leaves the device. */
@@ -29,6 +37,21 @@ export interface Settings {
    * available and must never be framed as giving up.
    */
   gentleMode: boolean;
+  /**
+   * Whether the "Listen to this page" control appears on written content.
+   *
+   * On by default. Someone who would benefit from it is exactly the person
+   * least likely to go hunting through a settings page to find it, and the
+   * control is quiet enough not to be in anyone else's way.
+   */
+  readAloud: boolean;
+  speechRate: SpeechRate;
+  /**
+   * The chosen voice's `voiceURI`. Empty means the browser's own default —
+   * which is the right fallback, because the installed voices differ on every
+   * device and a stored name may not exist on the next one.
+   */
+  speechVoice: string;
   /** Whether the user has completed the first-run introduction. */
   onboarded: boolean;
 }
@@ -43,6 +66,9 @@ export const DEFAULT_SETTINGS: Settings = {
   motion: "system",
   contrast: "normal",
   gentleMode: false,
+  readAloud: true,
+  speechRate: "normal",
+  speechVoice: "",
   onboarded: false,
 };
 
