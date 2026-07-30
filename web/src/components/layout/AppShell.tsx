@@ -63,7 +63,7 @@ export function AppShell({
         aria-label="Main"
         className="hidden shrink-0 border-r border-border bg-surface lg:sticky lg:top-0 lg:flex lg:h-dvh lg:w-64 lg:flex-col"
       >
-        <div className="px-5 py-6">
+        <div className="px-5 py-4">
           <Wordmark />
         </div>
         <div className="flex-1 overflow-y-auto px-3 pb-6">
@@ -98,7 +98,7 @@ export function AppShell({
             the account control sits on the right throughout. */}
         <header
           data-app-nav
-          className="sticky top-0 z-30 border-b border-border bg-surface/95 px-4 py-3 backdrop-blur sm:px-6 lg:px-10"
+          className="sticky top-0 z-30 border-b border-border bg-surface/95 px-4 py-2 backdrop-blur sm:px-6 lg:px-10"
         >
           <div className="mx-auto flex w-full max-w-4xl items-center gap-4">
             <div className="lg:hidden">

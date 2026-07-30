@@ -109,13 +109,6 @@ export const NAV_ITEMS: NavItem[] = [
     section: "more",
   },
   {
-    href: "/therapist",
-    label: "Therapist mode",
-    icon: "clipboard",
-    description: "Export and share progress",
-    section: "more",
-  },
-  {
     href: "/settings",
     label: "Settings",
     icon: "settings",

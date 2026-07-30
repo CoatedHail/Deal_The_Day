@@ -7,7 +7,6 @@ import { Private } from "@/components/a11y/Private";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { ButtonLink } from "@/components/ui/Button";
-import { Callout } from "@/components/ui/Callout";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { StatTile } from "@/components/ui/StatTile";
@@ -207,10 +206,6 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      <Callout tone="erp" title="A reminder" className="mt-6">
-        The goal is not to feel calm before you start. It is to go ahead while the
-        feeling is still there, and let your family see you do it.
-      </Callout>
     </>
   );
 }
