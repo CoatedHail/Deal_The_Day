@@ -22,7 +22,7 @@ type Difficulty = GameFeedback["difficulty"];
  */
 export interface ReviewRow {
   id: string;
-  /** ISO 8601. Serialised on the server so it survives the client boundary. */
+  /** ISO 8601. Serialized on the server so it survives the client boundary. */
   submittedAt: string;
   cardNumber: number | null;
   rating: number;
@@ -150,7 +150,7 @@ interface CardSummary {
   tooHard: number;
 }
 
-function summariseByCard(reviews: ReviewRow[]): CardSummary[] {
+function summarizeByCard(reviews: ReviewRow[]): CardSummary[] {
   const groups = new Map<string, ReviewRow[]>();
   for (const review of reviews) {
     const key = review.cardNumber === null ? "deck" : String(review.cardNumber);
@@ -274,7 +274,7 @@ export function ReviewsBrowser({ reviews }: { reviews: ReviewRow[] }) {
     sort,
   ]);
 
-  const byCard = useMemo(() => summariseByCard(filtered), [filtered]);
+  const byCard = useMemo(() => summarizeByCard(filtered), [filtered]);
   const averageRating = useMemo(
     () => mean(filtered.map((review) => review.rating)),
     [filtered],

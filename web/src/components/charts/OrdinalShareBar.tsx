@@ -6,7 +6,7 @@ export interface ShareSegment {
   key: string;
   label: string;
   value: number;
-  /** CSS custom property name holding this step's colour. */
+  /** CSS custom property name holding this step's color. */
   token: "--chart-ord-1" | "--chart-ord-2" | "--chart-ord-3";
 }
 
@@ -15,10 +15,10 @@ export interface ShareSegment {
  *
  * The three buckets ("did not happen" → "happened") are ordinal, not nominal,
  * so they take one hue in monotone lightness steps rather than distinct hues —
- * the reader should see the order in the colour.
+ * the reader should see the order in the color.
  *
  * Segments are separated by a 2px surface gap and every visible segment is
- * direct-labelled, so identity never rests on colour alone.
+ * direct-labeled, so identity never rests on color alone.
  */
 export function OrdinalShareBar({
   segments,

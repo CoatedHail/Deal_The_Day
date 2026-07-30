@@ -30,7 +30,7 @@ export function AppShell({
     setMoreOpen(false);
   }, [pathname]);
 
-  // Escape closes the sheet, matching normal dialog behaviour.
+  // Escape closes the sheet, matching normal dialog behavior.
   useEffect(() => {
     if (!moreOpen) return;
     const handle = (event: KeyboardEvent) => {

@@ -2,7 +2,7 @@ import { Callout } from "@/components/ui/Callout";
 import { Card } from "@/components/ui/Card";
 
 /**
- * Marks a route that exists and is navigable but whose behaviour is not built
+ * Marks a route that exists and is navigable but whose behavior is not built
  * yet.
  *
  * Listing the planned pieces keeps the scaffold reviewable without dressing an

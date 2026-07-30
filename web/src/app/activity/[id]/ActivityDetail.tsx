@@ -126,7 +126,7 @@ export function ActivityDetail({ activityId }: { activityId: string }) {
                   ) : (
                     // An empty marker rather than a cross: an unticked item is
                     // simply unrecorded, not a failure, and should not be
-                    // coloured like one.
+                    // colored like one.
                     <span
                       aria-hidden="true"
                       className="mt-1 h-3.5 w-3.5 shrink-0 rounded-full border border-border-strong"

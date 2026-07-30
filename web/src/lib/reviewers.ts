@@ -13,7 +13,7 @@
  * Revisit it if the list outgrows a dozen names.
  *
  * This must only ever be consulted on the server. The list is a set of real
- * people's addresses, and the check is an authorisation decision — neither
+ * people's addresses, and the check is an authorization decision — neither
  * belongs in a JavaScript bundle the public can read.
  */
 
@@ -25,16 +25,16 @@ const REVIEWER_EMAILS: readonly string[] = [
 ];
 
 /** Addresses are compared case-insensitively; Google does not distinguish case. */
-function normalise(email: string): string {
+function normalize(email: string): string {
   return email.trim().toLowerCase();
 }
 
 function allowedEmails(): Set<string> {
   const fromEnv = (process.env.REVIEWER_EMAILS ?? "")
     .split(",")
-    .map(normalise)
+    .map(normalize)
     .filter(Boolean);
-  return new Set([...REVIEWER_EMAILS.map(normalise), ...fromEnv]);
+  return new Set([...REVIEWER_EMAILS.map(normalize), ...fromEnv]);
 }
 
 /**
@@ -45,5 +45,5 @@ function allowedEmails(): Set<string> {
  */
 export function isReviewer(email: string | null | undefined): boolean {
   if (!email) return false;
-  return allowedEmails().has(normalise(email));
+  return allowedEmails().has(normalize(email));
 }

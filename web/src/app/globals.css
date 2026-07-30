@@ -5,7 +5,7 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ---------------------------------------------------------------------------
-   Colour tokens
+   Color tokens
 
    The palette is deliberately warm and low-contrast-anxiety: sand and clay
    rather than clinical white and blue. Sage green carries primary actions
@@ -53,7 +53,7 @@
      Every chart in the app is either single-series or ordinal, so no
      categorical palette is needed. The ordinal ramp encodes "how much of the
      feared outcome actually happened" — deliberately one calm hue rather than
-     a green-to-red scale, because colouring a realised fear as an alarm would
+     a green-to-red scale, because coloring a realized fear as an alarm would
      contradict the point: the outcome happening is information, not failure.
 
      Ramp steps validated for monotone lightness, adjacent ΔL and light-end

@@ -12,7 +12,7 @@ import {
  *
  * A note on framing: none of these numbers are presented as targets anywhere in
  * the UI. They exist so a parent can notice change over time, and so a
- * therapist can see homework at a glance — not to be optimised.
+ * therapist can see homework at a glance — not to be optimized.
  */
 
 export interface TrendPoint {

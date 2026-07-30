@@ -50,7 +50,7 @@ export function useReadAloud({ rate, voiceURI }: { rate: number; voiceURI: strin
   const voices = useVoices();
 
   /**
-   * Incremented every time a reading starts or stops. Events from a cancelled
+   * Incremented every time a reading starts or stops. Events from a canceled
    * run still arrive afterwards, and without this they would restart the voice
    * or scramble the progress count.
    */

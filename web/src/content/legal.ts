@@ -7,7 +7,7 @@
  * URLs resolve before allowing the OAuth consent screen to be published.
  *
  * Everything stated below is accurate as of the date in `lastUpdated`. If the
- * app's behaviour changes — new third-party services, analytics, clinician
+ * app's behavior changes — new third-party services, analytics, clinician
  * access, a different database region — these must be updated in the same
  * change, or they become false.
  *
@@ -32,7 +32,7 @@ export interface LegalDocument extends Article {
 const PENDING_REVIEW = {
   type: "callout" as const,
   tone: "caution" as const,
-  title: "Being finalised",
+  title: "Being finalized",
   text: "Deal the Day is still in development and is not yet open to families. This document describes how the software behaves today, and is being reviewed before the site is offered to anyone outside the project team.",
 };
 
@@ -145,7 +145,7 @@ export const PRIVACY_POLICY: LegalDocument = {
     // NEEDS-OWNER: name the legal entity and a monitored contact address.
     {
       type: "paragraph",
-      text: "Deal the Day is made by the SNP-REACH project team. The specific organisation formally responsible for this data, and a contact address for privacy questions, are being confirmed and will be published here before the site is opened to families.",
+      text: "Deal the Day is made by the SNP-REACH project team. The specific organization formally responsible for this data, and a contact address for privacy questions, are being confirmed and will be published here before the site is opened to families.",
     },
 
     { type: "heading", text: "Changes" },

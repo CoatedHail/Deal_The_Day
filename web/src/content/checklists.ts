@@ -8,7 +8,7 @@
  *
  * Keep each list to three. The number is doing real work: a pre-filled list of
  * three quietly says "three is normal", which is a far better anchor than an
- * empty box with an "Add item" button, and it is the cheapest defence we have
+ * empty box with an "Add item" button, and it is the cheapest defense we have
  * against the checklist turning into an exhaustive planning project.
  *
  * Keep items concrete, universally sensible, and boring. A suggestion that

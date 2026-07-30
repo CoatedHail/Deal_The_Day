@@ -11,7 +11,7 @@
  *
  * The nested shapes (a pre-activity check, a set of check-in ratings) are
  * stored as `jsonb` rather than being flattened into columns. The domain types
- * in `lib/types.ts` are already plain serialisable data and remain the single
+ * in `lib/types.ts` are already plain serializable data and remain the single
  * source of truth for their shape; splitting them across columns would mean
  * maintaining the same structure in two places for no gain. Postgres can still
  * query inside jsonb if that is ever needed.

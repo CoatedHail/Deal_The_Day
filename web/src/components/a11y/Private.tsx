@@ -11,7 +11,7 @@
  * part of the page's text content and is never collected. This is for text the
  * app renders back out.
  *
- * See lib/speech.ts for the collector that honours this.
+ * See lib/speech.ts for the collector that honors this.
  */
 export function Private({
   children,

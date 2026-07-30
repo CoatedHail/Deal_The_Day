@@ -52,8 +52,8 @@ export const GUIDE_ARTICLES: Article[] = [
     ],
   },
   {
-    slug: "encouraging-brave-behaviour",
-    title: "Encouraging brave behaviour",
+    slug: "encouraging-brave-behavior",
+    title: "Encouraging brave behavior",
     summary:
       "How to praise the trying rather than the outcome, and why that distinction does the work.",
     status: "placeholder",

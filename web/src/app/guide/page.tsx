@@ -7,7 +7,7 @@ import { GUIDE_ARTICLES } from "@/content/guide";
 export const metadata: Metadata = {
   title: "Parent guide",
   description:
-    "Practical frameworks and example scripts for talking with your children about anxiety, uncertainty and brave behaviour.",
+    "Practical frameworks and example scripts for talking with your children about anxiety, uncertainty and brave behavior.",
 };
 
 export default function GuideIndexPage() {

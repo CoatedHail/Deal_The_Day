@@ -111,7 +111,7 @@ export interface ChoiceOption<T extends string> {
  * Radio group rendered as cards.
  *
  * Uses a real fieldset and native radios so keyboard and screen reader
- * behaviour comes for free.
+ * behavior comes for free.
  */
 export function ChoiceGroup<T extends string>({
   legend,

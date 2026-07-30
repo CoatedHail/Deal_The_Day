@@ -118,7 +118,7 @@ export const LEARN_ARTICLES: Article[] = [
     slug: "intolerance-of-uncertainty",
     title: "Intolerance of uncertainty",
     summary:
-      "The engine underneath a lot of anxious behaviour: not knowing feels unbearable, so you try to make it stop.",
+      "The engine underneath a lot of anxious behavior: not knowing feels unbearable, so you try to make it stop.",
     status: "ready",
     minutes: 3,
     blocks: [
@@ -230,7 +230,7 @@ export const LEARN_ARTICLES: Article[] = [
     slug: "family-accommodation",
     title: "Family accommodation",
     summary:
-      "How the people who love you end up organising themselves around the anxiety — and what to do about it together.",
+      "How the people who love you end up organizing themselves around the anxiety — and what to do about it together.",
     status: "placeholder",
     minutes: 6,
     outline: [
@@ -277,7 +277,7 @@ export const LEARN_ARTICLES: Article[] = [
     status: "placeholder",
     minutes: 6,
     outline: [
-      "Catastrophising",
+      "Catastrophizing",
       "All-or-nothing thinking",
       "Overestimating responsibility",
       "Emotional reasoning",
@@ -286,8 +286,8 @@ export const LEARN_ARTICLES: Article[] = [
     ],
   },
   {
-    slug: "modelling-flexibility",
-    title: "Modelling flexibility for your children",
+    slug: "modeling-flexibility",
+    title: "Modeling flexibility for your children",
     summary:
       "Children learn how to handle uncertainty by watching someone do it. That is the part you can offer them.",
     status: "placeholder",

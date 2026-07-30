@@ -38,7 +38,7 @@ import {
  * Columns are nullable in Postgres where the domain type uses an optional
  * property, so every read has to turn `null` back into `undefined`. Doing it
  * through one helper keeps `undefined` out of the JSON the client receives,
- * where a `null` would survive serialisation and an absent key would not.
+ * where a `null` would survive serialization and an absent key would not.
  */
 function optional<T>(value: T | null): T | undefined {
   return value === null ? undefined : value;
