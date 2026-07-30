@@ -124,6 +124,110 @@
   --shadow-lg: 0 8px 28px rgb(0 0 0 / 0.45), 0 2px 6px rgb(0 0 0 / 0.25);
 }
 
+/* Optional site-wide blue-and-sunshine palette. It replaces every colour
+   token, so navigation, content, controls and charts all change together. */
+[data-palette="blue-yellow"] {
+  --bg: #eaf7ff;
+  --bg-subtle: #dff2fd;
+  --surface: #fafdff;
+  --surface-sunken: #e6f5fd;
+  --border: #bdddef;
+  --border-strong: #82bedd;
+
+  --text: #17344b;
+  --text-muted: #4b6578;
+  --text-subtle: #668094;
+
+  --primary: #946300;
+  --primary-hover: #775000;
+  --primary-soft: #fff3b8;
+  --primary-border: #e8c84f;
+  --on-primary: #ffffff;
+
+  --accent: #9b5700;
+  --accent-soft: #fff1cf;
+  --accent-border: #e7c36a;
+
+  --info: #285f84;
+  --info-soft: #dff2ff;
+  --info-border: #9bcce9;
+
+  --success: #397052;
+  --success-soft: #e2f2e8;
+  --success-border: #abd2ba;
+
+  --caution: #805b00;
+  --caution-soft: #fff4c9;
+  --caution-border: #e8cc69;
+
+  --focus: #17688f;
+
+  --chart-mark: #276f9b;
+  --chart-grid: #cee8f6;
+  --chart-axis: #75a9c5;
+  --chart-ord-1: #9bd7f4;
+  --chart-ord-2: #3c8fbc;
+  --chart-ord-3: #154d70;
+  --chart-before: #3c8fbc;
+  --chart-after: #8b6500;
+
+  --shadow-sm: 0 1px 2px rgb(39 105 143 / 0.07);
+  --shadow-md: 0 3px 14px rgb(39 105 143 / 0.09),
+    0 1px 2px rgb(39 105 143 / 0.05);
+  --shadow-lg: 0 10px 34px rgb(39 105 143 / 0.14),
+    0 2px 6px rgb(39 105 143 / 0.07);
+}
+
+[data-theme="dark"][data-palette="blue-yellow"] {
+  --bg: #102938;
+  --bg-subtle: #19384b;
+  --surface: #173548;
+  --surface-sunken: #112b3a;
+  --border: #315a73;
+  --border-strong: #5688a6;
+
+  --text: #f3f9fc;
+  --text-muted: #bed2de;
+  --text-subtle: #9db8c7;
+
+  --primary: #f4ce58;
+  --primary-hover: #ffdc70;
+  --primary-soft: #463c1b;
+  --primary-border: #8f782d;
+  --on-primary: #243040;
+
+  --accent: #ffd66b;
+  --accent-soft: #493819;
+  --accent-border: #80652b;
+
+  --info: #9fd8f6;
+  --info-soft: #183c53;
+  --info-border: #356b89;
+
+  --success: #9bd2ad;
+  --success-soft: #18372b;
+  --success-border: #35694d;
+
+  --caution: #f2ce68;
+  --caution-soft: #403719;
+  --caution-border: #776527;
+
+  --focus: #ffda67;
+
+  --chart-mark: #73c5ed;
+  --chart-grid: #27495c;
+  --chart-axis: #5d8297;
+  --chart-ord-1: #376f8e;
+  --chart-ord-2: #65acd1;
+  --chart-ord-3: #b9e4f8;
+  --chart-before: #65acd1;
+  --chart-after: #f4ce58;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-md: 0 3px 14px rgb(0 0 0 / 0.35), 0 1px 2px rgb(0 0 0 / 0.2);
+  --shadow-lg: 0 10px 34px rgb(0 0 0 / 0.45), 0 2px 6px rgb(0 0 0 / 0.25);
+}
+
 /* Raises text and border contrast for users who need it. Kept as a separate
    axis from dark mode so the two can be combined. */
 [data-contrast="high"] {
@@ -152,100 +256,30 @@
   --caution: #e4c087;
 }
 
-/* The settings workspace has its own calm blue-and-sunshine palette. Tokens
-   are scoped here so the preference controls can reuse the site's accessible
-   components without changing the visual language of other pages. */
-.settings-palette {
-  --bg: #eaf7ff;
-  --bg-subtle: #dff2fd;
-  --surface: #fafdff;
-  --surface-sunken: #e6f5fd;
-  --border: #bdddef;
-  --border-strong: #82bedd;
-
-  --text: #17344b;
-  --text-muted: #4b6578;
-  --text-subtle: #668094;
-
-  --primary: #946300;
-  --primary-hover: #775000;
-  --primary-soft: #fff3b8;
-  --primary-border: #e8c84f;
-  --on-primary: #ffffff;
-
-  --accent: #9b5700;
-  --accent-soft: #fff1cf;
-  --accent-border: #e7c36a;
-
-  --info: #285f84;
-  --info-soft: #dff2ff;
-  --info-border: #9bcce9;
-  --focus: #17688f;
-
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 1.75rem;
-  background:
-    radial-gradient(circle at 92% 3%, rgb(255 222 91 / 0.32), transparent 12rem),
-    linear-gradient(145deg, #e6f6ff 0%, #f4fbff 54%, #fff9dc 100%);
-  box-shadow: 0 10px 34px rgb(39 105 143 / 0.1);
-  padding: 1.25rem;
+[data-palette="blue-yellow"][data-contrast="high"] {
+  --text: #071824;
+  --text-muted: #17344b;
+  --text-subtle: #274b63;
+  --border: #397b9f;
+  --border-strong: #173f59;
+  --primary: #704b00;
+  --accent: #783f00;
+  --info: #174f74;
+  --success: #235b3a;
+  --caution: #674900;
 }
 
-.settings-palette::before {
-  position: absolute;
-  inset: 0 0 auto;
-  height: 0.4rem;
-  background: linear-gradient(90deg, #6fc4ef 0 68%, #f5cf4f 68% 100%);
-  content: "";
-}
-
-.settings-palette > * {
-  position: relative;
-}
-
-.settings-palette section {
-  box-shadow: 0 3px 14px rgb(39 105 143 / 0.07);
-}
-
-[data-theme="dark"] .settings-palette {
-  --bg: #152b3a;
-  --bg-subtle: #1c384b;
-  --surface: #183246;
-  --surface-sunken: #122938;
-  --border: #315a73;
-  --border-strong: #5688a6;
-
-  --text: #f3f9fc;
-  --text-muted: #bed2de;
-  --text-subtle: #9db8c7;
-
-  --primary: #f4ce58;
-  --primary-hover: #ffdc70;
-  --primary-soft: #463c1b;
-  --primary-border: #8f782d;
-  --on-primary: #243040;
-
-  --accent: #ffd66b;
-  --accent-soft: #493819;
-  --accent-border: #80652b;
-
-  --info: #9fd8f6;
-  --info-soft: #183c53;
-  --info-border: #356b89;
-  --focus: #ffda67;
-
-  background:
-    radial-gradient(circle at 92% 3%, rgb(245 207 79 / 0.16), transparent 12rem),
-    linear-gradient(145deg, #122a3a 0%, #173548 60%, #3a351b 100%);
-  box-shadow: 0 10px 34px rgb(0 0 0 / 0.24);
-}
-
-@media (min-width: 640px) {
-  .settings-palette {
-    padding: 2rem;
-  }
+[data-theme="dark"][data-palette="blue-yellow"][data-contrast="high"] {
+  --text: #ffffff;
+  --text-muted: #dcecf4;
+  --text-subtle: #c0d9e6;
+  --border: #83b9d5;
+  --border-strong: #c2e4f5;
+  --primary: #ffe078;
+  --accent: #ffe59a;
+  --info: #b9e7ff;
+  --success: #b7e5c5;
+  --caution: #ffe28a;
 }
 
 @theme inline {
