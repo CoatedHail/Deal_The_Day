@@ -12,6 +12,8 @@ export type Rating = number;
 export const RATING_MIN = 0;
 export const RATING_MAX = 10;
 
+export type CardLength = "short" | "medium" | "long";
+
 /**
  * How much of the feared outcome actually happened.
  *
@@ -34,6 +36,8 @@ export interface PreActivityCheck {
   cardNumber?: number;
   /** The wording on the card, if the family wants it recorded. */
   cardTitle: string;
+  /** The short, medium, or long card drawn from the physical deck. */
+  cardLength?: CardLength;
   cardCategory?: ActivityCategory;
   anxiety: Rating;
   confidence: Rating;
@@ -120,8 +124,8 @@ export interface ActivityEntry {
 /**
  * The seven dimensions tracked by an emotional check-in.
  *
- * Kept as a registry rather than hard-coded form fields so the check-in form,
- * the check-in form and trend charts stay in sync automatically.
+ * Kept as a registry rather than hard-coded form fields so the check-in form
+ * and trend charts stay in sync automatically.
  */
 export type CheckInMetricKey =
   | "mood"

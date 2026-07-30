@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Icon } from "@/components/ui/Icon";
 import { Pill } from "@/components/ui/Pill";
 import { formatCardReference } from "@/lib/cards";
+import { CARD_LENGTH_BY_ID } from "@/lib/card-lengths";
 import { cn } from "@/lib/cn";
 import { formatDate, formatTime, toDateKey } from "@/lib/date";
 import {
@@ -74,6 +75,9 @@ function ActivityCard({ activity }: { activity: ActivityEntry }) {
     <Card as="article" className="border-l-4 border-l-primary">
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="font-semibold text-text">{formatCardReference(pre)}</h3>
+        {pre.cardLength ? (
+          <Pill>{CARD_LENGTH_BY_ID[pre.cardLength].label} activity</Pill>
+        ) : null}
         {activity.status === "completed" ? (
           <Pill tone="success">Completed</Pill>
         ) : activity.status === "opted-out" ? (
