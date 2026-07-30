@@ -48,6 +48,15 @@ export default function DashboardPage() {
         }
       />
 
+      <Callout tone="info" title="Make the site comfortable for you" className="mb-6">
+        Change the font, text size, color scheme, contrast, motion and read-aloud
+        options at any time in{" "}
+        <Link href="/settings" className="font-semibold underline hover:text-info">
+          Settings
+        </Link>
+        .
+      </Callout>
+
       {isNew ? <Introduction /> : null}
 
       {awaitingReflection ? (
@@ -202,20 +211,17 @@ function Introduction() {
       />
       <div className="max-w-[var(--reading-measure)] space-y-3 text-text">
         <p>
-          Deal the Day is a card game your family plays together. Someone draws a card
-          with an activity on it — pick a restaurant, visit a park, take a small trip —
-          and then you do it, without the research, the backup plans, or the round of
-          &ldquo;are you sure this is okay?&rdquo;
+          Deal the Day is a game for families with parents who plan compulsively.
+          Someone draws a card with an activity, maybe a restaurant, an attraction, a
+          small trip, or even everyday errands. The goal is for a person without
+          OCD/OCPD-like symptoms to plan the activity and for the parent to manage
+          uncertainty.
         </p>
         <p>
-          This site is the part that happens around the game. Before you go, you write
-          down what you expect to happen and what you are most worried about.
-          Afterwards, you write down what actually happened. Over time, those two
-          columns start to disagree with each other in a useful way.
-        </p>
-        <p>
-          That is the whole mechanism. Not thinking your way out of anxiety, but
-          collecting evidence that you can handle not knowing.
+          This website works alongside the game by providing extra assistance,
+          including how to talk to kids about OCD/OCPD, an online log for each of the
+          cards with check-ins built in before the activity, check-ins after an
+          activity, a journal, a calendar, and other forms of support.
         </p>
       </div>
       <div className="mt-5 flex flex-wrap gap-3">
