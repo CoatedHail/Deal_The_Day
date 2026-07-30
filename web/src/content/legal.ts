@@ -92,7 +92,11 @@ export const PRIVACY_POLICY: LegalDocument = {
     { type: "heading", text: "Where it is stored" },
     {
       type: "paragraph",
-      text: "Your records are held in a PostgreSQL database operated by Neon, hosted on Amazon Web Services in Oregon, in the United States. The website itself is served by Vercel. Those two companies, and Google for sign-in, are the only third parties involved.",
+      text: "If you are signed in, your records are held in a PostgreSQL database operated by Neon, hosted on Amazon Web Services in Oregon, in the United States. The website itself is served by Vercel. Those two companies, and Google for sign-in, are the only third parties involved.",
+    },
+    {
+      type: "paragraph",
+      text: "If you are not signed in, everything you write stays in your own browser and is never sent to us at all. The trade-off is that clearing your browser data or switching device loses it. When you do sign in, anything already written in that browser is moved into your account and then removed from the browser, so there is only one copy.",
     },
     {
       type: "paragraph",
@@ -120,7 +124,7 @@ export const PRIVACY_POLICY: LegalDocument = {
         "You can read everything you have written, at any time, in the app.",
         "You can export the whole record as a file you keep.",
         "You can delete individual entries.",
-        "You can delete your account and everything in it. When you do, it is removed from the database rather than hidden.",
+        "You can delete your account and everything in it, from the settings page. When you do, your entries, your name and your email address are removed from the database rather than hidden, and it cannot be undone.",
       ],
     },
 
