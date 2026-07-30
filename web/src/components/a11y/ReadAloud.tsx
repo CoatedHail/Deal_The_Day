@@ -1,44 +1,70 @@
 "use client";
 
-import { useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { useSettings } from "@/components/providers/SettingsProvider";
 import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 import { SPEECH_RATES } from "@/lib/settings";
-import { articleToSpeech, estimateSpeechMinutes } from "@/lib/speech";
-import type { Article } from "@/content/types";
+import { collectPageSpeech, estimateSpeechMinutes } from "@/lib/speech";
 import { useReadAloud } from "./useReadAloud";
 
-/**
- * "Listen to this page" for written content.
- *
- * Renders nothing at all when there is nothing worth reading, when the browser
- * cannot speak, or when the reader has turned it off — an inert control that
- * does nothing when pressed is worse than no control.
- *
- * See lib/speech.ts for why this is only ever attached to published content and
- * never to a family's own entries.
- */
-export function ReadAloud({ article }: { article: Article }) {
-  const { settings } = useSettings();
+/** The element the collector reads from. Rendered by AppShell. */
+const MAIN_SELECTOR = "#main";
 
-  // Memoised on the article's identity: the hook stops the voice whenever the
-  // text changes, and a freshly built list on every render would keep cutting
-  // the reading off.
-  const utterances = useMemo(() => articleToSpeech(article), [article]);
+/**
+ * "Listen to this page", available on every page.
+ *
+ * Reads whatever the app itself is saying — headings, explanations,
+ * instructions, written material — and never what a family has typed. See
+ * lib/speech.ts for how that line is held, and components/a11y/Private.tsx for
+ * how a component opts its content out.
+ *
+ * Renders nothing when the browser cannot speak, when the reader has turned it
+ * off, or when there is nothing on the page worth hearing. A control that does
+ * nothing when pressed is worse than no control.
+ */
+export function ReadAloud() {
+  const { settings } = useSettings();
+  const pathname = usePathname();
+  const [available, setAvailable] = useState(0);
 
   const rate = SPEECH_RATES[settings.speechRate];
   const { supported, state, position, total, start, pause, resume, stop } =
-    useReadAloud({ utterances, rate, voiceURI: settings.speechVoice });
+    useReadAloud({ rate, voiceURI: settings.speechVoice });
 
-  if (!settings.readAloud || !supported || utterances.length === 0) return null;
+  const collect = useCallback(
+    () => collectPageSpeech(document.querySelector<HTMLElement>(MAIN_SELECTOR)),
+    [],
+  );
 
-  const minutes = estimateSpeechMinutes(utterances, rate);
+  // Counted after paint so the estimate reflects a page that has finished
+  // rendering, including one waiting on stored data. The real reading collects
+  // again when the button is pressed, so a late change is never missed.
+  useEffect(() => {
+    stop();
+    const timer = setTimeout(() => setAvailable(collect().length), 250);
+    return () => clearTimeout(timer);
+  }, [pathname, collect, stop]);
+
+  if (!settings.readAloud || !supported || available === 0) return null;
+
+  const minutes = estimateSpeechMinutes(
+    // Estimating from the count alone would be wrong; this is cheap enough to
+    // redo, and only runs while the control is idle.
+    state === "idle" ? collect() : [],
+    rate,
+  );
 
   return (
-    <div className="mb-6 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-surface-sunken px-3 py-2">
+    <div
+      // Excluded from its own reading, or the voice would open by announcing
+      // the button that started it.
+      data-no-speech
+      className="mb-6 flex flex-wrap items-center gap-2 rounded-xl border border-border bg-surface-sunken px-3 py-2"
+    >
       {state === "idle" ? (
-        <ControlButton onClick={start}>
+        <ControlButton onClick={() => start(collect())}>
           <Icon name="speaker" size={18} />
           Listen to this page
         </ControlButton>

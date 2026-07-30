@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ReadAloud } from "@/components/a11y/ReadAloud";
 import { Icon } from "@/components/ui/Icon";
 import { NAV_ITEMS, PRIMARY_NAV, SECONDARY_NAV, isActivePath } from "@/lib/nav";
 import { Wordmark } from "@/components/layout/Wordmark";
@@ -83,7 +84,12 @@ export function AppShell({
         </header>
 
         <main id="main" className="flex-1 px-4 py-6 pb-28 sm:px-6 lg:px-10 lg:py-10 lg:pb-10">
-          <div className="mx-auto w-full max-w-4xl">{children}</div>
+          <div className="mx-auto w-full max-w-4xl">
+            {/* Above the page rather than floating over it: someone who wants
+                it should meet it before they start reading. */}
+            <ReadAloud />
+            {children}
+          </div>
         </main>
 
         <SiteFooter />

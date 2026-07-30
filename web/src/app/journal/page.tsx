@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Private } from "@/components/a11y/Private";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Callout } from "@/components/ui/Callout";
 import { JournalTimeline } from "./JournalTimeline";
@@ -24,7 +25,9 @@ export default function JournalPage() {
         more convincing read weeks later than on the day.
       </Callout>
 
-      <JournalTimeline />
+      <Private>
+        <JournalTimeline />
+      </Private>
     </>
   );
 }

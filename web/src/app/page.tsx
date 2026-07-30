@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useData } from "@/components/providers/DataProvider";
 import { useSettings } from "@/components/providers/SettingsProvider";
+import { Private } from "@/components/a11y/Private";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { ButtonLink } from "@/components/ui/Button";
@@ -51,12 +52,15 @@ export default function DashboardPage() {
 
       {awaitingReflection ? (
         <Card className="mb-6 border-primary-border bg-primary-soft">
-          <CardHeader
-            title="You have an activity in progress"
-            description={`"${awaitingReflection.pre.cardTitle}" — drawn ${formatRelative(
-              awaitingReflection.createdAt,
-            )}.`}
-          />
+          {/* The card title is whatever the family wrote down. */}
+          <Private>
+            <CardHeader
+              title="You have an activity in progress"
+              description={`"${awaitingReflection.pre.cardTitle}" — drawn ${formatRelative(
+                awaitingReflection.createdAt,
+              )}.`}
+            />
+          </Private>
           <p className="mb-4 text-sm text-text">
             When you are ready, look back at what actually happened. There is no rush,
             and there is no wrong answer.
@@ -122,7 +126,7 @@ export default function DashboardPage() {
             }
           />
           {upcoming.length > 0 ? (
-            <ul className="space-y-3">
+            <ul data-private className="space-y-3">
               {upcoming.map((session) => (
                 <li key={session.id} className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
@@ -154,7 +158,7 @@ export default function DashboardPage() {
             }
           />
           {recentCheckIns.length > 0 ? (
-            <ul className="space-y-3.5">
+            <ul data-private className="space-y-3.5">
               {recentCheckIns.map((checkIn) => (
                 <li key={checkIn.id}>
                   <p className="text-sm text-text-muted">
