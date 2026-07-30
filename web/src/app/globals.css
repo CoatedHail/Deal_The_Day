@@ -359,13 +359,13 @@
   --font-scale: 0.9375;
 }
 [data-text-size="md"] {
-  --font-scale: 1;
+  --font-scale: 1.0625;
 }
 [data-text-size="lg"] {
-  --font-scale: 1.125;
+  --font-scale: 1.1875;
 }
 [data-text-size="xl"] {
-  --font-scale: 1.25;
+  --font-scale: 1.3125;
 }
 
 html {

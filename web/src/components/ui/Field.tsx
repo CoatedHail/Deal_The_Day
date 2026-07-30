@@ -10,6 +10,7 @@ const CONTROL =
 export function TextField({
   label,
   help,
+  helpDisclosureLabel,
   value,
   onChange,
   placeholder,
@@ -19,6 +20,7 @@ export function TextField({
 }: {
   label: string;
   help?: string;
+  helpDisclosureLabel?: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -35,7 +37,11 @@ export function TextField({
         {label}
         {required ? <span className="ml-1 text-accent">*</span> : null}
       </label>
-      {help ? (
+      {help && helpDisclosureLabel ? (
+        <FieldHelp id={helpId} summary={helpDisclosureLabel}>
+          {help}
+        </FieldHelp>
+      ) : help ? (
         <p id={helpId} className="text-sm text-text-muted">
           {help}
         </p>
@@ -46,7 +52,7 @@ export function TextField({
         value={value}
         required={required}
         placeholder={placeholder}
-        aria-describedby={help ? helpId : undefined}
+        aria-describedby={help && !helpDisclosureLabel ? helpId : undefined}
         onChange={(event) => onChange(event.target.value)}
         className={CONTROL}
       />
@@ -57,6 +63,7 @@ export function TextField({
 export function TextArea({
   label,
   help,
+  helpDisclosureLabel,
   value,
   onChange,
   placeholder,
@@ -66,6 +73,7 @@ export function TextArea({
 }: {
   label: string;
   help?: string;
+  helpDisclosureLabel?: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -82,7 +90,11 @@ export function TextArea({
         {label}
         {required ? <span className="ml-1 text-accent">*</span> : null}
       </label>
-      {help ? (
+      {help && helpDisclosureLabel ? (
+        <FieldHelp id={helpId} summary={helpDisclosureLabel}>
+          {help}
+        </FieldHelp>
+      ) : help ? (
         <p id={helpId} className="text-sm text-text-muted">
           {help}
         </p>
@@ -93,7 +105,7 @@ export function TextArea({
         rows={rows}
         required={required}
         placeholder={placeholder}
-        aria-describedby={help ? helpId : undefined}
+        aria-describedby={help && !helpDisclosureLabel ? helpId : undefined}
         onChange={(event) => onChange(event.target.value)}
         className={cn(CONTROL, "resize-y leading-relaxed")}
       />
@@ -116,6 +128,7 @@ export interface ChoiceOption<T extends string> {
 export function ChoiceGroup<T extends string>({
   legend,
   help,
+  helpDisclosureLabel,
   options,
   value,
   onChange,
@@ -124,6 +137,7 @@ export function ChoiceGroup<T extends string>({
 }: {
   legend: string;
   help?: string;
+  helpDisclosureLabel?: string;
   options: ReadonlyArray<ChoiceOption<T>>;
   value: T | null;
   onChange: (value: T) => void;
@@ -135,7 +149,11 @@ export function ChoiceGroup<T extends string>({
   return (
     <fieldset className={cn("space-y-2.5", className)}>
       <legend className="font-medium text-text">{legend}</legend>
-      {help ? <p className="text-sm text-text-muted">{help}</p> : null}
+      {help && helpDisclosureLabel ? (
+        <FieldHelp summary={helpDisclosureLabel}>{help}</FieldHelp>
+      ) : help ? (
+        <p className="text-sm text-text-muted">{help}</p>
+      ) : null}
       <div
         className={cn(
           "grid gap-2.5",
@@ -176,6 +194,30 @@ export function ChoiceGroup<T extends string>({
         })}
       </div>
     </fieldset>
+  );
+}
+
+function FieldHelp({
+  id,
+  summary,
+  children,
+}: {
+  id?: string;
+  summary: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <details className="group text-sm text-text-muted">
+      <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 rounded font-medium text-primary underline underline-offset-2 [&::-webkit-details-marker]:hidden">
+        <span aria-hidden="true" className="transition-transform group-open:rotate-45">
+          +
+        </span>
+        {summary}
+      </summary>
+      <p id={id} className="mt-1.5 max-w-[var(--reading-measure)]">
+        {children}
+      </p>
+    </details>
   );
 }
 
