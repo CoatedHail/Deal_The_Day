@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Private } from "@/components/a11y/Private";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ActivityDetail } from "./ActivityDetail";
 
@@ -20,7 +21,9 @@ export default async function ActivityDetailPage({
         title="Activity"
         description="What you expected, what happened, and what you took from it."
       />
-      <ActivityDetail activityId={id} />
+      <Private>
+        <ActivityDetail activityId={id} />
+      </Private>
     </>
   );
 }

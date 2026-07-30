@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Private } from "@/components/a11y/Private";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ButtonLink } from "@/components/ui/Button";
 import { ActivityList } from "./ActivityList";
@@ -17,7 +18,9 @@ export default function ActivityIndexPage() {
         description="Every card you have drawn, with what you predicted and what actually happened."
         action={<ButtonLink href="/activity/new">Start a card</ButtonLink>}
       />
-      <ActivityList />
+      <Private>
+        <ActivityList />
+      </Private>
     </>
   );
 }

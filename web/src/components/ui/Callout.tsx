@@ -31,7 +31,10 @@ export function Callout({
           {title}
         </p>
       ) : null}
-      <div className="text-sm leading-relaxed text-text">{children}</div>
+      {/* data-speak: prose in a container, so read-aloud does not skip it. */}
+      <div data-speak className="text-sm leading-relaxed text-text">
+        {children}
+      </div>
     </div>
   );
 }

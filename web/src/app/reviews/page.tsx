@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { desc } from "drizzle-orm";
 import { auth } from "@/auth";
+import { Private } from "@/components/a11y/Private";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Callout } from "@/components/ui/Callout";
 import { db } from "@/db";
@@ -66,7 +67,9 @@ export default async function ReviewsPage() {
         alongside other information about them.
       </Callout>
 
-      <ReviewsBrowser reviews={reviews} />
+      <Private>
+        <ReviewsBrowser reviews={reviews} />
+      </Private>
     </>
   );
 }

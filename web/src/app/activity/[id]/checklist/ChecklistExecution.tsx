@@ -113,7 +113,8 @@ export function ChecklistExecution({ activityId }: { activityId: string }) {
       </Callout>
 
       <Card>
-        <ul className="space-y-1">
+        {/* The items themselves are the parent's own words. */}
+        <ul data-private className="space-y-1">
           {items.map((item) => {
             const done = completed.includes(item.id);
             return (

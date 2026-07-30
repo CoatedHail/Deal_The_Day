@@ -211,7 +211,8 @@ export function FeedbackForm() {
             description={`${saved.length} kept on this device. These are not part of your progress record.`}
             level={2}
           />
-          <ul className="space-y-3">
+          {/* Reviews the family wrote. */}
+          <ul data-private className="space-y-3">
             {saved.map((entry) => (
               <li
                 key={entry.id}
