@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useData } from "@/components/providers/DataProvider";
 import { useSettings } from "@/components/providers/SettingsProvider";
 import { Private } from "@/components/a11y/Private";
+import { BrandMark } from "@/components/layout/BrandMark";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { ButtonLink } from "@/components/ui/Button";
@@ -39,14 +40,23 @@ export default function DashboardPage() {
 
   return (
     <>
-      <PageHeader
-        title={settings.displayName ? `Hello, ${settings.displayName}` : "Welcome"}
-        description={
-          isNew
-            ? "This is the companion to your Deal the Day deck. Nothing here needs to be done perfectly, or in order."
-            : "Here is where things stand. Take what is useful and leave the rest."
-        }
-      />
+      <div className="relative">
+        <PageHeader
+          className="sm:min-h-28 sm:pr-44"
+          title={settings.displayName ? `Hello, ${settings.displayName}` : "Welcome"}
+          description={
+            isNew
+              ? "This is the companion to your Deal the Day deck. Nothing here needs to be done perfectly, or in order."
+              : "Here is where things stand. Take what is useful and leave the rest."
+          }
+        />
+        <BrandMark
+          alt="Deal the Day family logo"
+          className="absolute right-0 top-0 hidden h-28 w-36 sm:block"
+          sizes="144px"
+          priority
+        />
+      </div>
 
       <Callout tone="info" title="Make the site comfortable for you" className="mb-6">
         Change the font, text size, color scheme, contrast, motion and read-aloud
