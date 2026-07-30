@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Callout } from "@/components/ui/Callout";
 import { ChoiceGroup, Checkbox, TextField } from "@/components/ui/Field";
 import { Icon } from "@/components/ui/Icon";
+import { SpeechControls } from "@/components/a11y/SpeechControls";
 import { useSettings } from "@/components/providers/SettingsProvider";
 import { useData } from "@/components/providers/DataProvider";
 import type {
@@ -144,6 +145,30 @@ export default function SettingsPage() {
               onChange={(motion) => updateSettings({ motion })}
               columns={2}
             />
+          </div>
+        </Card>
+
+        <Card as="section">
+          <CardHeader
+            title="Reading aloud"
+            description="A “Listen to this page” control on the explainers, the parent guide, the resources and the policies."
+          />
+          <div className="space-y-6">
+            <Checkbox
+              label="Offer to read pages aloud"
+              description="For anyone who finds reading hard work rather than impossible — tiredness, dyslexia, a head too busy to hold a paragraph. If you use a screen reader, yours is better than this and you can turn this off."
+              checked={settings.readAloud}
+              onChange={(readAloud) => updateSettings({ readAloud })}
+            />
+
+            {settings.readAloud ? <SpeechControls /> : null}
+
+            <Callout tone="info">
+              Only the written pages can be read aloud, never anything you have
+              written yourself. Some browsers speak by sending the text to their
+              own servers, which is fine for a public explainer and would not be
+              for your journal.
+            </Callout>
           </div>
         </Card>
 

@@ -27,7 +27,10 @@ export type IconName =
   | "download"
   | "printer"
   | "journal"
-  | "message";
+  | "message"
+  | "speaker"
+  | "pause"
+  | "stop";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   home: <path d="M3 10.5 12 3l9 7.5M5.5 9.5V20h13V9.5" />,
@@ -106,6 +109,14 @@ const PATHS: Record<IconName, React.ReactNode> = {
       <path d="M20 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z" />
     </>
   ),
+  speaker: (
+    <>
+      <path d="M4 9.5h3L12 5v14L7 14.5H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1z" />
+      <path d="M15.5 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" />
+    </>
+  ),
+  pause: <path d="M9 5v14M15 5v14" />,
+  stop: <rect x="6" y="6" width="12" height="12" rx="1.5" />,
 };
 
 export function Icon({
