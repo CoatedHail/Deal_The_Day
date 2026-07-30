@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useData } from "@/components/providers/DataProvider";
 import { useSettings } from "@/components/providers/SettingsProvider";
 import { Private } from "@/components/a11y/Private";
+import { CardLengthPicker } from "@/components/activity/CardLengthPicker";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { ButtonLink } from "@/components/ui/Button";
@@ -70,6 +71,8 @@ export default function DashboardPage() {
       </section>
 
       <Introduction defaultOpen={isNew} />
+
+      <CardLengthPicker />
 
       {awaitingReflection ? (
         <Card className="mb-6 border-primary-border bg-primary-soft">
