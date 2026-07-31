@@ -165,7 +165,9 @@ export function ActivityDetail({ activityId }: { activityId: string }) {
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-text-muted">Felt able to handle it</dt>
+              <dt className="font-medium text-text-muted">
+                Felt ready for the activity
+              </dt>
               <dd className="mt-0.5">
                 <Pill>{pre.confidence} / 10</Pill>
               </dd>
