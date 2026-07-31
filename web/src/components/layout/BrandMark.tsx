@@ -20,7 +20,7 @@ export function BrandMark({
       )}
     >
       <Image
-        src="/brand/deal-the-day-full-logo.png"
+        src="/brand/deal-the-day-mark.png"
         alt={alt}
         fill
         sizes={sizes}

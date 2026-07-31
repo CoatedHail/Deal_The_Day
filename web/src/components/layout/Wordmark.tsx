@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/layout/BrandMark";
 
-/** The supplied full logo already contains the product name and family mark. */
+/** The supplied family mark is the site's primary visual identity. */
 export function Wordmark({ href = "/" }: { href?: string }) {
   return (
     <Link
@@ -10,8 +10,8 @@ export function Wordmark({ href = "/" }: { href?: string }) {
     >
       <BrandMark
         alt="Deal the Day"
-        className="h-16 w-[4.5rem] rounded-xl bg-white p-1 shadow-sm ring-1 ring-black/5 lg:h-24 lg:w-[6.75rem] lg:p-1.5"
-        sizes="(min-width: 1024px) 108px, 72px"
+        className="h-16 w-14 rounded-xl bg-white p-1 shadow-sm ring-1 ring-black/5 lg:h-24 lg:w-20 lg:p-1.5"
+        sizes="(min-width: 1024px) 80px, 56px"
         priority
       />
     </Link>
