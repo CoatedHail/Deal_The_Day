@@ -16,6 +16,8 @@ export type ContentStatus = "placeholder" | "draft" | "ready";
 export type ContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "heading"; text: string }
+  /** A section within a section — "Teenagers" under "How much detail by age". */
+  | { type: "subheading"; text: string }
   | { type: "list"; items: string[]; ordered?: boolean }
   | { type: "callout"; tone: "info" | "erp" | "caution" | "success"; title?: string; text: string }
   /** A worked example of something to say out loud. */
