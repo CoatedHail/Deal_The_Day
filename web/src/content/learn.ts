@@ -286,20 +286,6 @@ export const LEARN_ARTICLES: Article[] = [
     ],
   },
   {
-    slug: "family-accommodation",
-    title: "Family accommodation",
-    summary:
-      "How the people who love you end up organizing themselves around the anxiety — and what to do about it together.",
-    status: "placeholder",
-    minutes: 6,
-    outline: [
-      "What accommodation is",
-      "Why families do it (because it works, briefly)",
-      "What it teaches children",
-      "Reducing it kindly, and together",
-    ],
-  },
-  {
     slug: "what-is-erp",
     title: "What ERP is, and why it works",
     summary:
