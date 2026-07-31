@@ -233,13 +233,56 @@ export const LEARN_ARTICLES: Article[] = [
     title: "When planning stops helping",
     summary:
       "Planning is a skill. It becomes a compulsion when it is driven by anxiety rather than by the task.",
-    status: "placeholder",
-    minutes: 6,
-    outline: [
-      "Useful planning vs anxious planning",
-      "The tell: how you feel if you cannot do it",
-      "How over-planning shrinks a family's world",
-      "What to try instead",
+    status: "ready",
+    minutes: 5,
+    authorId: "merisa",
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Planning is one of the most useful things a mind can do. It’s also one of the easiest habits for anxiety to hijack, because an anxious plan and a useful plan can look identical from the outside. The difference is what’s driving it, and what happens when the plan gets interrupted.",
+      },
+
+      { type: "heading", text: "1. Useful planning vs. anxious planning" },
+      {
+        type: "paragraph",
+        text: "Useful planning is bounded. You think through a problem, arrive at a decision or a checklist, and then you stop thinking about it until it’s time to act. It’s oriented toward the task – packing for a trip, prepping for a meeting, working out logistics for a family event – once the task is handled, the planning is done too.",
+      },
+      {
+        type: "paragraph",
+        text: "Anxious planning doesn’t have that off-switch. It’s oriented toward the feeling, not the task: the goal isn’t really to have a good itinerary, it’s to make the discomfort of not knowing go away. So it keeps running past the point of usefulness – re-checking a plan that’s already solid, adding contingencies for increasingly unlikely scenarios, mentally rehearsing a conversation for the fifth time. This tracks closely with what researchers call intolerance of uncertainty: a tendency to find “I don’t know what will happen” itself unbearable, regardless of how likely a bad outcome actually is. Planning becomes a way of trying to purchase certainty that isn’t actually for sale.",
+      },
+
+      { type: "heading", text: "2. The tell: How you feel if you can’t do it" },
+      {
+        type: "paragraph",
+        text: "The clearest signal isn’t how much someone plans – some people genuinely enjoy it, or their jobs demand a lot of it. The signal is what happens when planning is blocked or interfered with.",
+      },
+      {
+        type: "paragraph",
+        text: "If a trip gets rearranged last-minute and someone can adapt, mutter “well, that’s annoying,” and move on, planning was a tool. If the same disruption produces a spike of dread, a compulsion to re-plan everything from scratch, or a need to contact everyone involved right away to restore the original plan, planning was functioning as a compulsion – a way of managing anxiety rather than managing logistics. The plan itself had become load-bearing for the person’s sense of safety, which is a heavier job than any itinerary should have to do.",
+      },
+
+      { type: "heading", text: "3. How over-planning shrinks a family’s world" },
+      {
+        type: "paragraph",
+        text: "Over-planning rarely stays contained to the planner. Family members learn, often without anyone naming it, which kinds of spontaneity are “safe” to propose and which will trigger a spiral of what-ifs. Over time, this tends to narrow the family’s actual range of activity – fewer last-minute outings, less tolerance for anyone else’s looser style of things, more energy spent managing the planner’s anxiety than enjoying whatever was being planned. Family accommodation research in OCD and anxiety disorders describes a similar pattern: family members adjust their own behavior to prevent someone else’s distress, and while this brings short-term relief, it’s consistently linked to more severe symptoms and worse functioning over time, not less. The system optimizes for avoiding a bad feeling rather than for living well.",
+      },
+
+      { type: "heading", text: "4. What to try instead" },
+      {
+        type: "list",
+        items: [
+          "Separate the decision from the reassurance. Try to notice when you’ve already made a reasonable decision and are now just re-checking it for comfort. That re-checking is the compulsion, not the planning.",
+          "Practice not knowing on purpose, in small doses (such as what Deal The Day provides you with!). Leave out a detail of a low-stakes plan unresolved – the restaurant, the exact departure time – and let the discomfort run its course without resolving it early. This is the same principle underneath Exposure and Response Prevention: staying with uncertainty long enough for your nervous system to learn it isn’t dangerous.",
+          "Ask what the plan is actually protecting against. Naming the specific feared outcome, out loud, often makes it easier to see whether more planning would even help with it.",
+        ],
+      },
+
+      { type: "subheading", text: "Sources" },
+      {
+        type: "paragraph",
+        text: "Charleston, R.N. (2016). Fear of the unknown: One fear to rule them all? Journal of Anxiety Disorders; Lebowitz, E.R., et al. (2013). Family accommodation in pediatric anxiety disorders; Strauss, C., Hale, L., & Stobie, B. (2015). A meta-analytic review of the relationship between family accommodation and OCD symptom severity. Journal of Anxiety Disorders.",
+      },
     ],
   },
   {

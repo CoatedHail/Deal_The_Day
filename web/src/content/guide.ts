@@ -228,14 +228,174 @@ export const GUIDE_ARTICLES: Article[] = [
     title: "Explaining anxiety in age-appropriate ways",
     summary:
       "Simple, accurate ways to describe what anxiety is that work for a five-year-old and for a fifteen-year-old.",
-    status: "placeholder",
+    status: "ready",
     minutes: 6,
-    outline: [
-      "The smoke-alarm explanation",
-      "For younger children",
-      "For older children and teenagers",
-      "What to avoid saying",
-      "Example scripts",
+    authorId: "kara-horne",
+    blocks: [
+      { type: "heading", text: "The smoke-alarm explanation" },
+      {
+        type: "paragraph",
+        text: "Both versions below say the same thing at different ages. Pick the one that fits your child.",
+      },
+      {
+        type: "tabs",
+        tabs: [
+          {
+            label: "Ages 5–10",
+            blocks: [
+              { type: "subheading", text: "My Brain’s Smoke Alarm" },
+              {
+                type: "paragraph",
+                text: "Everyone’s brain has a “smoke alarm.” It helps us notice when something might be dangerous or important.",
+              },
+              {
+                type: "paragraph",
+                text: "My smoke alarm is really good with details. Sometimes that’s really helpful—it helps me remember important things, solve problems, and take good care of the people I love.",
+              },
+              {
+                type: "paragraph",
+                text: "But sometimes my smoke alarm is a little too good at its job. It can go off even when everything is actually okay, like a smoke alarm that beeps because someone made toast.",
+              },
+              {
+                type: "paragraph",
+                text: "When that happens, I might seem worried, want things done a certain way, or need a little time to help my brain settle down. It isn’t because of you, and it isn’t your job to make my alarm feel better.",
+              },
+              {
+                type: "paragraph",
+                text: "I’m learning ways to help my smoke alarm tell the difference between a real fire and burnt toast. Everyone’s brain is different, and this is just one of the ways mine works.",
+              },
+              {
+                type: "paragraph",
+                text: "The most important thing to know is that I love you, and I’m taking care of my brain so I can take the best care of you.",
+              },
+            ],
+          },
+          {
+            label: "Ages 11–15",
+            blocks: [
+              { type: "subheading", text: "How My Brain Works" },
+              {
+                type: "paragraph",
+                text: "Think of your brain like it has a built-in smoke alarm. It’s there to notice danger, problems, or things that need attention.",
+              },
+              {
+                type: "paragraph",
+                text: "My brain’s alarm is especially sensitive. That’s one of my strengths—it helps me notice details, plan ahead, be organized, and care deeply. Those are qualities I’m proud of.",
+              },
+              {
+                type: "paragraph",
+                text: "The challenge is that sometimes my alarm reacts too strongly. It can tell me something is wrong, unfinished, or unsafe even when there isn’t a real problem. The feeling is real, even if the alarm isn’t accurate.",
+              },
+              {
+                type: "paragraph",
+                text: "That can look like me re-checking the same things, worrying more than I’d like, or finding it hard when things don’t go as planned or don’t feel “right.” Those are signs that my brain’s alarm needs recalibrating, not signs that something is actually wrong.",
+              },
+              {
+                type: "paragraph",
+                text: "I’m learning skills to help my brain tell the difference between a real emergency and a false alarm. It takes practice, but like any skill, practice makes improvement.",
+              },
+              {
+                type: "paragraph",
+                text: "You don’t need to manage my alarm or change what you do because of it. My job is to work with my brain, and your job is to keep being a kid. We can always talk about it; I’m here for you and I love you very much.",
+              },
+            ],
+          },
+        ],
+      },
+
+      { type: "heading", text: "What to avoid saying" },
+      {
+        type: "paragraph",
+        text: "The goal is to avoid making the condition sound scary, shameful, or like the child needs to manage the parent’s emotions. Here are some helpful tips for rephrasing:",
+      },
+      {
+        type: "table",
+        columns: ["If you’re saying…", "Why it can be unhelpful", "Try"],
+        rows: [
+          [
+            "“My brain is broken.”",
+            "Can create shame or make kids worry that parent is not okay.",
+            "“My brain works a little differently. It has strengths and sometimes it sends me extra-long signals that I’m learning to manage.”",
+          ],
+          [
+            "“I can’t help it.”",
+            "Can make it seem like the condition is out of control.",
+            "“Sometimes my brain gives me strong feelings or urges and I’m practicing how to handle them.”",
+          ],
+          [
+            "“You’re making me stressed.”",
+            "Can make kids feel responsible for managing parent’s emotions.",
+            "“I’m feeling stressed right now, and I’m going to take care of my feelings. You haven’t done anything wrong.”",
+          ],
+          [
+            "“Please just do it this way so I don’t worry.”",
+            "Can teach kids they need to change their behavior to keep the parent calm.",
+            "“My brain is telling me I want things a certain way, but I’m practicing being flexible.”",
+          ],
+          [
+            "“I can’t relax until everything’s done.”",
+            "Can make kids feel pressure to help or fix things.",
+            "“My brain likes things to feel complete, but I’m learning that I can rest even when things aren’t perfect.”",
+          ],
+          [
+            "“I need things to be perfect.”",
+            "Can create fear of mistakes.",
+            "“My brain sometimes looks for the best or careful way to do things. I’m practicing remembering that good enough is often enough.”",
+          ],
+          [
+            "“My OCD/OCPD makes me this way.”",
+            "Can make it sound like the parent has no control.",
+            "“OCD/OCPD affects how my brain reacts sometimes, but I’m learning skills to respond differently.”",
+          ],
+          [
+            "“I’m just a perfectionist.”",
+            "Can make struggles sound like a personality trait that the parent cannot change or improve.",
+            "“I notice details and care about doing things well. I’m also working on flexibility and adapting.”",
+          ],
+          [
+            "“Don’t touch/move/change that because it bothers me.”",
+            "Can make children feel responsible for avoiding the parent’s discomfort.",
+            "“That feels uncomfortable for my brain, and I’m practicing handling that feeling.”",
+          ],
+          [
+            "“There’s a right way and a wrong way to do this.”",
+            "Can make children feel criticized or afraid of making mistakes.",
+            "“I have a preferred way, but there are often many good ways to do things.”",
+          ],
+        ],
+      },
+
+      { type: "heading", text: "Example scripts" },
+      { type: "paragraph", text: "Child: Why do you worry about things so much?" },
+      {
+        type: "quote",
+        text: "My brain works differently. It’s really good at noticing details and keeping me prepared, but sometimes my alarm system gets a little too loud. I’m learning how to turn the volume down sometimes.",
+        attribution: "Parent",
+      },
+      { type: "paragraph", text: "Child: Why do you keep checking?" },
+      {
+        type: "quote",
+        text: "My brain is giving me a strong ‘check again’ feeling. It feels real, but I’m practicing not always listening to that alarm.",
+        attribution: "Parent",
+      },
+      { type: "paragraph", text: "Child: Are you upset because of me?" },
+      {
+        type: "quote",
+        text: "No. I’m having a stressful moment, but that’s my feeling to handle. You didn’t cause it.",
+        attribution: "Parent",
+      },
+      { type: "paragraph", text: "Child: Is that just how you are?" },
+      {
+        type: "quote",
+        text: "OCD/OCPD affects my brain sometimes, but it doesn’t control me. I can learn new ways to respond.",
+        attribution: "Parent",
+      },
+      { type: "paragraph", text: "Child: Can I do it differently?" },
+      {
+        type: "quote",
+        text: "Yes. I might do it a particular way, but there can be lots of good ways to do something.",
+        attribution: "Parent",
+      },
     ],
   },
   {
@@ -254,16 +414,192 @@ export const GUIDE_ARTICLES: Article[] = [
   },
   {
     slug: "encouraging-brave-behavior",
-    title: "Encouraging brave behavior",
+    // Retitled by the author. The slug stays put so the URL does not move.
+    title: "Encouraging children’s involvement in brave behavior",
     summary:
-      "How to praise the trying rather than the outcome, and why that distinction does the work.",
-    status: "placeholder",
+      "How children can join in and cheer a parent on, without being handed responsibility for how the parent feels.",
+    status: "ready",
     minutes: 5,
-    outline: [
-      "Praise the approach, not the calm",
-      "Why 'you were so brave, and it was fine!' backfires",
-      "Sizing the step right",
-      "Example scripts",
+    authorId: "aashna-parsa",
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Families grow stronger when everyone feels connected, understood, and supported.",
+      },
+      {
+        type: "paragraph",
+        text: "When a parent is practicing how to respond differently to uncertainty, children may naturally notice. They might see a parent taking a moment before responding, trying something new, or handling a situation that feels uncomfortable.",
+      },
+      {
+        type: "paragraph",
+        text: "Inviting children to recognize and encourage brave behavior can help build empathy, teamwork, and trust within a family.",
+      },
+      {
+        type: "paragraph",
+        text: "At the same time, it is important to remember that children are not responsible for managing a parent’s emotions or making challenges disappear. The parent remains the parent. Adults are responsible for their own growth and support.",
+      },
+      {
+        type: "paragraph",
+        text: "A child’s role is not to become a coach, caretaker, or source of reassurance. Their role is to be a child, while also learning that families can support each other through moments of growth.",
+      },
+      {
+        type: "callout",
+        tone: "info",
+        text: "The goal is to create a family message that “we can support each other while everyone continues to take care of their own responsibilities.”",
+      },
+
+      { type: "heading", text: "1. Making space for children to notice courage" },
+      {
+        type: "paragraph",
+        text: "Children often recognize effort before adults realize they are paying attention. They may notice when a parent:",
+      },
+      {
+        type: "list",
+        items: [
+          "Tries something outside their comfort zone",
+          "Handles an unexpected change",
+          "Takes time to respond instead of reacting quickly",
+          "Practices being flexible",
+          "Makes room for uncertainty",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "These moments can become opportunities to model an important lesson:",
+      },
+      {
+        type: "callout",
+        tone: "erp",
+        text: "Bravery does not mean something feels easy. Bravery means choosing a helpful response even when something feels challenging.",
+      },
+      { type: "paragraph", text: "A parent might say:" },
+      {
+        type: "quote",
+        text: "That was a tricky moment for me, and I practiced being flexible.",
+      },
+      {
+        type: "paragraph",
+        text: "This helps children understand that everyone, including adults, continues learning. It also shows children that growth is something families can practice together.",
+      },
+
+      { type: "heading", text: "2. Inviting support without creating responsibility" },
+      {
+        type: "paragraph",
+        text: "Children often want to help people they love. This is a strength. A child saying, “Are you okay?” or offering encouragement can be a meaningful moment of connection.",
+      },
+      {
+        type: "paragraph",
+        text: "However, there is an important difference between supporting someone and being responsible for someone’s feelings.",
+      },
+      { type: "paragraph", text: "Support sounds like:" },
+      {
+        type: "quote",
+        text: "I noticed you tried something difficult. That was brave.",
+      },
+      { type: "paragraph", text: "Responsibility sounds like:" },
+      {
+        type: "quote",
+        text: "I need to make sure my parent does not feel worried.",
+      },
+      {
+        type: "paragraph",
+        text: "Children should never feel that the family depends on them staying calm, avoiding certain topics, changing their behavior, or preventing a parent from feeling uncomfortable.",
+      },
+      {
+        type: "callout",
+        tone: "erp",
+        title: "A helpful reminder for families",
+        text: "Children can be part of the encouragement, but they are not in charge of the process.",
+      },
+
+      { type: "heading", text: "3. Helping children understand their role" },
+      {
+        type: "paragraph",
+        text: "Clear roles can make children feel secure. Children can be encouraged to:",
+      },
+      {
+        type: "list",
+        items: [
+          "Notice effort",
+          "Offer kindness",
+          "Celebrate progress",
+          "Share their own feelings",
+          "Participate in family conversations",
+        ],
+      },
+      { type: "paragraph", text: "Parents can continue to:" },
+      {
+        type: "list",
+        items: [
+          "Make decisions",
+          "Seek support when needed",
+          "Practice their own coping skills",
+          "Guide the family through challenges",
+        ],
+      },
+      { type: "paragraph", text: "For example, a child might say:" },
+      { type: "quote", text: "I’m proud of you for trying that." },
+      { type: "paragraph", text: "And a parent might respond:" },
+      {
+        type: "quote",
+        text: "Thank you. I’m proud of myself for practicing something difficult too.",
+      },
+      {
+        type: "paragraph",
+        text: "This creates connection without placing the child in a caregiving role.",
+      },
+
+      { type: "heading", text: "4. Building a family culture of courage" },
+      {
+        type: "paragraph",
+        text: "Families can create an environment where trying matters more than being perfect. This might look like celebrating moments such as:",
+      },
+      {
+        type: "list",
+        items: [
+          "Someone trying something new",
+          "Someone adapting to a change",
+          "Someone taking a pause before reacting",
+          "Someone handling uncertainty with patience",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The focus is not on whether a challenge was completely easy or whether everyone felt comfortable. The focus is on the strengths shown along the way:",
+      },
+      {
+        type: "list",
+        items: ["Courage", "Flexibility", "Patience", "Understanding", "Growth"],
+      },
+      { type: "paragraph", text: "A family can practice saying:" },
+      {
+        type: "list",
+        items: [
+          "“We are all learning.”",
+          "“We can support each other.”",
+          "“Everyone’s feelings matter.”",
+          "“No one has to be perfect to make progress.”",
+        ],
+      },
+
+      { type: "heading", text: "Growing together, with everyone in their role" },
+      {
+        type: "paragraph",
+        text: "A family’s strength comes from connection, not from everyone having the same responsibilities.",
+      },
+      {
+        type: "paragraph",
+        text: "When children see parents practicing courage, they learn an important lesson: challenges are part of life, and people can grow through them.",
+      },
+      {
+        type: "paragraph",
+        text: "When parents allow children to offer encouragement without asking them to carry the weight, children learn another important lesson: families can care for each other while still respecting each person’s role.",
+      },
+      {
+        type: "callout",
+        tone: "erp",
+        text: "The goal is not for children to fix difficult moments. The goal is for families to build a shared understanding: “We can encourage each other. We can grow together. And everyone gets to be supported, including the adults and the children.”",
+      },
     ],
   },
   {
