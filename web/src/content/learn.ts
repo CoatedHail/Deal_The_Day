@@ -286,73 +286,24 @@ export const LEARN_ARTICLES: Article[] = [
     ],
   },
   {
-    slug: "reassurance-seeking",
-    title: "Reassurance seeking",
-    summary:
-      "Why asking 'are you sure it will be fine?' feels helpful and works against you.",
-    status: "placeholder",
-    minutes: 5,
-    outline: [
-      "What counts as reassurance seeking",
-      "The relief-then-return cycle",
-      "Reassurance you ask for, and reassurance you give yourself",
-      "What to do with the urge instead",
-    ],
-  },
-  {
-    slug: "overcontrol",
-    title: "Overcontrol",
-    summary:
-      "When high standards, rigidity and control stop being strengths and start costing you connection.",
-    status: "placeholder",
-    minutes: 6,
-    outline: [
-      "What overcontrol looks like day to day",
-      "The costs that are easy to miss",
-      "Why it is hard to see in yourself",
-      "Loosening without losing yourself",
-    ],
-  },
-  {
-    slug: "family-accommodation",
-    title: "Family accommodation",
-    summary:
-      "How the people who love you end up organizing themselves around the anxiety — and what to do about it together.",
-    status: "placeholder",
-    minutes: 6,
-    outline: [
-      "What accommodation is",
-      "Why families do it (because it works, briefly)",
-      "What it teaches children",
-      "Reducing it kindly, and together",
-    ],
-  },
-  {
     slug: "what-is-erp",
-    title: "What ERP actually is",
+    title: "What ERP is, and why it works",
     summary:
-      "Exposure and Response Prevention, explained without jargon. The two halves and why both are needed.",
+      "Exposure and Response Prevention, explained without jargon: the two halves, why both are needed, and the mechanism underneath.",
+    // Was two articles — "What ERP actually is" and "How ERP loosens
+    // compulsions". Nobody explains what ERP is without explaining why it
+    // works, so split across two pages the setup had to be written twice.
     status: "placeholder",
-    minutes: 7,
+    minutes: 8,
     outline: [
       "The two words",
       "What exposure is and is not",
       "What response prevention means",
       "Why doing only half of it does not work",
-      "What a session looks like in real life",
-    ],
-  },
-  {
-    slug: "how-erp-reduces-compulsions",
-    title: "How ERP loosens compulsions",
-    summary:
-      "The mechanism: you are not waiting for anxiety to drop, you are collecting evidence that you can handle it.",
-    status: "placeholder",
-    minutes: 6,
-    outline: [
       "The old model: habituation",
       "The better model: inhibitory learning",
       "Why surprise is the active ingredient",
+      "What a session looks like in real life",
       "What that means for how you use this app",
     ],
   },
@@ -434,20 +385,6 @@ export const LEARN_ARTICLES: Article[] = [
         tone: "info",
         text: "Certainty of the future is uncontrollable, but what we can learn is how to live well without knowing exactly what comes next.",
       },
-    ],
-  },
-  {
-    slug: "modeling-flexibility",
-    title: "Modeling flexibility for your children",
-    summary:
-      "Children learn how to handle uncertainty by watching someone do it. That is the part you can offer them.",
-    status: "placeholder",
-    minutes: 6,
-    outline: [
-      "What kids actually pick up",
-      "Why 'do as I say' does not transfer",
-      "Narrating your own coping out loud",
-      "Letting them see you get it wrong",
     ],
   },
 ];
