@@ -112,22 +112,27 @@ export function TagInput({
       </div>
 
       {unusedSuggestions.length > 0 ? (
-        <div className="pt-1">
-          <p className="mb-1.5 text-xs text-text-subtle">Common ones, if any fit:</p>
-          <ul className="flex flex-wrap gap-1.5">
-            {unusedSuggestions.map((suggestion) => (
-              <li key={suggestion}>
-                <button
-                  type="button"
-                  onClick={() => add(suggestion)}
-                  className="rounded-full border border-dashed border-border-strong px-2.5 py-1 text-xs text-text-muted transition-colors hover:border-primary hover:bg-primary-soft hover:text-text"
-                >
-                  + {suggestion}
-                </button>
-              </li>
-            ))}
+        <details className="group pt-1 text-sm">
+          <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 rounded font-medium text-primary underline underline-offset-2 [&::-webkit-details-marker]:hidden">
+            <span aria-hidden="true" className="transition-transform group-open:rotate-45">
+              +
+            </span>
+            See common examples
+          </summary>
+          <ul className="mt-2 flex flex-wrap gap-1.5">
+              {unusedSuggestions.map((suggestion) => (
+                <li key={suggestion}>
+                  <button
+                    type="button"
+                    onClick={() => add(suggestion)}
+                    className="rounded-full border border-dashed border-border-strong px-2.5 py-1 text-xs text-text-muted transition-colors hover:border-primary hover:bg-primary-soft hover:text-text"
+                  >
+                    + {suggestion}
+                  </button>
+                </li>
+              ))}
           </ul>
-        </div>
+        </details>
       ) : null}
     </div>
   );

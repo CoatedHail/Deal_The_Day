@@ -60,7 +60,6 @@ function validate(body: unknown): AppData {
     activities: requireArray(input.activities, "activities"),
     checkIns: requireArray(input.checkIns, "checkIns"),
     sessions: requireArray(input.sessions, "sessions"),
-    therapistNotes: requireArray(input.therapistNotes, "therapistNotes"),
     insights: requireArray(input.insights, "insights"),
     checklists: requireArray(input.checklists, "checklists"),
   };

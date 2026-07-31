@@ -320,7 +320,7 @@ export const LEARN_ARTICLES: Article[] = [
       "The handful of patterns that show up again and again — named, so they are easier to spot in the moment.",
     status: "ready",
     minutes: 3,
-    authorId: "jackie",
+    authorId: "jackie-zhang",
     blocks: [
       {
         type: "paragraph",

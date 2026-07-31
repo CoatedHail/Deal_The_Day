@@ -19,6 +19,7 @@ export interface TeamMember {
   /** Slug used as the page anchor and as an article's `authorId`. */
   id: string;
   name: string;
+  group: "snp-reach" | "camp-leader";
   /** What they do on the project. */
   role?: string;
   /** A sentence or two, in their own words where possible. */
@@ -28,19 +29,92 @@ export interface TeamMember {
 }
 
 export const TEAM: TeamMember[] = [
-  // NEEDS-OWNER for all three: a role, a short bio, and a photo. Names are as
-  // each person signed their drafts.
   {
     id: "merisa",
-    name: "Merisa S",
+    name: "Merisa Shukhova",
+    group: "snp-reach",
+    photo: "/team/merisa-shukhova.webp",
   },
   {
-    id: "jackie",
-    name: "Jackie",
+    id: "jolee-liu",
+    name: "Jolee Liu",
+    group: "snp-reach",
+    photo: "/team/jolee-liu.webp",
   },
   {
-    id: "aashna",
-    name: "Aashna P",
+    id: "jackie-zhang",
+    name: "Jackie Zhang",
+    group: "snp-reach",
+    photo: "/team/jackie-zhang.webp",
+  },
+  {
+    id: "emmy-weltsch",
+    name: "Emmy Weltsch",
+    group: "snp-reach",
+    photo: "/team/emmy-weltsch.webp",
+  },
+  {
+    id: "aashna-parsa",
+    name: "Aashna Parsa",
+    group: "snp-reach",
+    photo: "/team/aashna-parsa.webp",
+  },
+  {
+    id: "carina-lee",
+    name: "Carina Lee",
+    group: "snp-reach",
+    photo: "/team/carina-lee.webp",
+  },
+  {
+    id: "kaito-dirk",
+    name: "Kaito Dirk",
+    group: "snp-reach",
+    photo: "/team/kaito-dirk.webp",
+  },
+  {
+    id: "oscar-li",
+    name: "Oscar Li",
+    group: "snp-reach",
+    photo: "/team/oscar-li.webp",
+  },
+  {
+    id: "michael-kuoh",
+    name: "Michael Kuoh",
+    group: "snp-reach",
+    photo: "/team/michael-kuoh.webp",
+  },
+  {
+    id: "kara-horne",
+    name: "Kara Horne",
+    group: "snp-reach",
+    photo: "/team/kara-horne.webp",
+  },
+  {
+    id: "julie-ye",
+    name: "Julie Ye",
+    group: "snp-reach",
+    photo: "/team/julie-ye.webp",
+  },
+  {
+    id: "maya",
+    name: "Maya",
+    group: "camp-leader",
+    role: "Camp Leader",
+    photo: "/team/maya.webp",
+  },
+  {
+    id: "ananyaa",
+    name: "Ananyaa",
+    group: "camp-leader",
+    role: "Camp Leader",
+    photo: "/team/ananyaa.webp",
+  },
+  {
+    id: "zach",
+    name: "Zach",
+    group: "camp-leader",
+    role: "Camp Leader",
+    photo: "/team/zach.webp",
   },
 ];
 

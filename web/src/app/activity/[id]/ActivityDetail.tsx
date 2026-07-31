@@ -8,6 +8,7 @@ import { Card, CardHeader } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Icon } from "@/components/ui/Icon";
 import { Pill } from "@/components/ui/Pill";
+import { CARD_LENGTH_BY_ID } from "@/lib/card-lengths";
 import { formatCardReference } from "@/lib/cards";
 import { formatDate, formatRelative } from "@/lib/date";
 import {
@@ -61,6 +62,9 @@ export function ActivityDetail({ activityId }: { activityId: string }) {
         <div className="flex flex-wrap items-center gap-2">
           <h2 className="text-lg font-semibold text-text">{formatCardReference(pre)}</h2>
           <StatusPill status={activity.status} />
+          {pre.cardLength ? (
+            <Pill>{CARD_LENGTH_BY_ID[pre.cardLength].label} activity</Pill>
+          ) : null}
           {pre.cardCategory ? (
             <Pill>{ACTIVITY_CATEGORY_LABELS[pre.cardCategory]}</Pill>
           ) : null}
@@ -161,7 +165,9 @@ export function ActivityDetail({ activityId }: { activityId: string }) {
               </dd>
             </div>
             <div>
-              <dt className="font-medium text-text-muted">Felt able to handle it</dt>
+              <dt className="font-medium text-text-muted">
+                Felt ready for the activity
+              </dt>
               <dd className="mt-0.5">
                 <Pill>{pre.confidence} / 10</Pill>
               </dd>

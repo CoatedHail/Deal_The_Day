@@ -55,7 +55,7 @@ export const PRE_ACTIVITY_COPY = {
     anchorHigh: "Extremely",
   } satisfies ScaleCopy,
   confidence: {
-    label: "How able do you feel to handle it?",
+    label: "How ready do you feel for the activity?",
     anchorLow: "Not at all",
     anchorHigh: "Very",
   } satisfies ScaleCopy,

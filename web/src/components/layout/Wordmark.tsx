@@ -1,23 +1,19 @@
 import Link from "next/link";
+import { BrandMark } from "@/components/layout/BrandMark";
 
-/**
- * The product mark: a small card motif plus the name.
- *
- * The two offset rounded rectangles read as a deck without needing artwork.
- */
+/** The supplied family mark is the site's primary visual identity. */
 export function Wordmark({ href = "/" }: { href?: string }) {
   return (
-    <Link href={href} className="inline-flex items-center gap-2.5">
-      <span
-        aria-hidden="true"
-        className="relative inline-block h-8 w-8 shrink-0"
-      >
-        <span className="absolute inset-y-0.5 left-0 w-6 -rotate-12 rounded-md border border-accent-border bg-accent-soft" />
-        <span className="absolute inset-y-0 right-0 w-6 rotate-6 rounded-md border border-primary-border bg-primary-soft" />
-      </span>
-      <span className="font-display text-lg font-semibold leading-tight text-text">
-        Deal the Day
-      </span>
+    <Link
+      href={href}
+      className="inline-flex rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus focus-visible:ring-offset-2"
+    >
+      <BrandMark
+        alt="Deal the Day"
+        className="h-16 w-14 rounded-xl bg-white p-1 shadow-sm ring-1 ring-black/5 lg:h-24 lg:w-20 lg:p-1.5"
+        sizes="(min-width: 1024px) 80px, 56px"
+        priority
+      />
     </Link>
   );
 }

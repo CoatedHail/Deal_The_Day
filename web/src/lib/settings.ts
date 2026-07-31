@@ -7,6 +7,7 @@
  */
 
 export type ThemePreference = "system" | "light" | "dark";
+export type PalettePreference = "calm" | "blue-yellow";
 export type TextSize = "sm" | "md" | "lg" | "xl";
 export type FontChoice = "default" | "dyslexic";
 export type MotionPreference = "system" | "reduced";
@@ -24,6 +25,7 @@ export interface Settings {
   /** Display name used in greetings. Never leaves the device. */
   displayName: string;
   theme: ThemePreference;
+  palette: PalettePreference;
   textSize: TextSize;
   font: FontChoice;
   motion: MotionPreference;
@@ -61,6 +63,7 @@ export const SETTINGS_STORAGE_KEY = "dtd.settings.v1";
 export const DEFAULT_SETTINGS: Settings = {
   displayName: "",
   theme: "system",
+  palette: "calm",
   textSize: "md",
   font: "default",
   motion: "system",
@@ -100,6 +103,7 @@ export function applySettings(settings: Settings, root: HTMLElement): void {
     settings.theme === "system" ? (prefersDark ? "dark" : "light") : settings.theme;
 
   root.dataset.theme = resolvedTheme;
+  root.dataset.palette = settings.palette;
   root.dataset.textSize = settings.textSize;
   root.dataset.font = settings.font;
   root.dataset.contrast = settings.contrast;
@@ -130,6 +134,7 @@ export const SETTINGS_BOOTSTRAP_SCRIPT = `
       theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
     root.dataset.theme = theme;
+    root.dataset.palette = s.palette || "calm";
     root.dataset.textSize = s.textSize || "md";
     root.dataset.font = s.font || "default";
     root.dataset.contrast = s.contrast || "normal";

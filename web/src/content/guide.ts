@@ -14,7 +14,7 @@ export const GUIDE_ARTICLES: Article[] = [
       "How much to say, at what age, and how to do it without making them responsible for it.",
     status: "ready",
     minutes: 8,
-    authorId: "aashna",
+    authorId: "aashna-parsa",
     blocks: [
       { type: "paragraph", text: "Many children notice more than adults realize." },
       {
@@ -273,7 +273,7 @@ export const GUIDE_ARTICLES: Article[] = [
       "What to do when your child asks for certainty you cannot give — and when you want to ask for it yourself.",
     status: "ready",
     minutes: 5,
-    authorId: "aashna",
+    authorId: "aashna-parsa",
     blocks: [
       {
         type: "paragraph",

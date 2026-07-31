@@ -31,7 +31,17 @@ export type IconName =
   | "speaker"
   | "pause"
   | "stop"
-  | "people";
+  | "people"
+  | "balance"
+  | "brain"
+  | "headphones"
+  | "lock"
+  | "mail"
+  | "question"
+  | "repeat"
+  | "shield"
+  | "shuffle"
+  | "target";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   home: <path d="M3 10.5 12 3l9 7.5M5.5 9.5V20h13V9.5" />,
@@ -125,6 +135,64 @@ const PATHS: Record<IconName, React.ReactNode> = {
       <circle cx="4.5" cy="10" r="2.2" />
       <circle cx="19.5" cy="10" r="2.2" />
       <path d="M6.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M2 19c0-2 1.1-3.6 2.9-3.6M22 19c0-2-1.1-3.6-2.9-3.6" />
+    </>
+  ),
+  balance: (
+    <>
+      <path d="M12 3v18M6 21h12M4 7h16M7 7l-4 7h8L7 7ZM17 7l-4 7h8l-4-7Z" />
+    </>
+  ),
+  brain: (
+    <>
+      <path d="M9.5 4.5A3 3 0 0 0 4 6.2a3 3 0 0 0-1 5.6A3.5 3.5 0 0 0 6.5 18H10V5.5a2 2 0 0 0-.5-1Z" />
+      <path d="M14.5 4.5A3 3 0 0 1 20 6.2a3 3 0 0 1 1 5.6 3.5 3.5 0 0 1-3.5 6.2H14V5.5a2 2 0 0 1 .5-1ZM6 10h4M14 13h4M7 15v3M17 6v3" />
+    </>
+  ),
+  headphones: (
+    <>
+      <path d="M4 13v-1a8 8 0 0 1 16 0v1" />
+      <path d="M4 13h3v7H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 1-2ZM20 13h-3v7h2a2 2 0 0 0 2-2v-3a2 2 0 0 0-1-2Z" />
+    </>
+  ),
+  lock: (
+    <>
+      <rect x="4" y="10" width="16" height="11" rx="2" />
+      <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" />
+    </>
+  ),
+  mail: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m4 7 8 6 8-6" />
+    </>
+  ),
+  question: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.8 9a2.4 2.4 0 1 1 3.5 2.1c-.8.5-1.3 1-1.3 1.9M12 17h.01" />
+    </>
+  ),
+  repeat: (
+    <>
+      <path d="m17 2 3 3-3 3M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3M20 13v2a4 4 0 0 1-4 4H4" />
+    </>
+  ),
+  shield: (
+    <>
+      <path d="M12 3 4.5 6v5.5c0 4.5 3 7.5 7.5 9.5 4.5-2 7.5-5 7.5-9.5V6L12 3Z" />
+      <path d="m8.5 12 2.2 2.2 4.8-5" />
+    </>
+  ),
+  shuffle: (
+    <>
+      <path d="M4 7h2.5c4.5 0 5 10 10 10H20M17 14l3 3-3 3M4 17h2.5c1.7 0 2.8-1.4 3.8-3M14 7c.8 0 1.6 0 2.5 0H20M17 4l3 3-3 3" />
+    </>
+  ),
+  target: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1" />
     </>
   ),
 };

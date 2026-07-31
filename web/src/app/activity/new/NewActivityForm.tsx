@@ -13,19 +13,39 @@ import {
   COMPULSION_SUGGESTIONS,
   PRE_ACTIVITY_COPY as COPY,
 } from "@/content/activity-flow";
+import { CARD_LENGTH_BY_ID, CARD_LENGTHS } from "@/lib/card-lengths";
 import { parseCardNumber } from "@/lib/cards";
-import { ACTIVITY_CATEGORY_LABELS, ActivityCategory } from "@/lib/types";
+import {
+  ACTIVITY_CATEGORY_LABELS,
+  ActivityCategory,
+  CardLength,
+} from "@/lib/types";
 
 const CATEGORY_OPTIONS = (
   Object.keys(ACTIVITY_CATEGORY_LABELS) as ActivityCategory[]
 ).map((value) => ({ value, label: ACTIVITY_CATEGORY_LABELS[value] }));
 
-export function NewActivityForm() {
+const LENGTH_OPTIONS = CARD_LENGTHS.map((card) => ({
+  value: card.id,
+  label: card.label,
+  description: card.summary,
+}));
+
+export function NewActivityForm({
+  initialCardLength,
+}: {
+  initialCardLength?: CardLength;
+}) {
   const router = useRouter();
   const { startActivity } = useData();
 
   const [cardNumberInput, setCardNumberInput] = useState("");
-  const [cardTitle, setCardTitle] = useState("");
+  const [cardLength, setCardLength] = useState<CardLength | null>(
+    initialCardLength ?? null,
+  );
+  const [cardTitle, setCardTitle] = useState(
+    initialCardLength ? CARD_LENGTH_BY_ID[initialCardLength].title : "",
+  );
   const [category, setCategory] = useState<ActivityCategory | null>(null);
   const [anxiety, setAnxiety] = useState(5);
   const [confidence, setConfidence] = useState(5);
@@ -51,6 +71,7 @@ export function NewActivityForm() {
     const id = startActivity({
       cardNumber: cardNumber ?? undefined,
       cardTitle: cardTitle.trim(),
+      cardLength: cardLength ?? undefined,
       cardCategory: category ?? undefined,
       anxiety,
       confidence,
@@ -63,9 +84,28 @@ export function NewActivityForm() {
     router.push(`/activity/${id}`);
   }
 
+  function handleLengthChange(nextLength: CardLength) {
+    setCardLength(nextLength);
+    setCardTitle((current) => {
+      const matchesLengthCard = CARD_LENGTHS.some((card) => card.title === current);
+      return current.trim().length === 0 || matchesLengthCard
+        ? CARD_LENGTH_BY_ID[nextLength].title
+        : current;
+    });
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <Card className="space-y-6">
+        <ChoiceGroup
+          legend="Which length card did you pick?"
+          help="Optional if you are recording a different card from the deck."
+          options={LENGTH_OPTIONS}
+          value={cardLength}
+          onChange={handleLengthChange}
+          columns={3}
+        />
+
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
             <TextField
@@ -129,6 +169,7 @@ export function NewActivityForm() {
         <TextArea
           label={COPY.biggestFear.label}
           help={COPY.biggestFear.help}
+          helpDisclosureLabel="More information"
           placeholder={COPY.biggestFear.placeholder}
           value={biggestFear}
           onChange={setBiggestFear}
