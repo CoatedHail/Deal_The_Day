@@ -125,7 +125,13 @@
 }
 
 /* Optional site-wide blue-and-sunshine palette. It replaces every colour
-   token, so navigation, content, controls and charts all change together. */
+   token, so navigation, content, controls and charts all change together.
+
+   The yellows are held to roughly twice the blues' chroma at the same
+   lightness, which is the ratio the default palette already uses between its
+   gold and its blue. Matched exactly, a yellow at a blue's chroma stops
+   reading as yellow at all and turns beige — lightness was never the problem
+   here, saturation was. */
 [data-palette="blue-yellow"] {
   --bg: #eaf7ff;
   --bg-subtle: #dff2fd;
@@ -140,13 +146,13 @@
 
   --primary: #946300;
   --primary-hover: #775000;
-  --primary-soft: #fff3b8;
-  --primary-border: #e8c84f;
+  --primary-soft: #fbf3cd;
+  --primary-border: #e3c874;
   --on-primary: #ffffff;
 
   --accent: #9b5700;
   --accent-soft: #fff1cf;
-  --accent-border: #e7c36a;
+  --accent-border: #e5c372;
 
   --info: #285f84;
   --info-soft: #dff2ff;
@@ -157,8 +163,8 @@
   --success-border: #abd2ba;
 
   --caution: #805b00;
-  --caution-soft: #fff4c9;
-  --caution-border: #e8cc69;
+  --caution-soft: #fef4cf;
+  --caution-border: #e6cc78;
 
   --focus: #17688f;
 
