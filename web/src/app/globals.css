@@ -10,15 +10,22 @@
    The palette is deliberately warm and low-contrast-anxiety: sand and clay
    rather than clinical white and blue. Sage green carries primary actions
    because it reads as calm and growth-oriented rather than alarming.
+
+   The surfaces carry real warmth rather than a hint of it — around chroma 5-6
+   at page level, and no pure white anywhere, since a white card on a warm page
+   fights it instead of belonging to it. That also keeps this palette clearly
+   apart from the blue-and-sunshine one, which sits at a comparable tint
+   strength on the opposite side of the wheel. Lightness is unchanged from the
+   paler original, so every contrast ratio is as it was.
    --------------------------------------------------------------------------- */
 
 :root {
-  --bg: #faf6f1;
-  --bg-subtle: #f3ece4;
-  --surface: #ffffff;
-  --surface-sunken: #f7f1ea;
-  --border: #e7ddd2;
-  --border-strong: #d3c4b5;
+  --bg: #fcf5eb;
+  --bg-subtle: #f8ebdc;
+  --surface: #fffefb;
+  --surface-sunken: #fbf0e3;
+  --border: #eedcc7;
+  --border-strong: #ddc2a5;
 
   --text: #2e2926;
   --text-muted: #6b615a;
@@ -73,12 +80,12 @@
 }
 
 [data-theme="dark"] {
-  --bg: #1a1714;
-  --bg-subtle: #211d19;
-  --surface: #24201c;
-  --surface-sunken: #1e1a17;
-  --border: #38312b;
-  --border-strong: #4d443c;
+  --bg: #1d1610;
+  --bg-subtle: #241c14;
+  --surface: #271f17;
+  --surface-sunken: #211913;
+  --border: #3d3023;
+  --border-strong: #544231;
 
   --text: #f1eae2;
   --text-muted: #b5a99e;
@@ -125,7 +132,13 @@
 }
 
 /* Optional site-wide blue-and-sunshine palette. It replaces every colour
-   token, so navigation, content, controls and charts all change together. */
+   token, so navigation, content, controls and charts all change together.
+
+   The yellows are held to roughly twice the blues' chroma at the same
+   lightness, which is the ratio the default palette already uses between its
+   gold and its blue. Matched exactly, a yellow at a blue's chroma stops
+   reading as yellow at all and turns beige — lightness was never the problem
+   here, saturation was. */
 [data-palette="blue-yellow"] {
   --bg: #eaf7ff;
   --bg-subtle: #dff2fd;
@@ -140,13 +153,13 @@
 
   --primary: #946300;
   --primary-hover: #775000;
-  --primary-soft: #fff3b8;
-  --primary-border: #e8c84f;
+  --primary-soft: #fbf3cd;
+  --primary-border: #e3c874;
   --on-primary: #ffffff;
 
   --accent: #9b5700;
   --accent-soft: #fff1cf;
-  --accent-border: #e7c36a;
+  --accent-border: #e5c372;
 
   --info: #285f84;
   --info-soft: #dff2ff;
@@ -157,8 +170,8 @@
   --success-border: #abd2ba;
 
   --caution: #805b00;
-  --caution-soft: #fff4c9;
-  --caution-border: #e8cc69;
+  --caution-soft: #fef4cf;
+  --caution-border: #e6cc78;
 
   --focus: #17688f;
 
