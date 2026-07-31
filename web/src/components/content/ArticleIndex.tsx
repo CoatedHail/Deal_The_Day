@@ -9,13 +9,9 @@ const ARTICLE_ICONS: Record<string, Record<string, IconName>> = {
     "intolerance-of-uncertainty": "question",
     "why-uncertainty-creates-anxiety": "pulse",
     "compulsive-planning": "calendar",
-    "reassurance-seeking": "message",
-    overcontrol: "lock",
     "family-accommodation": "family",
     "what-is-erp": "target",
-    "how-erp-reduces-compulsions": "repeat",
     "cognitive-distortions": "brain",
-    "modeling-flexibility": "shuffle",
   },
   "/guide": {
     "talking-with-children": "message",
