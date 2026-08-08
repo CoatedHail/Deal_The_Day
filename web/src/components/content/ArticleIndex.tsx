@@ -9,7 +9,10 @@ const ARTICLE_ICONS: Record<string, Record<string, IconName>> = {
     "intolerance-of-uncertainty": "question",
     "why-uncertainty-creates-anxiety": "pulse",
     "compulsive-planning": "calendar",
+    "reassurance-seeking": "message",
+    overcontrol: "lock",
     "what-is-erp": "target",
+    "how-erp-reduces-compulsions": "repeat",
     "cognitive-distortions": "brain",
   },
   "/guide": {
@@ -19,6 +22,7 @@ const ARTICLE_ICONS: Record<string, Record<string, IconName>> = {
     "encouraging-brave-behavior": "shield",
     "avoiding-reassurance-traps": "repeat",
     "family-accommodation": "family",
+    "modeling-flexibility": "shuffle",
     "regulating-yourself": "pause",
     "supporting-exposures": "people",
   },

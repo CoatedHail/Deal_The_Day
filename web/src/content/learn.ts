@@ -286,25 +286,224 @@ export const LEARN_ARTICLES: Article[] = [
     ],
   },
   {
-    slug: "what-is-erp",
-    title: "What ERP is, and why it works",
+    slug: "reassurance-seeking",
+    authorId: "merisa",
+    title: "Reassurance seeking",
     summary:
-      "Exposure and Response Prevention, explained without jargon: the two halves, why both are needed, and the mechanism underneath.",
-    // Was two articles — "What ERP actually is" and "How ERP loosens
-    // compulsions". Nobody explains what ERP is without explaining why it
-    // works, so split across two pages the setup had to be written twice.
-    status: "placeholder",
-    minutes: 8,
-    outline: [
-      "The two words",
-      "What exposure is and is not",
-      "What response prevention means",
-      "Why doing only half of it does not work",
-      "The old model: habituation",
-      "The better model: inhibitory learning",
-      "Why surprise is the active ingredient",
-      "What a session looks like in real life",
-      "What that means for how you use this app",
+      "Why asking 'are you sure it will be fine?' feels helpful and works against you.",
+    status: "ready",
+    minutes: 5,
+    blocks: [
+      {
+        type: "paragraph",
+        text: "“Are you sure it will be fine?” seems like such a small question. It’s also one of the most well-studied maintaining factors in anxiety and OCD, because it feels like problem-solving while quietly functioning as a compulsion.",
+      },
+
+      { type: "heading", text: "1. What counts as reassurance seeking?" },
+      {
+        type: "paragraph",
+        text: "Reassurance seeking is asking someone (or something – a search engine, a symptom checker, your own memory) to confirm that a feared outcome won’t happen, that you did something correctly, or that you’re a good person, when you already know the answer or when no answer could actually settle the question. It can be obvious – repeatedly asking a partner “do you still love me?” – or subtle: over-explaining a decision so someone will tell you it was the right call, re-reading a text message for the tenth time to check its tone, or asking a doctor for a fourth opinion on a result three doctors have already called normal.",
+      },
+      {
+        type: "paragraph",
+        text: "What makes it reassurance seeking rather than ordinary information-gathering is the pattern: the question isn’t really answerable to satisfaction, and even a clear “yes, it’s fine” doesn’t fully land. Something in the asking is aimed at relief rather than at new information.",
+      },
+
+      { type: "heading", text: "2. The relief-then-return cycle" },
+      {
+        type: "paragraph",
+        text: "Reassurance works – for a few minutes. That's exactly the problem. The brief relief teaches the brain that asking is what makes the anxious feeling go away, which makes asking more likely next time, and often sooner. This mirrors the basic structure of a compulsion in OCD: an unwanted, distressing thought or doubt, followed by a behavior that neutralizes the distress temporarily, followed by the doubt returning – frequently a little stronger, because the underlying fear was never actually tested, only postponed. Reassurance doesn’t teach anyone that the feared thing was never dangerous; it teaches them that danger was narrowly avoided by asking in time. That’s a very different, and much more fragile, lesson.",
+      },
+
+      {
+        type: "heading",
+        text: "3. Reassurance you ask for, and reassurance you give yourself",
+      },
+      {
+        type: "paragraph",
+        text: "There's an important asymmetry between reassurance sought from others and the internal version – silently reviewing evidence in your own head to try to reach certainty. Both function the same way psychologically, but reassurance from other people also puts a cost on the relationship. The people closest to someone who seeks reassurance often end up organizing real time and energy around answering the same questions, which research on family accommodation identifies as a factor that tends to increase symptom severity rather than relieve it, even though everyone involved is acting out of care. The people giving reassurance aren't doing anything wrong by wanting to help; the pattern itself is what keeps the cycle going regardless of anyone's intentions.",
+      },
+
+      { type: "heading", text: "4. What to do with the urge instead" },
+      {
+        type: "list",
+        items: [
+          "Name it out loud, if only to yourself: “This is a reassurance urge, not an actual open question.” Naming the pattern is often enough to loosen its grip slightly.",
+          // "white-knuckling" — the draft had "white-knickling".
+          "Delay, don’t suppress. Rather than white-knuckling through refusing to ask, try setting a short delay – five minutes of waiting, then fifteen – before asking (or answering your own internal question). Delay lets you notice that the anxiety can shift on its own even without an answer.",
+          "Answer once, then hold the line. If you’re on the receiving end of someone else’s reassurance-seeking, answering the same question honestly once and then gently declining to repeat it protects both of you from the cycle, even though it feels unkind in the moment.",
+          "Sit with the “maybe.” Most reassurance questions are really requests for certainty. Practicing tolerance for “I don’t fully know, and I’m choosing to act anyway” is closer to the actual skill than getting better answers.",
+        ],
+      },
+
+      { type: "subheading", text: "Sources" },
+      {
+        type: "paragraph",
+        text: "Salkovskis, P. M., & Warwick, H. M. C. (1986). Morbid preoccupations, health anxiety and reassurance: A cognitive-behavioural approach. Behaviour Research and Therapy. Rachman, S. (2002). A cognitive theory of compulsive checking. Behaviour Research and Therapy. Lebowitz, E. R., & Omer, H. (2013). Treating Childhood and Adolescent Anxiety: A Guide for Caregivers.",
+      },
+    ],
+  },
+  {
+    slug: "overcontrol",
+    authorId: "merisa",
+    title: "Overcontrol",
+    summary:
+      "When high standards, rigidity and control stop being strengths and start costing you connection.",
+    status: "ready",
+    minutes: 6,
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Self-control is generally treated as an unambiguous virtue – the trait behind delayed gratification, discipline, and getting things done. Research on \"overcontrol,\" most developed through Thomas Lynch's work on Radically Open Dialectical Behavior Therapy (RO-DBT), suggests it has a ceiling. Past a certain point, more control stops improving a person's life and starts quietly costing them their connection to it.",
+      },
+
+      { type: "heading", text: "1. What overcontrol looks like day to day" },
+      {
+        type: "paragraph",
+        text: "Overcontrolled traits often look admirable from the outside: someone reserved and cautious, an exceptional rule-follower, hard-working to the point of self-sacrifice, rarely emotionally expressive, difficult to catch off guard. RO-DBT research describes five recurring themes – inhibited or disingenuous emotional expression, hyper-detailed and overly cautious behavior, rigid rule-following, an aloof or distant relational style, and a tendency toward social comparison and quiet resentment. None of these are dramatic on their own. Together, they describe someone who has learned to manage life primarily by tightening their grip on it.",
+      },
+
+      { type: "heading", text: "2. The costs that are easy to miss" },
+      {
+        type: "paragraph",
+        text: "Because overcontrol produces competence, its costs tend to stay hidden – from the person themselves and from everyone around them. The research literature associates significant overcontrol with social isolation, loneliness, and difficulty forming close relationships, even when the person is surrounded by people. High inhibitory control makes it hard to signal warmth or vulnerability in ways others can read, which means people around an overcontrolled person often experience them as harder to connect with than they intend to be. Overcontrol is also linked to more severe, harder-to-treat conditions when it goes unaddressed, including treatment-resistant depression, anorexia nervosa, and obsessive-compulsive personality disorder – not because control itself is the disorder, but because it becomes the mechanism keeping the person stuck.",
+      },
+
+      { type: "heading", text: "3. Why it is hard to see in yourself" },
+      {
+        type: "paragraph",
+        text: "Overcontrol is largely ego-syntonic: it doesn't feel like a problem, it feels like being responsible, being the reliable one, having standards other people lack. Because the traits are rewarded – at work, in school, sometimes by entire families – there's rarely external pressure prompting the person to question them. The discomfort, when it shows up, tends to get interpreted as a reason to control harder (more planning, more rules, more self-discipline) rather than as a signal that the strategy itself has limits. This is part of why overcontrol is described as a spectrum of temperament and coping style rather than a single symptom to spot: it's less \"does this person have a problem\" and more \"how much room is left in this person's life for anything to be uncertain, spontaneous, or shared.\"",
+      },
+
+      { type: "heading", text: "4. Loosening without losing yourself" },
+      {
+        type: "paragraph",
+        text: "The goal isn't to become someone who has no self-control – that's neither realistic nor desirable. RO-DBT frames the target as radical openness: the willingness to actively seek out the parts of life you'd normally avoid or find uncomfortable, with genuine curiosity about being wrong rather than certainty about being right. In practice that can mean:",
+      },
+      {
+        type: "list",
+        items: [
+          "Letting other people see an unpolished reaction occasionally, instead of the composed version",
+          "Asking someone else to make a decision you'd normally control, and living with their choice",
+          "Treating a mistake as data rather than as evidence you need tighter rules",
+          "Practicing expressing a genuine feeling in the moment it happens, rather than processing it privately first and reporting a tidy summary later",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "None of this requires becoming a different kind of person. It requires treating flexibility itself as a skill worth practicing, the same way discipline was once practiced.",
+      },
+
+      { type: "subheading", text: "Sources" },
+      {
+        type: "paragraph",
+        text: "Lynch, T. R. (2018). Radically Open Dialectical Behavior Therapy: Theory and Practice for Treating Disorders of Overcontrol. Lynch, T. R., & Cheavens, J. S. (2008). Dialectical behavior therapy for comorbid personality disorders. Journal of Clinical Psychology. Lynch, T. R., et al. (2015). Radically open-dialectical behavior therapy for disorders of over-control. American Journal of Psychotherapy.",
+      },
+    ],
+  },
+  {
+    slug: "what-is-erp",
+    authorId: "merisa",
+    title: "What ERP actually is",
+    summary:
+      "Exposure and Response Prevention, explained without jargon. The two halves and why both are needed.",
+    // Split back into two articles now that both are written. They were merged
+    // while unwritten, on the reasoning that the setup would have to be written
+    // twice; the delivered drafts share no setup and the first cross-references
+    // the second by name, so the author's structure is two pieces.
+    status: "ready",
+    minutes: 6,
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Exposure and Response Prevention gets described a lot of ways – “facing your fears,” “leaning into discomfort,” “the gold-standard OCD treatment.” All roughly true, and all vague enough to miss what actually makes it work.",
+      },
+
+      { type: "heading", text: "1. The two words" },
+      {
+        type: "paragraph",
+        text: "ERP is genuinely two separate ingredients, and the name tells you both. “Exposure” is deliberately contacting whatever triggers the individual – a thought, a situation, a sensation. “Response Prevention” is not performing the compulsion/action that would normally follow. Neither half is optional, and neither half is the whole treatment on its own. Exposure without response prevention just means being distressed and then doing the ritual anyway, which doesn’t change anything. Response prevention without exposure – simply trying to white-knuckle through not doing compulsions while avoiding triggers entirely – doesn’t give the brain the chance to learn anything new either. It’s the combination that does the work.",
+      },
+
+      { type: "heading", text: "2. What exposure is and what it is not" },
+      {
+        type: "paragraph",
+        text: "Exposure means deliberately, gradually, and repeatedly encountering the source of the fear – touching a doorknob for someone with contamination fears, sitting with an unwanted intrusive thought without pushing it away, driving over a bridge for someone afraid of causing harm. It's not about \"getting used to\" danger, and it's not about proving bravery. The point is testing a prediction: the obsession predicts something bad will happen, or that the anxiety will be unbearable and never end, and exposure is the only way to actually find out what happens when the prediction goes untested.",
+      },
+      {
+        type: "paragraph",
+        text: "Exposure is also not the same as flooding someone with their worst fear all at once with no plan. Most ERP is built as a hierarchy, moving from moderately distressing triggers toward the most difficult ones, so the person is building real evidence at a pace that's demanding but survivable.",
+      },
+
+      { type: "heading", text: "3. What response prevention means" },
+      {
+        type: "paragraph",
+        text: "Response prevention is refraining from the compulsion – the washing, checking, counting, reassurance-seeking, mental reviewing, or avoidance – that would normally follow the trigger. This includes both obvious physical compulsions and quieter mental ones, like silently repeating a \"safe\" phrase or replaying a memory to check it. Response prevention is often the harder half psychologically, because the urge to perform the compulsion peaks right when the anxiety is highest, which is exactly when it's hardest to resist.",
+      },
+
+      { type: "heading", text: "4. Why doing only half of it does not work" },
+      {
+        type: "paragraph",
+        text: "Compulsions work in the short term – that's the entire problem. Every time someone performs a compulsion after a trigger, they get brief relief, and that relief teaches the brain that the compulsion was necessary to prevent something bad, or to make the anxiety bearable. This reinforces the belief that gave rise to the compulsion in the first place, rather than testing it. Skipping response prevention means every exposure ends in a \"rescue,\" which keeps the underlying belief intact no matter how much exposure happens around it. This is the core reason ERP requires both halves working together rather than either one in isolation.",
+      },
+
+      { type: "heading", text: "5. What a session looks like in real life" },
+      {
+        type: "paragraph",
+        text: "A typical ERP session starts by identifying a specific trigger from the person's hierarchy and a clear plan: what exposure will happen, and what compulsion will be resisted. The person then does the exposure – actually touches the doorknob, actually sits with the intrusive thought – while a therapist (or, later, the person on their own) tracks distress and resists the urge to neutralize it. Sessions often continue until there's some shift in the person's experience of the fear, not necessarily until anxiety drops to zero; more recent research, discussed further in \"How ERP loosens compulsions,\" suggests the goal isn't watching anxiety fall in the room but building a new, competing piece of learning that holds up outside it. Between sessions, the same exposures get repeated and expanded, because the learning consolidates with repetition, not with a single successful attempt.",
+      },
+
+      { type: "subheading", text: "Sources" },
+      {
+        type: "paragraph",
+        text: "Foa, E. B., & Kozak, M. J. (1986). Emotional processing of fear: Exposure to corrective information. Psychological Bulletin. Abramowitz, J. S. (2006). Understanding and Treating Obsessive-Compulsive Disorder: A Cognitive Behavioral Approach. Craske, M. G., et al. (2014). Maximizing exposure therapy: An inhibitory learning approach. Behaviour Research and Therapy.",
+      },
+    ],
+  },
+  {
+    slug: "how-erp-reduces-compulsions",
+    authorId: "merisa",
+    title: "How ERP loosens compulsions",
+    summary:
+      "The mechanism: you are not waiting for anxiety to drop, you are collecting evidence that you can handle it.",
+    status: "ready",
+    minutes: 6,
+    blocks: [
+      {
+        type: "paragraph",
+        text: "For decades, the standard explanation for why ERP works was habituation: stay with the fear long enough and your anxiety will naturally fall, so you learn the trigger isn't dangerous. That model isn't wrong exactly, but a substantial body of research has moved past it, because it turns out anxiety dropping during a session isn't actually what predicts whether ERP helps.",
+      },
+
+      { type: "heading", text: "1. The old model: habituation" },
+      {
+        type: "paragraph",
+        text: "The habituation account treats fear the way you’d treat a loud noise in a quiet room – startling at first, then fading into the background the longer it plays. Applied to exposure therapy, the idea was that repeated, prolonged contact with a feared trigger causes anxiety to decline within a session (and across sessions), and that this decline in fear is the mechanism of improvement. Therapists using this model often paid close attention to whether a person’s anxiety dropped by the end of an exposure, treating a within-session drop as the marker of success.",
+      },
+
+      { type: "heading", text: "2. The better model: inhibitory learning" },
+      {
+        type: "paragraph",
+        text: "Research led by psychologist Michelle Craske and colleagues found that the amount anxiety drops during an exposure doesn't reliably predict how well someone does afterward – some people improve significantly with little in-session habituation, and some habituate fully in-session but relapse anyway. Their alternative, the inhibitory learning model, proposes something different: the old fear association (this trigger predicts danger) doesn't get erased by exposure. Instead, a new, competing association gets built alongside it (this trigger does not predict danger), and the new one has to become strong enough to win out and be retrieved even outside the safety of a therapy session. Treatment success depends less on how calm someone feels by the end of an exposure and more on how solid and how retrievable that new, competing learning is.",
+      },
+
+      { type: "heading", text: "3. Why is surprise the active ingredient?" },
+      {
+        type: "paragraph",
+        // "unbearably anxious" — the draft had "unbearable anxious".
+        text: "Under this model, what actually drives learning is a mismatch between what someone expected to happen and what actually happened – an “expectancy violation.” If someone predicts touching a doorknob will make them unbearably anxious for hours, and it turns out the anxiety peaks and then genuinely eases within twenty minutes, that gap between prediction and reality is the thing the brain encodes. The bigger and more genuine that mismatch, the stronger the new learning tends to be. This is part of why exposures are often designed to maximize surprise – varying the situation, occasionally combining multiple fears at once, or deliberately not reassuring someone in advance that “it’ll be fine” – rather than simply repeating the same predictable exposure until boredom sets in.",
+      },
+
+      { type: "heading", text: "4. What does that mean for how you use Deal The Day?" },
+      {
+        type: "paragraph",
+        text: "Practically, this shifts what to pay attention to during exposure practice. A session where anxiety stays uncomfortably high the whole way through isn’t a failure – what matters is whether the feared outcome you predicted actually happened, and whether you can hold onto that evidence afterward. It also explains why variety and repetition across different contexts, rather than one long, perfect exposure, tend to produce more durable results: inhibitory learning needs to be retrieved successfully in multiple situations before it reliably beats out the old fear association everywhere it might show up, not just in the room where it was first learned.",
+      },
+
+      { type: "subheading", text: "Sources" },
+      {
+        type: "paragraph",
+        text: "Craske, M. G., Treanor, M., Conway, C. C., Zbozinek, T., & Vervliet, B. (2014). Maximizing exposure therapy: An inhibitory learning approach. Behaviour Research and Therapy. Craske, M. G., et al. (2008). Optimizing inhibitory learning during exposure therapy. Behaviour Research and Therapy. Bouton, M. E. (2002). Context, ambiguity, and unlearning: Sources of relapse after behavioral extinction. Biological Psychiatry.",
+      },
     ],
   },
   {

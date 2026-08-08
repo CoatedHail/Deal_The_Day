@@ -772,16 +772,108 @@ export const GUIDE_ARTICLES: Article[] = [
   },
   {
     slug: "family-accommodation",
+    authorId: "merisa",
     title: "Family accommodation",
     summary:
       "How the people who love you end up organizing themselves around the anxiety — and what to do about it together.",
-    status: "placeholder",
+    status: "ready",
     minutes: 6,
-    outline: [
-      "What accommodation is",
-      "Why families do it (because it works, briefly)",
-      "What it teaches children",
-      "Reducing it kindly, and together",
+    blocks: [
+      {
+        type: "paragraph",
+        text: "When someone in a family struggles with anxiety or OCD, the people who love them usually want to help. Often, \"helping\" quietly turns into something with a name in the research literature: family accommodation – and it tends to make things harder to treat, not easier.",
+      },
+
+      { type: "heading", text: "1. What accommodation is" },
+      {
+        type: "paragraph",
+        text: "Family accommodation refers to the ways family members change their own behavior to help a relative avoid distress connected to their symptoms. It shows up in a few recognizable forms: participating directly in rituals (a parent washing their hands the way a child insists on), helping someone avoid a feared situation altogether (driving a longer route to skip a bridge), and modifying household routines to fit around symptoms (the whole family eating dinner an hour later because of a checking ritual). Researcher Eli Lebowitz and colleagues, who have studied this extensively in pediatric OCD, describe it as strikingly common – most parents of children with OCD report engaging in significant accommodation, often without realizing how much their daily routines have been reshaped around it.",
+      },
+
+      { type: "heading", text: "2. Why families do it (because it works, briefly)" },
+      {
+        type: "paragraph",
+        text: "Accommodation isn't a parenting failure or a sign of enabling in the pejorative sense – it's a completely understandable response to watching someone you love in real distress. In the moment, accommodating reduces the person's anxiety, and often reduces conflict too: it's simply easier to hand over the reassurance, take the longer route, or do the check yourself than to sit through someone's escalating panic. That short-term relief is exactly why the pattern is so sticky. It reliably works, right up until it doesn't.",
+      },
+      {
+        type: "paragraph",
+        text: "The research on this is consistent across a large number of studies: higher levels of family accommodation are associated with more severe OCD symptoms, greater functional impairment, and worse treatment outcomes, including higher rates of dropping out of therapy. Accommodating the anxiety, in other words, tends to feed it.",
+      },
+
+      { type: "heading", text: "3. What it teaches children" },
+      {
+        type: "paragraph",
+        text: "Beyond maintaining the symptom itself, accommodation sends a quiet message: this fear is dangerous enough that we need to organize around it. Children are highly attuned to what their parents treat as threatening, partly through the kind of observational learning Albert Bandura described decades ago – kids don't just learn from what they're told, they learn from watching what the adults around them avoid, dread, or work hard to prevent. A family that consistently accommodates a child's OCD, however lovingly, can end up reinforcing the belief that the feared outcome truly requires that much protection, making it harder for the child to discover on their own that they could tolerate the anxiety without the ritual or the avoidance.",
+      },
+
+      { type: "heading", text: "4. Reducing it kindly, and together" },
+      {
+        type: "paragraph",
+        text: "Reducing accommodation isn't about withdrawing support – it's about changing the kind of support offered, and doing it gradually and as a team rather than as a unilateral withdrawal that feels like abandonment.",
+      },
+      {
+        type: "list",
+        items: [
+          "Name the pattern together, without blame. Most accommodation happens gradually enough that no one notices it becoming the norm.",
+          "Reduce accommodation slowly, with warning, rather than stopping abruptly. Sudden withdrawal tends to spike distress and can undermine trust.",
+          "Replace participation with support. Instead of doing the ritual with someone, a family member can acknowledge how hard the anxiety is and decline to participate – support for the person, not for the compulsion.",
+          "Loop in a clinician if accommodation is significant. Programs built specifically around reducing family accommodation exist, and treating it as a family-level target – not just an individual one – tends to produce better outcomes than the person \"fixing it\" alone.",
+        ],
+      },
+
+      { type: "subheading", text: "Sources" },
+      {
+        type: "paragraph",
+        text: "Lebowitz, E. R., et al. (2013). Family accommodation in obsessive-compulsive disorder. Expert Review of Neurotherapeutics. Strauss, C., Hale, L., & Stobie, B. (2015). A meta-analytic review of the relationship between family accommodation and OCD symptom severity. Journal of Anxiety Disorders. Bandura, A. (1977). Social Learning Theory.",
+      },
+    ],
+  },
+  {
+    slug: "modeling-flexibility",
+    authorId: "merisa",
+    title: "Modeling flexibility for your children",
+    summary:
+      "Children learn how to handle uncertainty by watching someone do it. That is the part you can offer them.",
+    // Filed in the parent guide rather than the psychoeducation library. It is
+    // a parenting topic, and it was cut from /learn on exactly that reasoning
+    // before the text existed.
+    status: "ready",
+    minutes: 6,
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Parents often ask how to teach their kids to handle uncertainty better than they themselves do. The honest, well-supported answer is a little uncomfortable: children learn far more from watching what you do with your own anxiety than from anything you tell them about theirs.",
+      },
+
+      { type: "heading", text: "1. What kids actually pick up" },
+      {
+        type: "paragraph",
+        text: "Albert Bandura's foundational work on observational learning showed that children acquire behaviors, emotional reactions, and attitudes largely by watching people around them, not just by being instructed. Applied to anxiety specifically, a substantial body of research finds that children whose parents model anxious behavior – visible tension, avoidance of certain situations, verbal expressions of worry – tend to adopt similar anxious responses themselves, even when no one is directly teaching them to worry. In one well-known experimental study, children showed measurably more fear and avoidance after simply watching a parent respond fearfully to an unfamiliar situation, compared to children who watched a parent respond calmly. The transmission happens through demonstration, not lecture.",
+      },
+
+      { type: "heading", text: "2. Why “do as I say” does not transfer" },
+      {
+        type: "paragraph",
+        text: "This is why explicitly telling a child \"there's nothing to be afraid of\" tends to do so little, if the child also watches you check the locks three times before bed or avoid a highway you find stressful. Children are highly attuned to the gap between what adults say and what they visibly do, and when the two conflict, behavior tends to win. Verbal reassurance without a matching demonstration of coping is basically asking a child to believe something that isn't being modeled anywhere in their environment. It's not that words don't matter – it's that they're a much smaller part of the transmission than most parents assume.",
+      },
+
+      { type: "heading", text: "3. Narrating your own coping out loud" },
+      {
+        type: "paragraph",
+        text: "Because so much of anxious modeling is unconscious and automatic – a tense shoulder, a rushed avoidance of a topic -- one of the more useful things a parent can do is make coping visible rather than trying to hide the anxiety altogether. That doesn't mean broadcasting every worry. It means narrating the coping step, out loud, in age-appropriate language: \"I'm feeling a bit nervous about this call, so I'm going to take a breath and just make it,\" rather than either hiding the nervousness completely or spiraling into it visibly. This gives a child something concrete to imitate – not \"Mom is never anxious,\" which isn't true and isn't believable anyway, but \"here's what Mom does when she's anxious,\" which is both true and teachable.",
+      },
+
+      { type: "heading", text: "4. Letting them see you get it wrong" },
+      {
+        type: "paragraph",
+        text: "Perhaps counterintuitively, letting children see a parent make a mistake, get a plan wrong, or have to recover from disappointment is itself valuable modeling – as long as they also see the recovery. A parent who never seems to make mistakes doesn't teach a child how to handle making one; a parent who visibly gets something wrong, has a reasonable reaction, and moves forward is demonstrating exactly the skill of tolerating imperfection and uncertainty that anxious or rigid children often need most. The goal isn't performing calm at all times. It's showing a full, honest cycle: something didn't go as planned, here's how a person handles that, and life continues.",
+      },
+
+      { type: "subheading", text: "Sources" },
+      {
+        type: "paragraph",
+        text: "Bandura, A. (1977). Social Learning Theory. de Rosnay, M., Cooper, P. J., Tsigaras, N., & Murray, L. (2006). Transmission of social anxiety from mother to infant: An experimental study. Behaviour Research and Therapy. Fisak, B., & Grills-Taquechel, A. E. (2007). Parental modeling, reinforcement, and information transfer: Risk factors in the development of child anxiety? Clinical Child and Family Psychology Review.",
+      },
     ],
   },
   {
