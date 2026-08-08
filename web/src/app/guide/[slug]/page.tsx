@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ContentBody } from "@/components/content/ContentBody";
 import { ArticleByline } from "@/components/content/ArticleByline";
+import { ClinicalNotice } from "@/components/content/ClinicalNotice";
 import { Icon } from "@/components/ui/Icon";
 import { GUIDE_ARTICLES } from "@/content/guide";
 import { findArticle } from "@/content/types";
@@ -45,6 +46,7 @@ export default async function GuideArticlePage({ params }: Params) {
       <div className="max-w-[var(--reading-measure)]">
         <ContentBody article={article} />
         <ArticleByline article={article} />
+        {article.status === "ready" ? <ClinicalNotice /> : null}
       </div>
 
       <nav
