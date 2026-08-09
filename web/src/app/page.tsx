@@ -11,6 +11,8 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { StatTile } from "@/components/ui/StatTile";
+import { StartTourButton } from "@/components/tour/StartTourButton";
+import { TOUR_COPY } from "@/content/tour";
 import { Pill } from "@/components/ui/Pill";
 import { Icon } from "@/components/ui/Icon";
 import { formatDate, formatRelative, isFutureOrToday, parseDateKey } from "@/lib/date";
@@ -68,6 +70,19 @@ export default function DashboardPage() {
             </ButtonLink>
           </div>
         </div>
+      </section>
+
+      <section
+        className="mb-7 rounded-card border border-border bg-surface p-5 sm:p-6"
+        aria-labelledby="tour-invite"
+      >
+        <h2 id="tour-invite" className="text-lg font-semibold text-text">
+          New here?
+        </h2>
+        <p className="mb-4 mt-1 max-w-[var(--reading-measure)] text-sm leading-relaxed text-text-muted">
+          {TOUR_COPY.startHelp}
+        </p>
+        <StartTourButton variant="secondary" />
       </section>
 
       <Introduction defaultOpen={isNew} />

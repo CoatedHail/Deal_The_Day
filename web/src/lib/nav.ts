@@ -105,6 +105,13 @@ export const NAV_ITEMS: NavItem[] = [
     section: "read",
   },
   {
+    href: "/get-the-deck",
+    label: "Get the deck",
+    icon: "cards",
+    description: "The printed deck, and when you can order it",
+    section: "more",
+  },
+  {
     href: "/team",
     label: "Meet the team",
     icon: "people",
