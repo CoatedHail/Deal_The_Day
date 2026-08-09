@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useData } from "@/components/providers/DataProvider";
 import { useSettings } from "@/components/providers/SettingsProvider";
 import { Private } from "@/components/a11y/Private";
-import { CardLengthPicker } from "@/components/activity/CardLengthPicker";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { ButtonLink } from "@/components/ui/Button";
@@ -87,8 +86,6 @@ export default function DashboardPage() {
 
       <Introduction defaultOpen={isNew} />
 
-      <CardLengthPicker />
-
       {awaitingReflection ? (
         <Card className="mb-6 border-primary-border bg-primary-soft">
           {/* The card title is whatever the family wrote down. */}
@@ -113,12 +110,19 @@ export default function DashboardPage() {
         <Card className="mb-6">
           <CardHeader
             title="Today's activity"
-            description="Draw a card from the deck, then work through it here."
+            description="Pick a deck and the app deals you a card."
           />
-          <ButtonLink href="/activity/new" size="lg">
-            Start today&rsquo;s card
+          <ButtonLink href="/deck" size="lg">
+            Draw a card
             <Icon name="arrow-right" size={18} />
           </ButtonLink>
+          <p className="mt-3 text-sm text-text-muted">
+            Got the printed cards?{" "}
+            <Link href="/activity/new" className="underline hover:text-text">
+              Enter a card number instead
+            </Link>
+            .
+          </p>
         </Card>
       )}
 

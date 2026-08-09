@@ -13,7 +13,7 @@ export default function ProgressPage() {
     <>
       <PageHeader
         title="Progress"
-        description="Change is usually slower and less tidy than a chart suggests. Read these as notes, not as a score."
+        description="How things have changed over time. Not a score."
       />
 
       <ProgressBoard />
