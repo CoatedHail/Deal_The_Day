@@ -449,6 +449,28 @@ li {
   transition-duration: 0.01ms !important;
 }
 
+/**
+ * A card arriving off the top of the deck.
+ *
+ * Small on purpose: the point is to register that a *new* card landed, since
+ * without any movement a redraw looks identical to nothing happening. Both
+ * reduced-motion rules above already flatten this to nothing.
+ */
+@keyframes deal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.75rem) rotate(-1.5deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+.animate-deal {
+  animation: deal 220ms ease-out;
+}
+
 ::selection {
   background-color: var(--primary-soft);
   color: var(--text);
