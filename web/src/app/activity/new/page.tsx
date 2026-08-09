@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PRE_ACTIVITY_COPY } from "@/content/activity-flow";
+import { findDeckCard } from "@/content/cards";
 import { isCardLength } from "@/lib/card-lengths";
+import { parseCardNumber } from "@/lib/cards";
 import { NewActivityForm } from "./NewActivityForm";
 
 export const metadata: Metadata = {
@@ -12,11 +14,21 @@ export const metadata: Metadata = {
 export default async function NewActivityPage({
   searchParams,
 }: {
-  searchParams: Promise<{ length?: string | string[] }>;
+  searchParams: Promise<{ length?: string | string[]; card?: string | string[] }>;
 }) {
-  const { length } = await searchParams;
+  const { length, card } = await searchParams;
+
   const requestedLength = Array.isArray(length) ? length[0] : length;
-  const initialCardLength = isCardLength(requestedLength) ? requestedLength : undefined;
+  const requestedCard = Array.isArray(card) ? card[0] : card;
+
+  // A card drawn on /deck arrives as its number and fills in everything printed
+  // on it. `length` on its own is the older route in, from picking a length
+  // card without drawing, and stays supported.
+  const drawnNumber = requestedCard ? parseCardNumber(requestedCard) : null;
+  const drawnCard = drawnNumber !== null ? findDeckCard(drawnNumber) : undefined;
+
+  const initialCardLength =
+    drawnCard?.length ?? (isCardLength(requestedLength) ? requestedLength : undefined);
 
   return (
     <>
@@ -25,7 +37,7 @@ export default async function NewActivityPage({
         title="Start a card"
         description={PRE_ACTIVITY_COPY.intro}
       />
-      <NewActivityForm initialCardLength={initialCardLength} />
+      <NewActivityForm initialCardLength={initialCardLength} initialCard={drawnCard} />
     </>
   );
 }

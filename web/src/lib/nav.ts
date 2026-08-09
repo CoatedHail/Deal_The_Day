@@ -35,11 +35,19 @@ export const NAV_ITEMS: NavItem[] = [
     primary: true,
   },
   {
+    href: "/deck",
+    label: "The deck",
+    icon: "cards",
+    description: "Draw a card from the short, medium or long deck",
+    primary: true,
+    section: "practice",
+  },
+  {
     href: "/activity",
     label: "Activity",
-    icon: "cards",
+    icon: "journal",
     // Absorbed the journal: cards and check-ins are one record, read one way.
-    description: "Draw a card, and everything you have recorded",
+    description: "Everything your family has recorded",
     primary: true,
     section: "practice",
   },
@@ -48,7 +56,9 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Activity Ideas",
     icon: "sparkle",
     description: "Browse ideas by activity type",
-    primary: true,
+    // Gave up its slot in the bottom bar to the deck, which the mobile bar can
+    // only hold five of. Nothing is buried: every drawn card links here, which
+    // is the moment someone actually wants ideas.
     section: "practice",
   },
   {

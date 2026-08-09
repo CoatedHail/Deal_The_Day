@@ -1,20 +1,34 @@
 import type { IconName } from "@/components/ui/Icon";
+import type { ActivityCategory } from "@/lib/types";
 
 export interface ActivityIdeaCategory {
   slug: string;
   title: string;
+  /**
+   * Which of the seven stored categories this section belongs to.
+   *
+   * The relationship is many-to-one and deliberately so. The stored categories
+   * drive the pre-draw checklists, and a family should not be asked to author
+   * ten of those; browsing wants more buckets than checklists do.
+   *
+   * Left undefined for a section that describes a *constraint* rather than a
+   * kind of activity. "Low-cost or free" cuts across food, outdoors and
+   * at-home alike, so filing it under any one of them would be false.
+   */
+  category?: ActivityCategory;
   description: string;
   icon: IconName;
   image: string;
   imageAlt: string;
   photographer: string;
   sourceUrl: string;
-  ideas: string[];
+  ideas: readonly string[];
 }
 
-export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
+export const ACTIVITY_IDEA_CATEGORIES = [
   {
     slug: "food-restaurants",
+    category: "food",
     title: "Food and restaurants",
     description: "Let someone else choose the place, order, timing, or route.",
     icon: "cards",
@@ -39,6 +53,7 @@ export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
   },
   {
     slug: "outdoor-activities",
+    category: "outdoors",
     title: "Outdoor activities",
     description: "Make room for weather, timing, and plans that cannot be fully controlled.",
     icon: "sparkle",
@@ -63,6 +78,7 @@ export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
   },
   {
     slug: "arts-creativity",
+    category: "creative",
     title: "Arts and creativity",
     description: "Practice making something playful without needing a perfect result.",
     icon: "journal",
@@ -87,6 +103,7 @@ export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
   },
   {
     slug: "local-attractions",
+    category: "outing",
     title: "Local attractions",
     description: "Explore somewhere nearby and let the visit unfold at its own pace.",
     icon: "lifebuoy",
@@ -111,6 +128,7 @@ export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
   },
   {
     slug: "everyday-errands",
+    category: "everyday",
     title: "Everyday errands",
     description: "Turn ordinary tasks into manageable uncertainty practice.",
     icon: "clipboard",
@@ -135,6 +153,7 @@ export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
   },
   {
     slug: "at-home-activities",
+    category: "everyday",
     title: "At-home activities",
     description: "Use familiar surroundings while someone else chooses what happens next.",
     icon: "home",
@@ -159,6 +178,7 @@ export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
   },
   {
     slug: "short-trips",
+    category: "outing",
     title: "Short trips",
     description: "Take a small change of scenery without planning every minute.",
     icon: "arrow-right",
@@ -183,6 +203,7 @@ export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
   },
   {
     slug: "social-activities",
+    category: "connection",
     title: "Social activities",
     description: "Connect with other people while allowing plans and conversations to vary.",
     icon: "family",
@@ -253,4 +274,31 @@ export const ACTIVITY_IDEA_CATEGORIES: ActivityIdeaCategory[] = [
       "Visit a free museum day or outdoor concert",
     ],
   },
-];
+] as const satisfies readonly ActivityIdeaCategory[];
+
+/** Every slug that exists, so a bad reference fails the build. */
+export type IdeaSlug = (typeof ACTIVITY_IDEA_CATEGORIES)[number]["slug"];
+
+/**
+ * Sections that name a kind of activity, and sections that name a constraint.
+ *
+ * Split because they answer different questions — "what are we doing" against
+ * "however we do it, it has to be free". Shown as one list they read as ten
+ * peers, which is why nothing ever lined up with the stored categories.
+ */
+/**
+ * The same list at its declared type.
+ *
+ * `as const` is what makes `IdeaSlug` a real union, but it also means the
+ * entries without a `category` are a different shape from the ones with one,
+ * and the union has no such property to read. Widening here costs nothing and
+ * keeps the slug checking.
+ */
+const ALL: readonly ActivityIdeaCategory[] = ACTIVITY_IDEA_CATEGORIES;
+
+export const IDEA_KINDS = ALL.filter((entry) => entry.category);
+export const IDEA_CONSTRAINTS = ALL.filter((entry) => !entry.category);
+
+export function findIdeaCategory(slug: string): ActivityIdeaCategory | undefined {
+  return ALL.find((entry) => entry.slug === slug);
+}
