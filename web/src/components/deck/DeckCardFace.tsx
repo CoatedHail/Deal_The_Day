@@ -34,15 +34,26 @@ export function DeckCardFace({
       <div>
         <h3 className="text-2xl font-semibold leading-tight text-text sm:text-3xl">
           {card.title}
+          {/* The gap has to be a real space, not just margin. Without it the
+              heading is read aloud as "Tell a storyex. Experiences", which is
+              also exactly how it prints on the physical card. */}
           {card.example ? (
-            <span className="ml-2 align-baseline text-sm font-normal text-text-muted">
-              {card.example}
-            </span>
+            <>
+              {" "}
+              <span className="align-baseline text-sm font-normal text-text-muted">
+                {card.example}
+              </span>
+            </>
           ) : null}
         </h3>
+        {/* Straight to this card's own section, opened, rather than to ten
+            collapsed ones to hunt through. */}
         <p className="mt-1.5 text-sm text-text-muted">
           Need ideas?{" "}
-          <Link href="/activity-ideas" className="underline hover:text-text">
+          <Link
+            href={`/activity-ideas?open=${card.ideas}#${card.ideas}`}
+            className="underline hover:text-text"
+          >
             Check our website
           </Link>
           !

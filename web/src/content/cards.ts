@@ -1,3 +1,4 @@
+import type { IdeaSlug } from "@/content/activity-ideas";
 import type { ActivityCategory, CardLength } from "@/lib/types";
 
 /**
@@ -37,41 +38,55 @@ export interface DeckCard {
   example?: string;
   length: CardLength;
   /**
-   * Which checklist and set of activity ideas this card belongs with.
+   * Which checklist this card belongs with.
    *
    * Not printed on the card — assigned here so a drawn card can carry the
    * family's pre-agreed checklist into the activity without them picking it.
    */
   category: ActivityCategory;
+  /**
+   * The ideas section this card's "Need ideas?" line points at.
+   *
+   * Kept separate from `category` rather than derived from it, because the two
+   * answer different questions and genuinely disagree. "Board/Card Games" is a
+   * `connection` card — that is the checklist a family wants for it — but the
+   * useful ideas are in At-home activities, not Social activities. Deriving one
+   * from the other would send half the deck somewhere unhelpful.
+   *
+   * Typed as the union of real slugs, so a card cannot name a section that does
+   * not exist without failing the build.
+   */
+  ideas: IdeaSlug;
 }
 
 export const DECK_CARDS: readonly DeckCard[] = [
-  { number: 1, title: "Board/Card Games", length: "medium", category: "connection" },
-  { number: 2, title: "Arts and Crafts", length: "short", category: "creative" },
-  { number: 3, title: "Baking", length: "medium", category: "food" },
-  { number: 4, title: "Snack time!", length: "short", category: "food" },
-  { number: 5, title: "Museum", length: "medium", category: "outing" },
-  { number: 6, title: "Beach/Lake/River", length: "long", category: "outdoors" },
-  { number: 7, title: "Reading/Writing", length: "short", category: "creative" },
+  { number: 1, title: "Board/Card Games", length: "medium", category: "connection", ideas: "at-home-activities" },
+  { number: 2, title: "Arts and Crafts", length: "short", category: "creative", ideas: "arts-creativity" },
+  { number: 3, title: "Baking", length: "medium", category: "food", ideas: "food-restaurants" },
+  { number: 4, title: "Snack time!", length: "short", category: "food", ideas: "food-restaurants" },
+  { number: 5, title: "Museum", length: "medium", category: "outing", ideas: "local-attractions" },
+  { number: 6, title: "Beach/Lake/River", length: "long", category: "outdoors", ideas: "outdoor-activities" },
+  { number: 7, title: "Reading/Writing", length: "short", category: "creative", ideas: "at-home-activities" },
   {
     number: 8,
     title: "Tell a story",
     example: "ex. Experiences",
     length: "short",
     category: "connection",
+    ideas: "social-activities",
   },
-  { number: 9, title: "Watch a Movie", length: "medium", category: "everyday" },
-  { number: 10, title: "Restaurant/Take out", length: "medium", category: "food" },
-  { number: 11, title: "Picnic day", length: "long", category: "outdoors" },
-  { number: 12, title: "Zoo/Aquarium", length: "long", category: "outing" },
-  { number: 13, title: "Theme Park", length: "long", category: "outing" },
-  { number: 14, title: "Hike/Walk", length: "medium", category: "outdoors" },
-  { number: 15, title: "Co-Op Video Games", length: "short", category: "connection" },
-  { number: 16, title: "Nature Photography", length: "medium", category: "outdoors" },
-  { number: 17, title: "Go to a Park", length: "medium", category: "outdoors" },
-  { number: 18, title: "Cooking", length: "medium", category: "food" },
-  { number: 19, title: "Go to a Sports Game", length: "long", category: "outing" },
-  { number: 20, title: "See a Play", length: "long", category: "outing" },
+  { number: 9, title: "Watch a Movie", length: "medium", category: "everyday", ideas: "at-home-activities" },
+  { number: 10, title: "Restaurant/Take out", length: "medium", category: "food", ideas: "food-restaurants" },
+  { number: 11, title: "Picnic day", length: "long", category: "outdoors", ideas: "outdoor-activities" },
+  { number: 12, title: "Zoo/Aquarium", length: "long", category: "outing", ideas: "local-attractions" },
+  { number: 13, title: "Theme Park", length: "long", category: "outing", ideas: "short-trips" },
+  { number: 14, title: "Hike/Walk", length: "medium", category: "outdoors", ideas: "outdoor-activities" },
+  { number: 15, title: "Co-Op Video Games", length: "short", category: "connection", ideas: "at-home-activities" },
+  { number: 16, title: "Nature Photography", length: "medium", category: "outdoors", ideas: "outdoor-activities" },
+  { number: 17, title: "Go to a Park", length: "medium", category: "outdoors", ideas: "outdoor-activities" },
+  { number: 18, title: "Cooking", length: "medium", category: "food", ideas: "food-restaurants" },
+  { number: 19, title: "Go to a Sports Game", length: "long", category: "outing", ideas: "local-attractions" },
+  { number: 20, title: "See a Play", length: "long", category: "outing", ideas: "local-attractions" },
 ] as const;
 
 /** The cards in one deck, in printed order. */
