@@ -30,8 +30,7 @@ export default function GetTheDeckPage() {
       />
 
       <Callout tone="info" title="Coming soon">
-        We are having the deck printed. When it is ready to order, this is where it
-        will be — and we will say so on the site rather than making you check back.
+        We are having the deck printed. When you can order it, it will be here.
       </Callout>
 
       <Card className="mt-5">
@@ -54,7 +53,7 @@ export default function GetTheDeckPage() {
       <Card className="mt-5">
         <CardHeader
           title="Tell us you want one"
-          description="It genuinely helps to know how many to print."
+          description="It helps us know how many to print."
           icon="mail"
           level={2}
         />

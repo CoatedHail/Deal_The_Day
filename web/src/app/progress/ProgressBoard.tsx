@@ -46,20 +46,20 @@ import {
 /**
  * The look-back page.
  *
- * Ranked rather than laid out flat. Only the argument stays open — what you
+ * Ranked rather than laid out flat. What stays open is the headline: what you
  * expected to happen, and how often it did not. Everything else is a closed
- * dropdown whose summary line carries its own finding, so the page can be read
- * top to bottom in about fifteen seconds and opened only where a family
- * actually wants the detail. A stack of charts nobody scrolls to is worse than
- * a sentence they read.
+ * dropdown whose summary line states its own finding, so the page can be read
+ * top to bottom in about fifteen seconds and opened only where someone wants
+ * the detail. A stack of charts nobody scrolls to is worse than a sentence they
+ * read.
  *
  * Everything sequence-based is indexed by card ordinal rather than by date.
  * Families play irregularly, and a calendar axis reports the gaps instead of
  * the change.
  *
  * This is deliberately not a second copy of /activity. That page is the record,
- * where you open one entry and read everything it holds. This page re-sorts the
- * same material to make one point.
+ * where you open one entry and read everything it holds. This page sorts the
+ * same material to show what has changed.
  */
 
 const CONCERN_LABELS = Object.fromEntries(
@@ -106,7 +106,7 @@ export function ProgressBoard() {
       <EmptyState
         title="Nothing to look back on yet"
         description="Once you have played a card or two, this page will show what you expected to happen next to what actually did."
-        action={<ButtonLink href="/activity/new">Start a card</ButtonLink>}
+        action={<ButtonLink href="/deck">Draw a card</ButtonLink>}
       />
     );
   }
@@ -119,7 +119,7 @@ export function ProgressBoard() {
     <div className="space-y-5">
       <p className="sr-only">{summarise(run.length, outcomes, gentle)}</p>
 
-      {/* ── The argument. The only thing that is open by default. ──────── */}
+      {/* ── The headline. The only thing open by default. ──────────────── */}
       <Card>
         <h2 className="sr-only">What you expected, and what happened</h2>
         <p data-speak className="text-lg leading-relaxed text-text sm:text-xl">
@@ -165,7 +165,7 @@ export function ProgressBoard() {
         {!enough ? (
           <Card className="border-dashed bg-surface-sunken">
             <p className="text-text">
-              There is not enough here yet to say anything honest about change.
+              Not enough here yet to show how things have changed.
             </p>
             <p className="mt-1.5 text-sm text-text-muted">
               After {CHANGE_MIN_CARDS - run.length}{" "}
@@ -182,8 +182,8 @@ export function ProgressBoard() {
                 summary={lengthSentence(lengths.earlier, lengths.recent, lengths.comparable)}
               >
                 <p className="mb-3 text-sm">
-                  Short, medium and long are ordered by how much not-knowing a card asks
-                  of you. Each square is one card, in the order you played them.
+                  Short, medium and long are ordered by how much uncertainty they ask
+                  for. Each square is one card, in the order you played them.
                 </p>
                 <ul
                   className="flex flex-wrap gap-1"
@@ -400,10 +400,9 @@ export function ProgressBoard() {
       </div>
 
       <Callout tone="erp" title="How to read this page">
-        None of this is a score, and none of it is a target. Change is usually slower
-        and less tidy than any chart suggests. If the numbers are becoming something
-        to manage rather than something to notice, gentle mode in settings turns them
-        off and leaves the rest.
+        None of this is a score. Change is usually slower and messier than a chart
+        makes it look. If the numbers start feeling like something to manage, gentle
+        mode in Settings hides them.
       </Callout>
     </div>
   );

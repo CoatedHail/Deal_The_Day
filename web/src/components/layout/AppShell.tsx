@@ -17,7 +17,6 @@ import {
 import { Wordmark } from "@/components/layout/Wordmark";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { TourBar } from "@/components/tour/TourBar";
-import { useTour } from "@/components/tour/TourProvider";
 import { cn } from "@/lib/cn";
 
 export function AppShell({
@@ -34,7 +33,6 @@ export function AppShell({
 }) {
   const pathname = usePathname();
   const [moreOpen, setMoreOpen] = useState(false);
-  const { active: tourActive } = useTour();
 
   // Close the mobile sheet whenever navigation happens.
   useEffect(() => {
@@ -111,19 +109,12 @@ export function AppShell({
           </div>
         </header>
 
-        <main
-          id="main"
-          className={cn(
-            "flex-1 px-4 py-6 pb-28 sm:px-6 lg:px-10 lg:py-10 lg:pb-10",
-            // The tour bar is fixed, so the page needs room underneath it or
-            // the last thing on any page sits behind it.
-            tourActive && "pb-72 lg:pb-56",
-          )}
-        >
+        <main id="main" className="flex-1 px-4 py-6 pb-28 sm:px-6 lg:px-10 lg:py-10 lg:pb-10">
           <div className="mx-auto w-full max-w-4xl">
             {/* Above the page rather than floating over it: someone who wants
                 it should meet it before they start reading. */}
             <ReadAloud />
+            <TourBar />
             {children}
           </div>
         </main>
@@ -197,7 +188,6 @@ export function AppShell({
         </>
       ) : null}
 
-      <TourBar />
     </div>
   );
 }

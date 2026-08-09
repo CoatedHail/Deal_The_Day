@@ -13,7 +13,7 @@ export default function DeckPage() {
     <>
       <PageHeader
         title="The deck"
-        description="The same twenty cards that come in the box, for when the box is not in front of you."
+        description="All twenty cards from the deck. Pick a pile and draw one."
       />
 
       <DeckTable />

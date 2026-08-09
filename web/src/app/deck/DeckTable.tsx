@@ -58,8 +58,8 @@ export function DeckTable() {
           {deck ? "Pick a different deck" : "Pick a deck"}
         </h2>
         <p className="mt-1 max-w-[var(--reading-measure)] text-sm leading-relaxed text-text-muted">
-          The deck decides how big the activity should be. What it actually is, you
-          decide together afterwards.
+          The deck sets how big the activity should be. You decide what it actually
+          is.
         </p>
 
         <div
@@ -142,11 +142,9 @@ export function DeckTable() {
 
                 {redraws >= 2 ? (
                   <Callout tone="erp" title="Worth noticing">
-                    That is {redraws} redraws. Sometimes a card genuinely does not fit
-                    the day. Sometimes drawing again is the anxiety looking for an
-                    easier one — and if it is, the card you keep putting back is
-                    probably the useful one. Either answer is fine; noticing which it
-                    is, is the practice.
+                    That is {redraws} redraws. Sometimes a card really does not fit the
+                    day. Sometimes it is the anxiety looking for an easier one. Worth a
+                    quick think about which this is.
                   </Callout>
                 ) : null}
               </div>
@@ -160,9 +158,8 @@ export function DeckTable() {
             summary={`See all ${cards.length} cards in the ${definition.label.toLowerCase()} deck`}
           >
             <p className="mb-3 text-sm">
-              Here so you can see what the deck holds. Reading the whole list before
-              every draw tends to turn into its own kind of checking, so the draw
-              above stays the way in.
+              Here so you can see what is in the deck. Drawing is still the main way
+              in.
             </p>
             <ul className="grid gap-2 sm:grid-cols-2">
               {cards.map((card) => (
@@ -181,14 +178,13 @@ export function DeckTable() {
         </section>
       ) : (
         <Callout tone="info">
-          Twenty cards across three decks. Choose a deck above and one card comes off
-          the top — you do not pick which. That is the part that makes it a game
-          rather than a to-do list.
+          Twenty cards across three decks. Pick a deck and one card comes off the top.
+          You do not choose which one.
         </Callout>
       )}
 
       <p className="text-sm text-text-subtle">
-        {DECK_CARDS.length} cards in the deck. Have the physical cards? You can also{" "}
+        {DECK_CARDS.length} cards in the deck. Got the printed cards? You can also{" "}
         <Link href="/activity/new" className="underline hover:text-text">
           type a card number in by hand
         </Link>
