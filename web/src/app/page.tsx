@@ -50,27 +50,9 @@ export default function DashboardPage() {
         }
       />
 
-      <section className="mb-7 rounded-card border border-info-border bg-info-soft p-5 sm:p-7" aria-labelledby="settings-guidance">
-        <div className="flex items-start gap-4">
-          <span className="rounded-xl bg-surface p-2.5 text-info shadow-sm">
-            <Icon name="settings" size={24} />
-          </span>
-          <div className="min-w-0">
-            <h2 id="settings-guidance" className="text-xl font-semibold text-text sm:text-2xl">
-              Make the site comfortable for you
-            </h2>
-            <p className="mt-2 max-w-[var(--reading-measure)] text-base leading-relaxed text-text sm:text-lg">
-              In Settings, you can customize the font, text size, color scheme,
-              contrast, motion, and read-aloud preferences at any time.
-            </p>
-            <ButtonLink href="/settings" variant="secondary" size="lg" className="mt-4">
-              Open Settings
-              <Icon name="arrow-right" size={18} />
-            </ButtonLink>
-          </div>
-        </div>
-      </section>
-
+      {/* The tour ends on Settings, which is where the accessibility controls
+          are, so it does the job the old "Make the site comfortable for you"
+          panel was doing without taking the top of the page to do it. */}
       <section
         className="mb-7 rounded-card border border-border bg-surface p-5 sm:p-6"
         aria-labelledby="tour-invite"
@@ -79,7 +61,8 @@ export default function DashboardPage() {
           New here?
         </h2>
         <p className="mb-4 mt-1 max-w-[var(--reading-measure)] text-sm leading-relaxed text-text-muted">
-          {TOUR_COPY.startHelp}
+          {TOUR_COPY.startHelp} It finishes on Settings, where you can change text
+          size, fonts, contrast and read-aloud.
         </p>
         <StartTourButton variant="secondary" />
       </section>
