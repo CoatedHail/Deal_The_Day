@@ -242,9 +242,9 @@ export function ActivityTimeline() {
         title="Nothing written down yet"
         description="Once you work through a card or take a check-in, everything you record will collect here in order."
         action={
-          <ButtonLink href="/activity/new">
+          <ButtonLink href="/deck">
             <Icon name="plus" size={18} />
-            Start a card
+            Draw a card
           </ButtonLink>
         }
       />

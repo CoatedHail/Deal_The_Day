@@ -16,11 +16,30 @@ export type ContentStatus = "placeholder" | "draft" | "ready";
 export type ContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "heading"; text: string }
+  /** A section within a section — "Teenagers" under "How much detail by age". */
+  | { type: "subheading"; text: string }
   | { type: "list"; items: string[]; ordered?: boolean }
   | { type: "callout"; tone: "info" | "erp" | "caution" | "success"; title?: string; text: string }
   /** A worked example of something to say out loud. */
   | { type: "script"; situation: string; instead: string; tryThis: string }
-  | { type: "quote"; text: string; attribution?: string };
+  | { type: "quote"; text: string; attribution?: string }
+  /**
+   * A comparison table.
+   *
+   * For material that is genuinely two-dimensional — a phrase, why it lands
+   * badly, and what to say instead. Anything that reads fine as a list should
+   * stay a list: a table is harder to follow on a phone and harder to hear.
+   */
+  | { type: "table"; caption?: string; columns: string[]; rows: string[][] }
+  /**
+   * Parallel versions of the same material, one shown at a time.
+   *
+   * Written for the case where a reader wants one branch and not the other —
+   * the wording for a seven-year-old versus the wording for a fifteen-year-old.
+   * Only the open panel is rendered, so read-aloud speaks what is on screen
+   * rather than every version at once.
+   */
+  | { type: "tabs"; tabs: { label: string; blocks: ContentBlock[] }[] };
 
 export interface Article {
   slug: string;

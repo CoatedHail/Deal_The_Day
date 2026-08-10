@@ -13,6 +13,7 @@ import {
   COMPULSION_SUGGESTIONS,
   PRE_ACTIVITY_COPY as COPY,
 } from "@/content/activity-flow";
+import type { DeckCard } from "@/content/cards";
 import { CARD_LENGTH_BY_ID, CARD_LENGTHS } from "@/lib/card-lengths";
 import { parseCardNumber } from "@/lib/cards";
 import {
@@ -33,20 +34,30 @@ const LENGTH_OPTIONS = CARD_LENGTHS.map((card) => ({
 
 export function NewActivityForm({
   initialCardLength,
+  initialCard,
 }: {
   initialCardLength?: CardLength;
+  /** Set when the card was drawn on /deck, so its printed details carry over. */
+  initialCard?: DeckCard;
 }) {
   const router = useRouter();
   const { startActivity } = useData();
 
-  const [cardNumberInput, setCardNumberInput] = useState("");
+  const [cardNumberInput, setCardNumberInput] = useState(
+    initialCard ? String(initialCard.number) : "",
+  );
   const [cardLength, setCardLength] = useState<CardLength | null>(
-    initialCardLength ?? null,
+    initialCard?.length ?? initialCardLength ?? null,
   );
+  // A drawn card's own wording wins. Falling back to the length card's title
+  // ("Medium Length Activity") is only useful when no real card is known.
   const [cardTitle, setCardTitle] = useState(
-    initialCardLength ? CARD_LENGTH_BY_ID[initialCardLength].title : "",
+    initialCard?.title ??
+      (initialCardLength ? CARD_LENGTH_BY_ID[initialCardLength].title : ""),
   );
-  const [category, setCategory] = useState<ActivityCategory | null>(null);
+  const [category, setCategory] = useState<ActivityCategory | null>(
+    initialCard?.category ?? null,
+  );
   const [anxiety, setAnxiety] = useState(5);
   const [confidence, setConfidence] = useState(5);
   const [predictedOutcome, setPredictedOutcome] = useState("");

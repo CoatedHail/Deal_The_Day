@@ -1,4 +1,5 @@
 import { Callout } from "@/components/ui/Callout";
+import { ContentTabs } from "@/components/content/ContentTabs";
 import type { Article, ContentBlock } from "@/content/types";
 
 /**
@@ -54,6 +55,13 @@ function Block({ block }: { block: ContentBlock }) {
         </h2>
       );
 
+    case "subheading":
+      return (
+        <h3 className="pt-1 font-display text-lg font-semibold text-text">
+          {block.text}
+        </h3>
+      );
+
     case "paragraph":
       return <p className="text-text">{block.text}</p>;
 
@@ -91,6 +99,81 @@ function Block({ block }: { block: ContentBlock }) {
             </footer>
           ) : null}
         </blockquote>
+      );
+
+    case "table":
+      return (
+        // Scrolls inside its own box rather than pushing the page sideways.
+        // Three columns of prose do not fit a phone, and a horizontally
+        // scrolling article is worse than a horizontally scrolling table.
+        <div className="overflow-x-auto rounded-card border border-border">
+          <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
+            {block.caption ? (
+              <caption className="px-4 pt-3 text-sm text-text-muted">
+                {block.caption}
+              </caption>
+            ) : null}
+            <thead>
+              <tr className="border-b border-border bg-surface-sunken">
+                {block.columns.map((column) => (
+                  <th key={column} scope="col" className="px-4 py-2.5 font-semibold text-text">
+                    {column}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row) => (
+                <tr
+                  key={row[0]}
+                  // Read aloud as one sentence per row, pairing each cell with
+                  // its column. Cell by cell it is unintelligible — a phrase,
+                  // then a reason, then a replacement, with nothing saying
+                  // which is which. An empty column heading is left out.
+                  data-speech={row
+                    .map((cell, index) =>
+                      block.columns[index] ? `${block.columns[index]}: ${cell}` : cell,
+                    )
+                    .join(". ")}
+                  className="border-b border-border last:border-0"
+                >
+                  {row.map((cell, index) =>
+                    // The first cell is the row's subject, so it is a header
+                    // for that row — which is what lets a screen reader say
+                    // which phrase a suggestion belongs to.
+                    index === 0 ? (
+                      <th
+                        key={index}
+                        scope="row"
+                        className="px-4 py-3 align-top font-medium text-text"
+                      >
+                        {cell}
+                      </th>
+                    ) : (
+                      <td key={index} className="px-4 py-3 align-top text-text-muted">
+                        {cell}
+                      </td>
+                    ),
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+
+    case "tabs":
+      return (
+        <ContentTabs
+          labels={block.tabs.map((tab) => tab.label)}
+          panels={block.tabs.map((tab) => (
+            <div key={tab.label} className="space-y-5">
+              {tab.blocks.map((inner, index) => (
+                <Block key={index} block={inner} />
+              ))}
+            </div>
+          ))}
+        />
       );
 
     /* A side-by-side "instead of / try" pair, the core teaching device of the

@@ -16,6 +16,7 @@ import {
 } from "@/lib/nav";
 import { Wordmark } from "@/components/layout/Wordmark";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { TourBar } from "@/components/tour/TourBar";
 import { cn } from "@/lib/cn";
 
 export function AppShell({
@@ -105,17 +106,17 @@ export function AppShell({
               <Wordmark />
             </div>
             <Link
-              href="/shop"
-              aria-label="Shop cards — coming soon"
+              href="/get-the-deck"
+              aria-label="Get the printed cards — coming soon"
               className={cn(
                 "ml-auto inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors lg:hidden",
-                isActivePath(pathname, "/shop")
+                isActivePath(pathname, "/get-the-deck")
                   ? "border-primary-border bg-primary-soft text-primary"
                   : "border-border bg-surface text-text-muted hover:bg-bg-subtle hover:text-text",
               )}
             >
               <Icon name="store" size={17} />
-              <span>Shop</span>
+              <span>Cards</span>
               <span className="rounded-full bg-caution-soft px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-caution">
                 Soon
               </span>
@@ -129,6 +130,7 @@ export function AppShell({
             {/* Above the page rather than floating over it: someone who wants
                 it should meet it before they start reading. */}
             <ReadAloud />
+            <TourBar />
             {children}
           </div>
         </main>
@@ -201,6 +203,7 @@ export function AppShell({
           </div>
         </>
       ) : null}
+
     </div>
   );
 }

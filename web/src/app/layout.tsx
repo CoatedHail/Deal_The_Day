@@ -5,6 +5,7 @@ import { SETTINGS_BOOTSTRAP_SCRIPT } from "@/lib/settings";
 import { SettingsProvider } from "@/components/providers/SettingsProvider";
 import { DataProvider } from "@/components/providers/DataProvider";
 import { AppShell } from "@/components/layout/AppShell";
+import { TourProvider } from "@/components/tour/TourProvider";
 import { AccountMenu } from "@/components/auth/AccountMenu";
 import { auth } from "@/auth";
 
@@ -56,7 +57,11 @@ export default async function RootLayout({
       <body className={atkinson.variable}>
         <SettingsProvider>
           <DataProvider signedIn={Boolean(session?.user)}>
-            <AppShell account={<AccountMenu />}>{children}</AppShell>
+            {/* Above the shell, because the tour walks the real pages and its
+                position has to outlive any one of them. */}
+            <TourProvider>
+              <AppShell account={<AccountMenu />}>{children}</AppShell>
+            </TourProvider>
           </DataProvider>
         </SettingsProvider>
       </body>
