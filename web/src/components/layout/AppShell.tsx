@@ -105,7 +105,23 @@ export function AppShell({
             <div className="lg:hidden">
               <Wordmark />
             </div>
-            <div className="ml-auto">{account}</div>
+            <Link
+              href="/get-the-deck"
+              aria-label="Get the printed cards — coming soon"
+              className={cn(
+                "ml-auto inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors lg:hidden",
+                isActivePath(pathname, "/get-the-deck")
+                  ? "border-primary-border bg-primary-soft text-primary"
+                  : "border-border bg-surface text-text-muted hover:bg-bg-subtle hover:text-text",
+              )}
+            >
+              <Icon name="store" size={17} />
+              <span>Cards</span>
+              <span className="rounded-full bg-caution-soft px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-caution">
+                Soon
+              </span>
+            </Link>
+            <div className="lg:ml-auto">{account}</div>
           </div>
         </header>
 
@@ -214,7 +230,14 @@ function NavLink({
     >
       <Icon name={item.icon} className={cn("mt-0.5", active && "text-primary")} />
       <span className="min-w-0">
-        <span className="block">{item.label}</span>
+        <span className="flex items-center gap-2">
+          <span className="block">{item.label}</span>
+          {item.badge ? (
+            <span className="rounded-full bg-caution-soft px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-caution">
+              {item.badge}
+            </span>
+          ) : null}
+        </span>
         {showDescription && item.description ? (
           <span className="block text-xs text-text-subtle">{item.description}</span>
         ) : null}

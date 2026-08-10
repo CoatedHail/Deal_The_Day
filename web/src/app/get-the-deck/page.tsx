@@ -5,11 +5,12 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Callout } from "@/components/ui/Callout";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
+import { Pill } from "@/components/ui/Pill";
 import { CONTACT } from "@/content/contact";
 import { DECK_CARDS } from "@/content/cards";
 
 export const metadata: Metadata = {
-  title: "Get the deck",
+  title: "Get the deck — coming soon",
   description:
     "The printed Deal the Day deck is on its way. Until then, the whole deck is here on the site.",
 };
@@ -25,12 +26,15 @@ export default function GetTheDeckPage() {
   return (
     <>
       <PageHeader
+        eyebrow="Coming soon"
         title="Get the deck"
-        description="Deal the Day is a physical card game. The printed deck is being made."
+        description="Deal the Day is a physical card game. The printed deck is being made, but it cannot be ordered yet."
+        action={<Pill tone="caution">Not available yet</Pill>}
       />
 
-      <Callout tone="info" title="Coming soon">
-        We are having the deck printed. When you can order it, it will be here.
+      <Callout tone="caution" title="Ordering is not available yet">
+        This page is a preview only. There is no checkout and no orders can be placed.
+        When the printed deck is ready to buy, we will make that clear here.
       </Callout>
 
       <Card className="mt-5">

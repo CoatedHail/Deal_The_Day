@@ -31,6 +31,7 @@ export type IconName =
   | "speaker"
   | "pause"
   | "stop"
+  | "store"
   | "people"
   | "balance"
   | "brain"
@@ -128,6 +129,12 @@ const PATHS: Record<IconName, React.ReactNode> = {
   ),
   pause: <path d="M9 5v14M15 5v14" />,
   stop: <rect x="6" y="6" width="12" height="12" rx="1.5" />,
+  store: (
+    <>
+      <path d="M4 10v10h16V10M3 10l2-6h14l2 6" />
+      <path d="M3 10a3 3 0 0 0 5 2 3 3 0 0 0 4 0 3 3 0 0 0 4 0 3 3 0 0 0 5-2M8 20v-5h5v5" />
+    </>
+  ),
   // Three people, to read as a team rather than as the two-adult "family" glyph.
   people: (
     <>

@@ -20,6 +20,7 @@ export interface NavItem {
   label: string;
   icon: IconName;
   description?: string;
+  badge?: string;
   /** Shown in the mobile bottom bar. Kept to five to stay tappable. */
   primary?: boolean;
   /** Home stands on its own above the sections. */
@@ -107,8 +108,9 @@ export const NAV_ITEMS: NavItem[] = [
   {
     href: "/get-the-deck",
     label: "Get the deck",
-    icon: "cards",
-    description: "The printed deck, and when you can order it",
+    icon: "store",
+    description: "Printed card shop coming soon",
+    badge: "Soon",
     section: "more",
   },
   {
