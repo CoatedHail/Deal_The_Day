@@ -20,6 +20,7 @@ export interface NavItem {
   label: string;
   icon: IconName;
   description?: string;
+  badge?: string;
   /** Shown in the mobile bottom bar. Kept to five to stay tappable. */
   primary?: boolean;
   /** Home stands on its own above the sections. */
@@ -33,6 +34,13 @@ export const NAV_ITEMS: NavItem[] = [
     icon: "home",
     description: "Where things stand today",
     primary: true,
+  },
+  {
+    href: "/shop",
+    label: "Shop cards",
+    icon: "store",
+    description: "Card shop coming soon",
+    badge: "Soon",
   },
   {
     href: "/activity",
