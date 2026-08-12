@@ -400,16 +400,41 @@ export const GUIDE_ARTICLES: Article[] = [
   },
   {
     slug: "discussing-uncertainty",
+    authorId: "merisa",
     title: "Talking about not knowing",
     summary:
       "How to make 'we'll find out' a normal, safe thing to hear in your house.",
-    status: "placeholder",
+    status: "ready",
     minutes: 5,
-    outline: [
-      "Making uncertainty ordinary",
-      "Answering questions you genuinely cannot answer",
-      "Games and moments that build the muscle",
-      "Example scripts",
+    blocks: [
+      { type: "heading", text: "1. Making uncertainty ordinary" },
+      { type: "paragraph", text: "Researchers who study anxiety describe intolerance of uncertainty as one of the core engines underneath it - a tendency to experience “I don't know what will happen” as inherently threatening, regardless of how likely a bad outcome actually is. That tendency isn't fixed from birth; it's shaped by experience, including how uncertainty gets handled in the home a child grows up in. A house where every unknown gets resolved immediately, where “I don't know” is treated as an emergency to fix rather than a normal state to sit in, quietly teaches a child that not knowing is dangerous. A house where uncertainty shows up often, in low-stakes ways, and gets handled without alarm teaches the opposite lesson just as effectively - often without a single direct conversation about anxiety at all." },
+      { type: "paragraph", text: "Making uncertainty ordinary means resisting the urge to over-resolve small unknowns. “We don't know yet if the game is going to be outside or inside - we'll find out when we get there” is a small, repeatable rehearsal of tolerating an open question, and it's more powerful precisely because it's mundane." },
+      { type: "heading", text: "2. Answering questions you genuinely cannot answer" },
+      { type: "paragraph", text: "Children ask questions adults can't actually answer - will grandma get better, will we have enough money, will the thing I'm scared of happen - and the instinct is often to either fabricate certainty (“nothing bad will happen”) or shut the question down. Both responses skip past the more useful move, which is modeling how to hold a real unknown honestly. “I don't know for sure, and that's an uncomfortable thing to sit with - here's what we do know, and here's what we're doing about the parts we can control” gives a child something more durable than false reassurance: a demonstration that not knowing doesn't have to mean falling apart. It also happens to be true, which matters, because children tend to notice when reassurance doesn't match reality, and that mismatch can undermine trust in future reassurance too." },
+      { type: "heading", text: "3. Games and moments that build the muscle" },
+      { type: "paragraph", text: "Tolerance for uncertainty is a skill, and like most skills it's built through small, repeated practice rather than one big conversation. A few low-stakes ways to build it into ordinary life:" },
+      {
+        type: "list",
+        items: [
+          "Let a plan stay unresolved on purpose. (just like what our game recommends!) Leave the restaurant choice, the game, or the weekend activity undecided until the day of, and narrate the “we'll see” out loud instead of resolving it early for comfort.",
+          "Play games with real chance in them. Card and dice games where outcomes genuinely aren't controllable give children low-stakes, repeated practice losing, winning, and not knowing which is coming - practice that transfers more than it might seem to.",
+          "Ask “what if we don't know” as a normal question, not a crisis one: “what if we don't know until tomorrow whether the trip is happening - what would we do in the meantime?” This treats not-knowing as a situation to plan around rather than a problem to eliminate.",
+          "Notice and name successful tolerance out loud. “You didn't know how that test would go and you did it anyway” reinforces the skill more than reassurance would have.",
+        ],
+      },
+      { type: "heading", text: "4. Example scripts" },
+      {
+        type: "list",
+        items: [
+          "“I don't know the answer to that yet. That's an uncomfortable feeling, and it's okay to have it - we'll find out together.”",
+          "“We're not going to decide that right now. Let's see what happens and figure it out when we get there.”",
+          "“You're asking because not knowing feels bad. I get that. I'm not going to guess just to make the feeling go away, because I'd probably be guessing wrong.”",
+          "“That didn't go the way either of us expected - and look, we handled it anyway.”",
+        ],
+      },
+      { type: "subheading", text: "Sources" },
+      { type: "paragraph", text: "Carleton, R. N. (2016). Fear of the unknown: One fear to rule them all? Journal of Anxiety Disorders. Dugas, M. J., & Robichaud, M. (2007). Cognitive-Behavioral Treatment for Generalized Anxiety Disorder: From Science to Practice. Freeston, M. H., et al. (1994). Why do people worry? Personality and Individual Differences." },
     ],
   },
   {
@@ -878,38 +903,69 @@ export const GUIDE_ARTICLES: Article[] = [
   },
   {
     slug: "regulating-yourself",
+    authorId: "merisa",
     title: "Steadying yourself in the moment",
     summary:
       "What to do with your own spike while it is happening — and the one trap to avoid.",
-    // Returned to placeholder deliberately. This carried a draft written to
-    // fill the gap while the section was empty, not by anyone on the team, and
-    // it was the only article on the site with no author. Clinical guidance on
-    // self-regulation should carry a name. The outline below is that draft's
-    // shape, kept as a brief for whoever takes it on; the prose itself is in
-    // git history at 7f1f032 if it is worth starting from.
-    status: "placeholder",
-    minutes: 4,
-    outline: [
-      "The goal is not to feel calm",
-      "The trap worth knowing about: when grounding becomes a compulsion",
-      "Things that help without becoming rituals",
-      "Saying it out loud in front of your children",
-      "If it is consistently too much",
+    // Was held at placeholder because the draft filling this gap had no
+    // author, and clinical guidance on self-regulation should carry a name.
+    // It does now.
+    status: "ready",
+    minutes: 5,
+    blocks: [
+      { type: "heading", text: "1. The goal is not to feel calm" },
+      { type: "paragraph", text: "It's natural to treat “get calm” as the objective when you're supporting someone through a hard moment - or managing your own anxious spike. But research on exposure and anxiety treatment consistently finds that how much anxiety drops in the moment isn't actually what predicts whether things go well afterward. What matters more is whether you can stay functional and present while the feeling is happening, not whether you can make the feeling disappear. Chasing calm as the goal tends to backfire, because it turns “am I calm yet?” into one more thing to monitor and fail at, which usually raises anxiety rather than lowering it. A more workable goal is staying upright and useful while activated - showing up for the moment at an 8 out of 10 rather than waiting until you're back down to a 2." },
+      { type: "heading", text: "2. The trap worth knowing about: when grounding becomes a compulsion" },
+      { type: "paragraph", text: "Grounding techniques - noticing five things you can see, holding something cold, focusing on your feet on the floor - are genuinely useful tools for regulating a nervous system in the moment. The trap is using them the way a compulsion gets used: reaching for them automatically, every single time, specifically to make the anxious feeling go away as fast as possible, rather than as an occasional aid to staying present. When a grounding technique becomes something you need to perform before you can tolerate a feeling at all, it can start functioning less like stabilization and more like avoidance - quietly preventing the natural process of sitting with the feeling long enough to learn it isn't dangerous. The distinction isn't whether you use grounding; it's whether you could, if you needed to, get through the moment without it." },
+      { type: "heading", text: "3. Things that help without becoming rituals" },
+      {
+        type: "list",
+        items: [
+          "Slow, natural breathing - not a rigid four-count box-breath performed to exact specification every time, just breathing that isn't shallow and rushed.",
+          "Naming what's happening, briefly and without elaborating: “this is a spike, it will move through.” One pass, not a repeated internal script.",
+          "Physical movement - a short walk, stretching, changing rooms - engages the body without becoming a strict, must-be-done-this-way ritual.",
+          "Checking in with a value, not a feeling: “what does the next five minutes actually need from me,” rather than “how do I make this stop.”",
+        ],
+      },
+      { type: "paragraph", text: "The through-line: these help you tolerate the moment, rather than trying to abort it. If any of them starts to feel non-negotiable - like skipping it would be unthinkable - that's worth noticing." },
+      { type: "heading", text: "4. Saying it out loud in front of your children" },
+      { type: "paragraph", text: "Children learn far more from watching a parent manage a hard moment than from being told to manage their own. Naming your own coping, briefly and honestly, in front of your kids - “I'm feeling pretty activated right now, so I'm going to take a breath and keep going” - gives them a real, observable model of what handling anxiety looks like, rather than either a performance of constant calm (which isn't believable) or an unexplained spiral (which is frightening without context). The goal isn't a tidy speech. A single honest sentence, followed by you actually doing the thing, teaches more than an explanation would." },
+      { type: "heading", text: "5. If it is consistently too much" },
+      { type: "paragraph", text: "There's a real difference between an anxious spike that's uncomfortable but passable, and one that consistently overwhelms your ability to function or support anyone else. If steadying yourself is something you're struggling with regularly rather than occasionally - if the spikes are getting more frequent, more intense, or harder to move through even with these tools - that's worth bringing to a clinician directly, rather than treating it as something to just manage better on your own. Supporting someone else through their hard moments depends on having enough steadiness of your own to draw on, and that steadiness sometimes needs its own support." },
+      { type: "subheading", text: "Sources" },
+      { type: "paragraph", text: "Craske, M. G., et al. (2014). Maximizing exposure therapy: An inhibitory learning approach. Behaviour Research and Therapy. Salkovskis, P. M. (1991). The importance of behaviour in the maintenance of anxiety and panic. Behavioural Psychotherapy. Bandura, A. (1977). Social Learning Theory." },
     ],
   },
   {
     slug: "supporting-exposures",
+    authorId: "merisa",
     title: "Supporting an exposure without forcing it",
     summary:
       "Consent matters. How to stay alongside someone doing something hard without pushing them into it.",
-    status: "placeholder",
+    status: "ready",
     minutes: 6,
-    outline: [
-      "Why forced exposure backfires",
-      "Agreeing the step in advance",
-      "What to say during",
-      "What to do if someone stops partway",
-      "Example scripts",
+    blocks: [
+      { type: "heading", text: "1. Why forced exposure backfires" },
+      { type: "paragraph", text: "It's tempting to think of exposure as something you can push someone through - that if the fear itself isn't dangerous, forcing contact with it should work just as well as agreeing to it. Research doesn't support that shortcut. Perceived control over an exposure is itself part of what makes it work: people who feel they have some say in the pace and intensity of an exposure tend to approach the feared situation more, and tolerate it better, than people who feel it's being done to them. Clinical guidance on exposure is consistent on this point - it's described as a carefully paced, collaborative procedure, not something to spring on someone or push past their stated limits, because doing so risks teaching a different, worse lesson: that fear itself is unbearable and that they have no control over what happens to their own body. That's the opposite of what exposure is supposed to teach." },
+      { type: "paragraph", text: "For a parent, this means the instinct to physically walk a child toward the thing they're afraid of, or refuse to let them retreat once they've said stop, usually backfires - even when the underlying logic (“the dog won't bite you, just pet it”) is completely correct. Being right about the safety of the situation doesn't make forcing it a good idea." },
+      { type: "heading", text: "2. Agreeing the step in advance" },
+      { type: "paragraph", text: "The single most protective thing you can do is decide the exposure together, before it starts, in calm conditions rather than in the moment. That means naming the specific step (not “face your fear” in the abstract, but “touch the doorknob and then sit at the table without washing your hands for ten minutes”), agreeing on it out loud, and treating that agreement as the plan you're both committed to. This does two things: it gives the person doing the exposure genuine ownership of the difficulty they're choosing to face, and it gives you, as the supporter, a clear boundary for what you're actually there to help with - you're not there to invent new demands mid-exposure, and you're not there to rescue them from the one you agreed to." },
+      { type: "heading", text: "3. What to say during the exposure" },
+      { type: "paragraph", text: "Your job during the exposure itself is smaller than it might feel like it should be. You're not there to talk them out of their anxiety, argue them out of the fear, or promise them it will be fine - reassurance during an exposure tends to function the same way a compulsion does, quietly undoing some of the learning the exposure is meant to build. What helps more is staying present, calm, and non-judgmental: acknowledging that this is hard without trying to make the hardness go away. Something as simple as “I see this is really tough, and you're doing it anyway” does more than trying to problem-solve the fear in real time." },
+      { type: "heading", text: "4. What to do if someone stops partway" },
+      { type: "paragraph", text: "Stopping isn't failure, and treating it as failure - yours or theirs - tends to make the next attempt harder, not easier. If someone needs to stop, the most useful response is a calm, non-shaming acknowledgment (“okay, we're stopping there”) followed by, once things have settled, a conversation about what happened and whether the step was too big, not whether the person is capable. Adjusting the size of the next attempt is a normal part of building a hierarchy, not a sign the whole approach is failing. What matters most is that the decision to stop is respected in the moment - arguing someone back into an exposure once they've said no reintroduces the coercion that undermines the whole process." },
+      { type: "heading", text: "5. Example scripts" },
+      {
+        type: "list",
+        items: [
+          "Before starting: “So the plan is: you touch the handle, and we wait ten minutes before you wash. If it gets too much, you can say stop and we'll pause - no arguing about it in the moment, we can talk after.”",
+          "During, if anxiety spikes: “This is the hard part. You don't have to feel calm right now - you just have to stay with it a little longer if you can.”",
+          "If they stop: “Okay, we're stopping. That's allowed. Let's talk in a bit about what we try next time.”",
+          "Afterward, regardless of outcome: “You did something difficult on purpose. That's the whole point - how it felt isn't the measure of whether it worked.”",
+        ],
+      },
+      { type: "subheading", text: "Sources" },
+      { type: "paragraph", text: "Salkovskis, P. M. (1991). The importance of behaviour in the maintenance of anxiety and panic: A cognitive account. Behavioural Psychotherapy. Craske, M. G., et al. (2014). Maximizing exposure therapy: An inhibitory learning approach. Behaviour Research and Therapy. Kindt, M., et al. (2021). Perceived control and approach behavior in specific phobia." },
     ],
   },
 ];
