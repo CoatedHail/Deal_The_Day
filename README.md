@@ -8,6 +8,11 @@ This site does not replace the physical deck. It is the part that happens around
 it: recording what you expect before an activity, what actually happened
 afterwards, and what changed over time.
 
+**Live site:** [deal-the-day.vercel.app](https://deal-the-day.vercel.app)
+
+Built by a team of students in the Stanford Neurodiversity Project's REACH
+program and presented at the Stanford Neurodiversity Summit.
+
 > **Not a medical device.** Educational companion only — not a substitute for
 > professional mental health treatment, diagnosis, or therapy.
 
@@ -41,6 +46,7 @@ npx --prefix web tsc --noEmit  # typecheck
 
 - **Next.js 15** (App Router) with React 19 and TypeScript
 - **Tailwind CSS v4**, with design tokens defined in `web/src/app/globals.css`
+- **Auth.js** (Google sign-in) and **Drizzle ORM** on **Neon Postgres**
 - No UI or charting dependencies — components and charts are hand-rolled
 
 ## How the code is organised
@@ -57,18 +63,21 @@ npx --prefix web tsc --noEmit  # typecheck
 
 ### Data storage
 
-All user data currently lives in `localStorage` behind a `DataRepository`
-interface (`web/src/lib/storage.ts`). The interface is async so that an
-API-backed implementation can be swapped in later without touching any
-component.
+All reads and writes go through one async `DataRepository` interface
+(`web/src/lib/storage.ts`), so components never know where data lives. There
+are two implementations:
 
-Nothing is uploaded anywhere and there is no account system. This has two
-consequences worth knowing before planning features:
+- **Signed out:** `LocalStorageRepository` keeps the record in the browser. No
+  account needed, and nothing leaves the device.
+- **Signed in with Google:** `ApiRepository` saves to Postgres (Neon, via
+  Drizzle) through `/api/data`. Writes are debounced so a burst of edits costs
+  one request, and a pending save is flushed with `keepalive` when the tab is
+  hidden or closed.
 
-- Data is per-device and per-browser. There is no sync between a parent's phone
-  and their laptop.
-- A clinician cannot log in to view entries. Sharing works by the family
-  exporting their record and handing it over (`/therapist`).
+The first time someone signs in on a device that already has a history, the
+local record is moved up to their account and then removed from the browser,
+so there is only ever one copy. If loading from the server fails, saving is
+suspended rather than overwriting the server record with an empty one.
 
 ### Cards
 
